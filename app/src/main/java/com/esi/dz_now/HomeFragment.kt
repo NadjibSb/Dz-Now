@@ -15,6 +15,9 @@ class HomeFragment: Fragment() {
 
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container,false)
 
+        val viewPager = binding.viewPager
+        viewPager.adapter = ViewPagerAdapter(context!!)
+        binding.slidingTabs.setupWithViewPager(viewPager)
         return binding.root
     }
 
