@@ -7,4 +7,5 @@ public enum class Categories(val title: Int) {
     CULTURE(R.string.culture_category),
     SANTE(R.string.health_category),
     TECH(R.string.tech_category)
+
 }
