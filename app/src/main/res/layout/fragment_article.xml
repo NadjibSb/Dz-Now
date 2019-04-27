@@ -3,19 +3,22 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         tools:context=".ArticleFragment">
-<ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">
+<ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
         <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="268dp"
-                tools:src="@drawable/article_image"
-                android:id="@+id/articleImage"/>
+                android:layout_height="205dp"
+                android:background="@drawable/article_image"
+                android:id="@+id/articleImage"
+                android:contentDescription="Description"/>
         <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
@@ -23,7 +26,7 @@
                 android:layout_marginTop="8dp">
             <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="336dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp">
                 <TextView
@@ -38,7 +41,7 @@
                         android:textSize="24sp"/>
                 <TextView
                         android:text="L'Algérie en coupe du monde"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/articlePublicationDate"
                         android:textAlignment="viewStart"
@@ -52,15 +55,18 @@
                         android:id="@+id/articleCategory"
                         android:textSize="14sp"/>
             </LinearLayout>
-            <ImageButton
-                    android:src="@android:drawable/btn_star_big_on"
+
+            <ToggleButton
+                    android:text="ToggleButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="37dp"
-                    android:id="@+id/readLaterArticle"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/toggleButton"
+                    android:layout_marginTop="16dp"
+
+                    android:background="@drawable/read_later_selector"
+                    android:textOff=""
+                    android:textOn=""
+            />
         </LinearLayout>
         <TextView
                 android:text="@string/articleContent"
