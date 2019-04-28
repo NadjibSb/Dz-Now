@@ -1,4 +1,4 @@
-package com.esi.dz_now
+package com.esi.dz_now.screens
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.esi.dz_now.R
+import com.esi.dz_now.data.Article
+import com.esi.dz_now.data.Categories
+import com.esi.dz_now.data.DataUtil
+import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SharedData {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -20,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             R.id.settingsFragment
         )
     )
+    private var dataUtil= DataUtil()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +50,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp() = multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
+
+
+
+    override fun getAllArticles(): MutableList<Article> {
+        return dataUtil.getAllArticles()
+    }
+
+    override fun getArticlesListByCategorie(categories: Categories): MutableList<Article> {
+        return dataUtil.getArticlesListByCategorie(categories)!!
+    }
+
+    override fun getCategories(): List<Categories> {
+        return dataUtil.getCategories()
+    }
+
 
 
 }
