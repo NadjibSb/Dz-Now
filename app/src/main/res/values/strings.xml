@@ -5,13 +5,20 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Paramètres</string>
     <string name="home">Home</string>
     <string name="favorites">Favorites</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_test">test</string>
+    <string name="themes_title">Thèmes</string>
+    <string name="category_title">Catégories à affciher</string>
+    <!-- Catgories -->
+    <string name="sport_category">Sport</string>
+    <string name="tech_category">Technologie</string>
+    <string name="culture_category">Culture</string>
+    <string name="politic_category">Politique</string>
+    <string name="health_category">Santé</string>
+    <string name="international_category">International</string>
+    <string name="science_category">Science</string>
 
     <string name="sport">Sport</string>
     <string name="technologie">Technologie</string>
@@ -19,4 +26,11 @@
     <string name="international">International</string>
     <string name="sante">Santé</string>
     <string name="culture">Culture</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test">test</string>
+    <string name="articleContent">"Battue chez elle par la Zambie (1-0), l’Algérie a définitivement mis une croix sur le Mondial 2018. C’est une grosse désillusion pour l’équipe huitième de finaliste de la Coupe du monde 2014 qui s’attend à une grosse crise du football. De son côté, la Zambie garde espoir de doubler le Nigeria sur le fil.
+        Même si mathématiquement tout restait possible, l’espoir d’une qualification au Mondial 2018 avait déserté les rangs des suiveurs de l’équipe d’Algérie depuis la défaite samedi dernier à Lusaka (3-1). Il ne subsistait dès lors qu’un honneur à sauver face au même adversaire cinq jours après pour le match retour. Mais dans son antre à Constantine, l’Algérie a été incapable de prendre le meilleur sur un adversaire solide, déterminé et certainement plus motivé qu’elle.
+        Les hommes de Lucas Alcaraz ont pourtant essayé mais sont tombés sur un gardien zambien, Kennedy Mweene, impérial qui a mis en échec tour à tour les attaquants algériens, Soudani,  (9e), Brahimi (59e), Ounas (61e), et Slimani (90 +3). Surtout, le portier des Chipolopolos a arrêté un penalty de Mahrez (16e) qui aurait pu permettre aux Fennecs de bien lancer l’opération « sauver l’honneur »."</string>
+
 </resources>
