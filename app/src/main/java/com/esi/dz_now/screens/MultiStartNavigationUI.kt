@@ -1,4 +1,4 @@
-package com.esi.dz_now
+package com.esi.dz_now.screens
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator

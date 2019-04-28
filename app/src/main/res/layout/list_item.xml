@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:id="@+id/itemContainer"
               android:padding="16dp"
               android:layout_margin="16dp"
               android:background="@android:color/holo_green_light"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
+    <ImageView
+            android:id="@+id/articleImage"
+            android:layout_width="match_parent"
+            android:src="@drawable/ic_menu_gallery"
+            android:layout_height="100dp"/>
 
     <TextView
             android:text="TextView"
