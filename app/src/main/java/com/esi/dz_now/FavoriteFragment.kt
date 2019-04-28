@@ -16,7 +16,7 @@ class FavoriteFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding: FragmentFavoriteBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_favorite, container,false)
-
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.favourites_fragment_title)
         binding.button.setOnClickListener {
             it.findNavController().navigate(R.id.action_favoriteFragment_to_articleFragment)
         }

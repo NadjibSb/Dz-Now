@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"/>
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/readModeAction"
+            android:orderInCategory="100"
+            android:title="read_mode"
+            android:icon="@drawable/book"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/shareAction"
+            android:orderInCategory="100"
+            android:icon="@drawable/share"
+            android:title="Block"
+            app:showAsAction="always" />
+
+</menu>

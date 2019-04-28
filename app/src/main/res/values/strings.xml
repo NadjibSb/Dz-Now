@@ -28,6 +28,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_test">test</string>
 
+    <string name="article_fragment_title">Article</string>
+    <string name="settings_fragment_title">Paramètres</string>
+    <string name="favourites_fragment_title">Favoris</string>
+    <string name="home_fragment_title">Acceuil</string>
+
+
 
     <string name="articleContent">"Battue chez elle par la Zambie (1-0), l’Algérie a définitivement mis une croix sur le Mondial 2018. C’est une grosse désillusion pour l’équipe huitième de finaliste de la Coupe du monde 2014 qui s’attend à une grosse crise du football. De son côté, la Zambie garde espoir de doubler le Nigeria sur le fil.
         Même si mathématiquement tout restait possible, l’espoir d’une qualification au Mondial 2018 avait déserté les rangs des suiveurs de l’équipe d’Algérie depuis la défaite samedi dernier à Lusaka (3-1). Il ne subsistait dès lors qu’un honneur à sauver face au même adversaire cinq jours après pour le match retour. Mais dans son antre à Constantine, l’Algérie a été incapable de prendre le meilleur sur un adversaire solide, déterminé et certainement plus motivé qu’elle.

@@ -17,15 +17,11 @@ class HomeFragment: Fragment() {
 
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container,false)
 
-<<<<<<< HEAD
-       // val viewPager = binding.viewPager
-       // viewPager.adapter = ViewPagerAdapter(context!!)
-       // binding.slidingTabs.setupWithViewPager(viewPager)
-=======
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.home_fragment_title)
         val viewPager = binding.viewPager
         viewPager.adapter = ViewPagerAdapter(context!!)
         binding.slidingTabs.setupWithViewPager(viewPager)
->>>>>>> 04ccbc90d5a3f2c3bf35410b4e613dbce98a7e16
+
         return binding.root
     }
 
