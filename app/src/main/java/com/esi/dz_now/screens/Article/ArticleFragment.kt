@@ -3,13 +3,18 @@ package com.esi.dz_now.screens.Article
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.esi.dz_now.R
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentArticleBinding
 import com.esi.dz_now.screens.MainActivity
+import kotlinx.android.synthetic.main.fragment_article.*
+
 
 
 class ArticleFragment : Fragment() {
@@ -23,11 +28,20 @@ class ArticleFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.article_fragment_title)
         setHasOptionsMenu(true)
 
-        val args = ArticleFragmentArgs.fromBundle(arguments!!)
-        data = activity as SharedData
 
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val articleID = ArticleFragmentArgs.fromBundle(arguments!!).articleID
+        data = activity as SharedData
+        var article = data.getArticleById(articleID)
+        articleTitle.text = article.title
+        articleContent.text = article.content
+        articleCategory.text = article.categories.title.toString()
+        articleImage.setBackgroundResource(R.drawable.article_image)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -45,6 +59,8 @@ class ArticleFragment : Fragment() {
             Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
         return super.onOptionsItemSelected(item)
     }
+
+
 
 
 

@@ -55,5 +55,17 @@ class DataUtil {
         return articlesListByCategories
     }
 
+    fun getArticleById(articleId: Int): Article {
+        var i = 0
+        var article = articlesList[0]
+        while (i < articlesList.size) {
+            if (articlesList[i].id == articleId) {
+                article = articlesList[i]
+            }
+            i++
+        }
+        return article
+    }
+
 
 }

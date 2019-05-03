@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity(), SharedData {
         return dataUtil.getCategories()
     }
 
-
+    override fun getArticleById(articleId: Int): Article {
+        return dataUtil.getArticleById(articleId)
+    }
 
 }
