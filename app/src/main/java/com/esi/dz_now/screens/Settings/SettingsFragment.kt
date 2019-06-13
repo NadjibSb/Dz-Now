@@ -13,6 +13,9 @@ import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentSettingsBinding
 import com.esi.dz_now.screens.MainActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
+import android.widget.CompoundButton
+import android.graphics.Color
+import android.util.Log
 
 
 class SettingsFragment : Fragment() {
@@ -23,8 +26,8 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding: FragmentSettingsBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_settings,container,false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.settings_fragment_title)
+            com.esi.dz_now.R.layout.fragment_settings,container,false)
+        (activity as MainActivity).supportActionBar?.title = getString(com.esi.dz_now.R.string.settings_fragment_title)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,6 +82,22 @@ class SettingsFragment : Fragment() {
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
         }
+
+        toggleButtonTheme.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                // The toggle is enabled/checked
+                Toast.makeText(context,"Light Theme",Toast.LENGTH_SHORT).show()
+
+                this.activity?.setTheme(com.esi.dz_now.R.style.AppTheme)
+            } else {
+                // The toggle is disabled
+                Toast.makeText(context,"Dark Theme off",Toast.LENGTH_SHORT).show()
+
+                activity?.setTheme(com.esi.dz_now.R.style.AppTheme_DARK)
+
+            }
+        }
+
 
     }
 
