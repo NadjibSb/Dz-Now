@@ -23,7 +23,7 @@ class ViewPagerAdapter(
         val categorie = categoriesList[position]
         val inflater = LayoutInflater.from(mContext)
         val layout = inflater.inflate(R.layout.viewpager_content, collection, false) as ViewGroup
-        val title = layout.findViewById<TextView>(R.id.title)
+        //val title = layout.findViewById<TextView>(R.id.title)
 
         setUpRecycleView(layout, getarticlesByCategories(categorie,articlesList))
 

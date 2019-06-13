@@ -9,6 +9,6 @@ data class Article(
     val content:String,
     val categories: Categories,
     val date: Date,
-    val favorit:Boolean
+    var favorit:Boolean
 ) {
 }

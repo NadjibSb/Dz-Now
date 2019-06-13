@@ -11,6 +11,16 @@ class DataUtil {
     }
 
     fun getCategories(): List<Categories>{
+        var list= mutableListOf<Categories>()
+        for (cat in Categories.values().toList()){
+            if (cat.isActivated){
+                list.add(cat)
+            }
+        }
+        return list
+    }
+
+    fun getAllCategories():List<Categories>{
         return Categories.values().toList()
     }
 
@@ -40,7 +50,7 @@ class DataUtil {
                         "Ceci est le contenu d'un article sur la ${categorie.title.toString()}",
                         categorie,
                         Date(),
-                        false
+                        true
                     )
                 )
             }
@@ -53,6 +63,18 @@ class DataUtil {
         val articlesListByCategories: MutableMap<Categories, MutableList<Article>> =
             ArticalesList.groupByTo(mutableMapOf()) { it.categories }
         return articlesListByCategories
+    }
+
+    fun getArticleById(articleId: Int): Article {
+        var i = 0
+        var article = articlesList[0]
+        while (i < articlesList.size) {
+            if (articlesList[i].id == articleId) {
+                article = articlesList[i]
+            }
+            i++
+        }
+        return article
     }
 
 

@@ -1,15 +1,15 @@
 package com.esi.dz_now.data
 
-import androidx.core.content.res.TypedArrayUtils.getString
+import android.provider.Settings.System.getString
 import com.esi.dz_now.R
 
-enum class Categories(val title: Int) {
-    SPORTS(R.string.sport_category),
-    POLITICS(R.string.politic_category),
-    INTERNATIONAL(R.string.international_category),
-    CULTURE(R.string.culture_category),
-    SANTE(R.string.health_category),
-    TECH(R.string.tech_category)
+enum class Categories(val title: Int, var isActivated:Boolean) {
+    SPORTS(R.string.sport_category, true),
+    POLITICS(R.string.politic_category, true),
+    INTERNATIONAL(R.string.international_category, true),
+    CULTURE(R.string.culture_category, true),
+    SANTE(R.string.health_category, true),
+    TECH(R.string.tech_category, true)
 
 
 }
