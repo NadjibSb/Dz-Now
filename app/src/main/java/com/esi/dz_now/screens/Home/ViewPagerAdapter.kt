@@ -20,12 +20,12 @@ class ViewPagerAdapter(
 ) : PagerAdapter() {
 
     override fun instantiateItem(collection: ViewGroup, position: Int): Any {
-        val customPagerEnum = categoriesList[position]
+        val categorie = categoriesList[position]
         val inflater = LayoutInflater.from(mContext)
         val layout = inflater.inflate(R.layout.viewpager_content, collection, false) as ViewGroup
         val title = layout.findViewById<TextView>(R.id.title)
 
-        setUpRecycleView(layout, articlesList)
+        setUpRecycleView(layout, getarticlesByCategories(categorie,articlesList))
 
         collection.addView(layout)
         return layout
@@ -54,6 +54,16 @@ class ViewPagerAdapter(
         recyclerView.adapter = ArticleListAdapter(list, mContext)
         recyclerView.layoutManager = LinearLayoutManager(mContext)
         recyclerView.setHasFixedSize(true)
+    }
+
+    fun getarticlesByCategories(categorie: Categories, allArticles: List<Article>):MutableList<Article>{
+        var newList = mutableListOf<Article>()
+        for (article in allArticles){
+            if (article.categories==categorie){
+                newList.add(article)
+            }
+        }
+        return newList
     }
 
 
