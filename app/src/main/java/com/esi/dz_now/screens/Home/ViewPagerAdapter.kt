@@ -1,15 +1,15 @@
 package com.esi.dz_now.screens.Home
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.recyclerview.widget.GridLayoutManager
 
 
 class ViewPagerAdapter(
@@ -77,7 +77,12 @@ class ViewPagerAdapter(
     private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
         recyclerView.adapter = ArticleListAdapter(list, mContext)
-        recyclerView.layoutManager = LinearLayoutManager(mContext)
+        val screenOrientation =
+            (mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
+        when(screenOrientation){
+            Surface.ROTATION_0 -> recyclerView.layoutManager = LinearLayoutManager(mContext)
+            else -> recyclerView.layoutManager = GridLayoutManager(mContext,2)
+        }
         recyclerView.setHasFixedSize(true)
     }
 
