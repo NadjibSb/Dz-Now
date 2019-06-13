@@ -68,37 +68,38 @@
             <CheckBox
                     android:text="@string/culture_category"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp" android:id="@+id/checkBox"
+                    android:layout_height="0dp"
+                    android:id="@+id/checkBoxCulture"
                     android:layout_weight="1"/>
             <CheckBox
                     android:text="@string/international_category"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/checkBoxInternational"
                     android:layout_weight="1"/>
             <CheckBox
                     android:text="@string/politic_category"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/checkBox8"
+                    android:id="@+id/checkBoxPolitique"
                     android:layout_weight="1"/>
             <CheckBox
                     android:text="@string/health_category"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/checkBox9"
+                    android:id="@+id/checkBoxSanté"
                     android:layout_weight="1"/>
             <CheckBox
                     android:text="@string/sport_category"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/checkBox10"
+                    android:id="@+id/checkBoxSport"
                     android:layout_weight="1"/>
             <CheckBox
                     android:text="@string/tech_category"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/checkBox11"
+                    android:id="@+id/checkBoxTechnologie"
                     android:layout_weight="1"/>
         </LinearLayout>
         <androidx.constraintlayout.widget.Group android:layout_width="wrap_content" android:layout_height="wrap_content"

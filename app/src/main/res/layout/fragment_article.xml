@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content">
                     <TextView
                             android:text="3 mai 2019, 15:25"
-                            android:layout_width="347dp"
+                            android:layout_width="343dp"
                             android:layout_height="match_parent"
                             android:id="@+id/articleDate"
                             android:textAlignment="viewStart"
@@ -69,17 +69,7 @@
 
                             android:textSize="18sp"/>
 
-                    <ToggleButton
-                            android:text="ToggleButton"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:id="@+id/toggleButton"
 
-
-                            android:background="@drawable/outline_star_rate_black_18dp"
-                            android:textOff=""
-                            android:textOn=""
-                    />
                 </LinearLayout>
 
                 <TextView

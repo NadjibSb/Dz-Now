@@ -29,6 +29,13 @@ class DataUtil {
 
     private fun creatArticleList() {
         val articles = mutableListOf<Article>()
+        var article1:Article = Article(
+            0,
+            "Ali Ghediri interpellé par les services de sécurité",
+            "img",
+            ""
+        )
+
 
         for (categorie in Categories.values()) {
             for (i in 0..5) {
@@ -40,7 +47,7 @@ class DataUtil {
                         "Ceci est le contenu d'un article sur la ${categorie.title}",
                         categorie,
                         Date(),
-                        false
+                        true
                     )
                 )
             }

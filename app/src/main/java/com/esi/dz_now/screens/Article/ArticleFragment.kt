@@ -9,23 +9,25 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.esi.dz_now.R
+
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentArticleBinding
 import com.esi.dz_now.screens.MainActivity
 import kotlinx.android.synthetic.main.fragment_article.*
-
-
+import android.R
+import com.esi.dz_now.data.Article
 
 class ArticleFragment : Fragment() {
 
     private lateinit var data: SharedData
+    private lateinit var article: Article
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val binding: FragmentArticleBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_article,container,false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.article_fragment_title)
+            com.esi.dz_now.R.layout.fragment_article,container,false)
+        (activity as MainActivity).supportActionBar?.title = getString(com.esi.dz_now.R.string.article_fragment_title)
         setHasOptionsMenu(true)
 
 
@@ -37,26 +39,51 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val articleID = ArticleFragmentArgs.fromBundle(arguments!!).articleID
         data = activity as SharedData
-        var article = data.getArticleById(articleID)
+        article = data.getArticleById(articleID)
         articleTitle.text = article.title
         articleContent.text = article.content
         articleCategory.text = article.categories.title.toString()
-        articleImage.setBackgroundResource(R.drawable.article_image)
+        articleImage.setBackgroundResource(com.esi.dz_now.R.drawable.article_image)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.read_article_menu, menu)
-
+        inflater.inflate(com.esi.dz_now.R.menu.read_article_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        val addToFavoriteActionMenuItem = menu.findItem(com.esi.dz_now.R.id.addToFavoriteAction)
+        if(!article.favorit)
+        {
+            addToFavoriteActionMenuItem.setIcon(com.esi.dz_now.R.drawable.star_border)
+            addToFavoriteActionMenuItem.title = "unstared"
+        }
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         var id = item.itemId
-        if(id==R.id.shareAction)
+        if(id== com.esi.dz_now.R.id.shareAction)
             Toast.makeText(context, "Share clicked!", Toast.LENGTH_SHORT).show()
-        if(id==R.id.readModeAction)
+        if(id== com.esi.dz_now.R.id.readModeAction)
             Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
+        if(id== com.esi.dz_now.R.id.addToFavoriteAction)
+        {
+            if(item.title=="stared")
+            {
+                item.title="unstared"
+                item.setIcon(com.esi.dz_now.R.drawable.star_border)
+                article.favorit = true
+            }
+            else
+            {
+                item.title="stared"
+                item.setIcon(com.esi.dz_now.R.drawable.round_star)
+                article.favorit = false
+            }
+        }
+
+
+
         return super.onOptionsItemSelected(item)
     }
 
