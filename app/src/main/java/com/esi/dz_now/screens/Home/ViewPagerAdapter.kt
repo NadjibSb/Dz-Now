@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
@@ -19,13 +18,33 @@ class ViewPagerAdapter(
     private val categoriesList: List<Categories>
 ) : PagerAdapter() {
 
+    private lateinit var mCategoriesList : MutableList<ViewPagerHeader>
+
+    init {
+        articlesList.shuffle()
+        mCategoriesList = initializeList(categoriesList)
+    }
+
+    private fun initializeList(categories: List<Categories>): MutableList<ViewPagerHeader> {
+        var list =mutableListOf<ViewPagerHeader>()
+        list.add(ViewPagerHeader.AllHeader())
+        for (cat in categories){
+            list.add(ViewPagerHeader.CategorieHeader(cat))
+        }
+        return list
+    }
+
     override fun instantiateItem(collection: ViewGroup, position: Int): Any {
-        val categorie = categoriesList[position]
+        val header = mCategoriesList[position]
         val inflater = LayoutInflater.from(mContext)
         val layout = inflater.inflate(R.layout.viewpager_content, collection, false) as ViewGroup
         //val title = layout.findViewById<TextView>(R.id.title)
 
-        setUpRecycleView(layout, getarticlesByCategories(categorie,articlesList))
+        if (header is ViewPagerHeader.AllHeader){
+            setUpRecycleView(layout,articlesList)
+        }else if(header is ViewPagerHeader.CategorieHeader){
+            setUpRecycleView(layout, getarticlesByCategories(header.categorie,articlesList))
+        }
 
         collection.addView(layout)
         return layout
@@ -36,7 +55,7 @@ class ViewPagerAdapter(
     }
 
     override fun getCount(): Int {
-        return categoriesList.size
+        return mCategoriesList.size
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -44,8 +63,14 @@ class ViewPagerAdapter(
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        val customPagerEnum = categoriesList[position]
-        return mContext.getString(customPagerEnum.title)
+        var title =""
+        val header = mCategoriesList[position]
+        if (header is ViewPagerHeader.AllHeader){
+            title= mContext.getString(header.text)
+        }else if(header is ViewPagerHeader.CategorieHeader){
+            title= mContext.getString(header.categorie.title)
+        }
+        return title
     }
 
     //RecycleView--------------------------------------------
@@ -64,6 +89,11 @@ class ViewPagerAdapter(
             }
         }
         return newList
+    }
+
+    sealed class ViewPagerHeader{
+        data class CategorieHeader(val categorie: Categories):ViewPagerHeader()
+        data class AllHeader(val text: Int = R.string.all_category ):ViewPagerHeader()
     }
 
 

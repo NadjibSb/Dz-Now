@@ -19,6 +19,7 @@
     <string name="health_category">Santé</string>
     <string name="international_category">International</string>
     <string name="science_category">Science</string>
+    <string name="all_category">Tous</string>
 
     <string name="sport">Sport</string>
     <string name="technologie">Technologie</string>
