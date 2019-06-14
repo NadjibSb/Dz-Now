@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
+import kotlinx.android.synthetic.main.list_item.view.*
 
 class ArticleListAdapter(val list: MutableList<Article>, val context: Context) : RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
 
@@ -34,6 +36,18 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
         val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(articleID)
         view.setOnClickListener {v:View ->
             v.findNavController().navigate(action)
+        }
+
+        view.readLaterArticle.setOnClickListener{
+            var i = 0
+            var article = list[0]
+            while (i < list.size) {
+                if (list[i].id == articleID) {
+                    article= list[i]
+                }
+                i++
+            }
+            article.favorit= !article.favorit
         }
     }
 

@@ -31,4 +31,8 @@ class HomeFragment: Fragment() {
         binding.slidingTabs.setupWithViewPager(viewPager)
         return binding.root
     }
+
+
+
+
 }
