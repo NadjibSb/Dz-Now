@@ -10,7 +10,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -62,12 +61,13 @@ class SettingsFragment : Fragment() {
         binding.themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                Toast.makeText(context, "Dark theme", Toast.LENGTH_SHORT).show()
                 //sharedPref.edit().putString(KEY_CURRENT_THEME, DARK_THEME).apply()
-            }else
+                Toast.makeText(context, "Dark theme", Toast.LENGTH_SHORT).show()
+            }else{
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 //sharedPref.edit().putString(KEY_CURRENT_THEME, LIGHT_THEME).apply()
-            //activity?.recreate()
+            }
+            activity?.recreate()
         }
     }
 

@@ -1,13 +1,14 @@
-package com.esi.dz_now.screens.Home
+package com.esi.dz_now.screens.Favorit
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,8 +17,13 @@ import com.esi.dz_now.data.Article
 import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
-    RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
+class FavorisArticleListAdapter(val list: MutableList<Article>, val context: Context) :
+    RecyclerView.Adapter<FavorisArticleListAdapter.ArticleViewHolder>() {
+
+    var itemChanged = MutableLiveData<Boolean>()
+    init {
+        itemChanged.value = false
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val articleItemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -33,13 +39,12 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
         holder.sourceDateText.text = article.source + "|" + article.date.toString()
         holder.image.setBackgroundResource(article.img)
         holder.star.isChecked = article.favorit
-        Log.i("nadjib",holder.star.isChecked.toString())
         handleClick(holder.container, article.id)
         Glide.with(context).load(article.img).to(holder.image)
     }
 
     private fun handleClick(view: View, articleID: Int) {
-        val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(articleID)
+        val action = FavoriteFragmentDirections.actionFavoriteFragmentToArticleFragment(articleID)
         view.setOnClickListener { v: View ->
             v.findNavController().navigate(action)
         }
@@ -54,6 +59,8 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
                 i++
             }
             article.favorit = !article.favorit
+            list.remove(article)
+            itemChanged.value=true
         }
     }
 
@@ -72,6 +79,7 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
             image = parent.findViewById(R.id.articleImage)
             container = parent.findViewById(R.id.itemContainer)
             star = parent.findViewById(R.id.readLaterArticle)
+
         }
     }
 

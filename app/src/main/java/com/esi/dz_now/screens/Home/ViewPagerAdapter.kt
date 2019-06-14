@@ -10,8 +10,6 @@ import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
 
-const val HOME_SOURCE="settings"
-
 
 class ViewPagerAdapter(
     private val mContext: Context,
@@ -78,7 +76,7 @@ class ViewPagerAdapter(
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
-        recyclerView.adapter = ArticleListAdapter(list, mContext, HOME_SOURCE)
+        recyclerView.adapter = ArticleListAdapter(list, mContext)
         val screenOrientation =
             (mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
         when (screenOrientation) {

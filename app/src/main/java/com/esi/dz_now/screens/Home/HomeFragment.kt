@@ -1,6 +1,5 @@
 package com.esi.dz_now.screens.Home
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.esi.dz_now.R
-import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentHomeBinding
 import com.esi.dz_now.screens.MainActivity

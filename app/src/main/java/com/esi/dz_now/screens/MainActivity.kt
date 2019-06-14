@@ -1,6 +1,5 @@
 package com.esi.dz_now.screens
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,8 +13,6 @@ import com.esi.dz_now.data.Categories
 import com.esi.dz_now.data.DataUtil
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), SharedData {
@@ -29,11 +26,12 @@ class MainActivity : AppCompatActivity(), SharedData {
             R.id.settingsFragment
         )
     )
-    private var dataUtil= DataUtil()
+    private var dataUtil = DataUtil()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
 
@@ -46,8 +44,6 @@ class MainActivity : AppCompatActivity(), SharedData {
     }
 
 
-
-
     override fun onBackPressed() {
         if (!multiStartNavigationUi.onBackPressed(this, navController)) {
             super.onBackPressed()
@@ -55,7 +51,6 @@ class MainActivity : AppCompatActivity(), SharedData {
     }
 
     override fun onSupportNavigateUp() = multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
-
 
 
     override fun getAllArticles(): MutableList<Article> {

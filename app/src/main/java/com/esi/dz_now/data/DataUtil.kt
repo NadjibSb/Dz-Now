@@ -31,10 +31,17 @@ class DataUtil {
     }
 
     fun getAllArticles(): MutableList<Article> {
-        articlesList.sortByDescending { article ->
+        var list = mutableListOf<Article>()
+        var activatedCategories = getCategories()
+        for (article in articlesList){
+            if (activatedCategories.contains(article.categories)){
+                list.add(article)
+            }
+        }
+        list.sortByDescending { article ->
             article.date
         }
-        return articlesList
+        return list
     }
 
 
