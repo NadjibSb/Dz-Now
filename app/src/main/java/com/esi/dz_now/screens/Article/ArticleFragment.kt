@@ -15,6 +15,7 @@ import com.esi.dz_now.databinding.FragmentArticleBinding
 import com.esi.dz_now.screens.MainActivity
 import kotlinx.android.synthetic.main.fragment_article.*
 import android.R
+import android.content.Intent
 import com.esi.dz_now.data.Article
 
 class ArticleFragment : Fragment() {
@@ -65,7 +66,12 @@ class ArticleFragment : Fragment() {
 
         var id = item.itemId
         if(id== com.esi.dz_now.R.id.shareAction)
-            Toast.makeText(context, "Share clicked!", Toast.LENGTH_SHORT).show()
+        {
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.type = "text/plain"
+            startActivity(Intent.createChooser(shareIntent,"Partager Article"))
+        }
         if(id== com.esi.dz_now.R.id.readModeAction)
             Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
         if(id== com.esi.dz_now.R.id.addToFavoriteAction)
