@@ -19,6 +19,8 @@ import com.esi.dz_now.databinding.FragmentFavoriteBinding
 import com.esi.dz_now.screens.Home.ArticleListAdapter
 import com.esi.dz_now.screens.MainActivity
 
+const val FAVORIS_SOURCE="favoris"
+
 
 class FavoriteFragment : Fragment() {
 
@@ -40,15 +42,13 @@ class FavoriteFragment : Fragment() {
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
-        recyclerView.adapter = ArticleListAdapter(list, context!!)
-/*        val context2 = context
+        recyclerView.adapter = ArticleListAdapter(list, context!!, FAVORIS_SOURCE)
         val screenOrientation =
-            (context2!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
+            (context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
         when(screenOrientation){
             Surface.ROTATION_0 -> recyclerView.layoutManager = LinearLayoutManager(context)
             else -> recyclerView.layoutManager = GridLayoutManager(context,2)
-        }*/
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        }
         recyclerView.setHasFixedSize(true)
     }
 
