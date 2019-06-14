@@ -12,9 +12,7 @@
     <fragment android:id="@+id/favoriteFragment"
               android:name="com.esi.dz_now.screens.Favorit.FavoriteFragment"
               android:label="fragment_favorite"
-              tools:layout="@layout/fragment_favorite">
-        <action android:id="@+id/action_favoriteFragment_to_articleFragment" app:destination="@id/articleFragment"/>
-    </fragment>
+              tools:layout="@layout/fragment_favorite"/>
 
     <fragment android:id="@+id/homeFragment"
               android:name="com.esi.dz_now.screens.Home.HomeFragment"

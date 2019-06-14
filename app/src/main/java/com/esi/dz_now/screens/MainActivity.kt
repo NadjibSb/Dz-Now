@@ -1,5 +1,6 @@
 package com.esi.dz_now.screens
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -74,4 +75,7 @@ class MainActivity : AppCompatActivity(), SharedData {
         return dataUtil.getArticleById(articleId)
     }
 
+    override fun getFavories(): MutableList<Article> {
+        return dataUtil.getFavories()
+    }
 }

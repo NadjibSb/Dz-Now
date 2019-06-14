@@ -45,15 +45,15 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp">
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp">
+                    android:layout_marginStart="16dp">
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                             android:id="@+id/articleDate"
                             android:textAlignment="viewStart"
                             android:fontFamily="sans-serif"
-                            android:layout_marginRight="0dp"
+                            android:layout_marginEnd="0dp"
 
                             android:textSize="18sp"/>
 
@@ -79,7 +79,7 @@
                         android:id="@+id/articleTitle"
                         android:textAlignment="viewStart"
                         android:fontFamily="sans-serif"
-                        android:layout_marginRight="0dp"
+                        android:layout_marginEnd="0dp"
                         android:textStyle="bold"
                         android:textSize="24sp"/>
                 <TextView
@@ -89,7 +89,7 @@
                         android:id="@+id/articlePublicationDate"
                         android:textAlignment="viewStart"
                         android:fontFamily="sans-serif"
-                        android:layout_marginRight="0dp"
+                        android:layout_marginEnd="0dp"
                         android:textSize="18sp"/>
                 <TextView
                         android:text="TextView"
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/articleContent"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_margin="16dp"/>
     </LinearLayout>
 </ScrollView>

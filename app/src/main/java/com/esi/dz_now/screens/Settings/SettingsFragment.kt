@@ -1,32 +1,40 @@
 package com.esi.dz_now.screens.Settings
 
 
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
-import android.view.*
-import android.widget.CheckBox
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Categories
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentSettingsBinding
 import com.esi.dz_now.screens.MainActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
+import java.util.*
 
 
 class SettingsFragment : Fragment() {
 
+    private lateinit var binding: FragmentSettingsBinding
     private lateinit var data: SharedData
-    private lateinit var categories:List<Categories>
+    private lateinit var categories: List<Categories>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val binding: FragmentSettingsBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_settings,container,false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_settings, container, false
+        )
         (activity as MainActivity).supportActionBar?.title = getString(R.string.settings_fragment_title)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         data = activity as SharedData
@@ -35,7 +43,7 @@ class SettingsFragment : Fragment() {
         checkBoxSport.isChecked = categories[0].isActivated
         checkBoxSport.setOnCheckedChangeListener { view, isChecked ->
             categories[0].isActivated = isChecked
-            val msg = "Catégorie Sport " + (if (isChecked) "activée" else "désactivée")+"."
+            val msg = "Catégorie Sport " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
         }
@@ -43,7 +51,7 @@ class SettingsFragment : Fragment() {
         checkBoxCulture.isChecked = categories[1].isActivated
         checkBoxCulture.setOnCheckedChangeListener { view, isChecked ->
             categories[1].isActivated = isChecked
-            val msg = "Catégorie Culture " + (if (isChecked) "activée" else "désactivée")+"."
+            val msg = "Catégorie Culture " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
         }
@@ -51,7 +59,7 @@ class SettingsFragment : Fragment() {
         checkBoxPolitique.isChecked = categories[2].isActivated
         checkBoxPolitique.setOnCheckedChangeListener { view, isChecked ->
             categories[2].isActivated = isChecked
-            val msg = "Catégorie Politique " + (if (isChecked) "activée" else "désactivée")+"."
+            val msg = "Catégorie Politique " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
         }
@@ -59,7 +67,7 @@ class SettingsFragment : Fragment() {
         checkBoxInternational.isChecked = categories[3].isActivated
         checkBoxInternational.setOnCheckedChangeListener { view, isChecked ->
             categories[3].isActivated = isChecked
-            val msg = "Catégorie International " + (if (isChecked) "activée" else "désactivée")+"."
+            val msg = "Catégorie International " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
         }
@@ -67,7 +75,7 @@ class SettingsFragment : Fragment() {
         checkBoxSanté.isChecked = categories[4].isActivated
         checkBoxSanté.setOnCheckedChangeListener { view, isChecked ->
             categories[4].isActivated = isChecked
-            val msg = "Catégorie Santé " + (if (isChecked) "activée" else "désactivée")+"."
+            val msg = "Catégorie Santé " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
         }
@@ -75,14 +83,40 @@ class SettingsFragment : Fragment() {
         checkBoxTechnologie.isChecked = categories[5].isActivated
         checkBoxTechnologie.setOnCheckedChangeListener { view, isChecked ->
             categories[5].isActivated = isChecked
-            val msg = "Catégorie Technologie " + (if (isChecked) "activée" else "désactivée")+"."
+            val msg = "Catégorie Technologie " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
         }
 
+
+        binding.arabic.setOnClickListener { v ->
+            //LocaleManagerMew.setLocale(this@LoginCustomerFragment.activity?.applicationContext)
+            var locale = Locale("ar")
+            Locale.setDefault(locale)
+            var res = this@SettingsFragment.activity!!.resources
+            var config = res.configuration
+            config.setLocale(locale)
+            res.updateConfiguration(config,res.displayMetrics)
+            activity?.recreate()
+        }
+        binding.french.setOnClickListener { v ->
+            //LocaleManagerMew.setLocale(this@LoginCustomerFragment.activity?.applicationContext)
+            var locale = Locale("fr")
+            var res = this@SettingsFragment.activity!!.resources
+            var config = res.configuration
+           /* if (Build.VERSION.SDK_INT >= 17) {
+                config.setLocale(locale)
+                var context2 = context!!.createConfigurationContext(config)
+            } else {
+                config.locale = locale
+                res.updateConfiguration(config, res.getDisplayMetrics())
+            }*/
+            config.setLocale(locale)
+            res.updateConfiguration(config,res.displayMetrics)
+            activity?.recreate()
+
+        }
+
+
     }
-
-
-
-
 }

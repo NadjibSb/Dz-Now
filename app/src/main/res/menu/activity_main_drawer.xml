@@ -6,11 +6,11 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_menu_home"
-        android:title="@string/home" />
+        android:title="@string/home_fragment_title" />
     <item
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/ic_menu_stars"
-        android:title="@string/favorites" />
+        android:title="@string/favourites_fragment_title" />
 
     <group
             android:id="@+id/bottom_menu"
@@ -18,7 +18,7 @@
         <item
             android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_menu_settings"
-            android:title="settings"/>
+            android:title="@string/settings_fragment_title"/>
 
     </group>
 

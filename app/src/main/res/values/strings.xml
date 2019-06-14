@@ -1,48 +1,34 @@
 <resources>
-    <string name="app_name">Dz-Now</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">DZ News</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Paramètres</string>
-    <string name="home">Home</string>
-    <string name="favorites">Favorites</string>
+    <string name="app_name" translatable="false">Dz Now</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
 
-    <string name="themes_title">Thèmes</string>
-    <string name="category_title">Catégories à affciher</string>
+    <string name="themes_title">Theme</string>
+    <string name="category_title">Categories to display</string>
 
     <string name="sport_category">Sport</string>
-    <string name="tech_category">Technologie</string>
+    <string name="tech_category">Technology</string>
     <string name="culture_category">Culture</string>
-    <string name="politic_category">Politique</string>
-    <string name="health_category">Santé</string>
+    <string name="politic_category">Politics</string>
+    <string name="health_category">Health</string>
     <string name="international_category">International</string>
     <string name="science_category">Science</string>
-    <string name="all_category">Tous</string>
-
-    <string name="sport">Sport</string>
-    <string name="technologie">Technologie</string>
-    <string name="politic">Politique</string>
-    <string name="international">International</string>
-    <string name="sante">Santé</string>
-    <string name="culture">Culture</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_test">test</string>
+    <string name="all_category">All</string>
 
 
     <string name="article_fragment_title">Article</string>
-    <string name="settings_fragment_title">Paramètres</string>
-    <string name="favourites_fragment_title">Favoris</string>
-    <string name="home_fragment_title">Acceuil</string>
+    <string name="settings_fragment_title">Settings</string>
+    <string name="favourites_fragment_title">Favorites</string>
+    <string name="home_fragment_title">Home</string>
+
+    <string name="addToFav">Add to favorites</string>
 
 
 
 =======
 >>>>>>> d177a925da6db24c0fa5169eab69d1ed32176597
-    <string name="articleContent">"Battue chez elle par la Zambie (1-0), l’Algérie a définitivement mis une croix sur le Mondial 2018. C’est une grosse désillusion pour l’équipe huitième de finaliste de la Coupe du monde 2014 qui s’attend à une grosse crise du football. De son côté, la Zambie garde espoir de doubler le Nigeria sur le fil.
+    <string name="articleContent" translatable="false">"Battue chez elle par la Zambie (1-0), l’Algérie a définitivement mis une croix sur le Mondial 2018. C’est une grosse désillusion pour l’équipe huitième de finaliste de la Coupe du monde 2014 qui s’attend à une grosse crise du football. De son côté, la Zambie garde espoir de doubler le Nigeria sur le fil.
         Même si mathématiquement tout restait possible, l’espoir d’une qualification au Mondial 2018 avait déserté les rangs des suiveurs de l’équipe d’Algérie depuis la défaite samedi dernier à Lusaka (3-1). Il ne subsistait dès lors qu’un honneur à sauver face au même adversaire cinq jours après pour le match retour. Mais dans son antre à Constantine, l’Algérie a été incapable de prendre le meilleur sur un adversaire solide, déterminé et certainement plus motivé qu’elle.
         Les hommes de Lucas Alcaraz ont pourtant essayé mais sont tombés sur un gardien zambien, Kennedy Mweene, impérial qui a mis en échec tour à tour les attaquants algériens, Soudani,  (9e), Brahimi (59e), Ounas (61e), et Slimani (90 +3). Surtout, le portier des Chipolopolos a arrêté un penalty de Mahrez (16e) qui aurait pu permettre aux Fennecs de bien lancer l’opération « sauver l’honneur »."</string>
+    <string name="language">Language</string>
 
 </resources>

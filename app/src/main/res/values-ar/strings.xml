@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sport_category">الرياضة</string>
+    <string name="tech_category">التكنولوجيا</string>
+    <string name="politic_category">السياسة</string>
+    <string name="international_category">الدولي</string>
+    <string name="health_category">الصحة</string>
+    <string name="culture_category">الثقافة</string>
+    <string name="all_category">الكل</string>
+    <string name="category_title">الفئات المعروضة</string>
+    <string name="addToFav">"تم الحفظ "</string>
+    <string name="home_fragment_title">الرئيسية</string>
+    <string name="settings_fragment_title">الإعدادات</string>
+    <string name="science_category">العلوم</string>
+    <string name="favourites_fragment_title">المفضلة</string>
+    <string name="themes_title">نمط العرض</string>
+    <string name="article_fragment_title">المقال</string>
+</resources>

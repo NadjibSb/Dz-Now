@@ -50,7 +50,7 @@ class DataUtil {
                         "Ceci est le contenu d'un article sur la ${categorie.title.toString()}",
                         categorie,
                         Date(),
-                        true
+                        false
                     )
                 )
             }
@@ -75,6 +75,14 @@ class DataUtil {
             i++
         }
         return article
+    }
+
+    fun getFavories():MutableList<Article>{
+        var list = mutableListOf<Article>()
+        for(article in articlesList){
+            if (article.favorit) list.add(article)
+        }
+        return list
     }
 
 
