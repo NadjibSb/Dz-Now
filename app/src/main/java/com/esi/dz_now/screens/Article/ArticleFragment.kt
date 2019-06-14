@@ -44,9 +44,10 @@ class ArticleFragment : Fragment() {
         articleTitle.text = article.title
 
         articleSourceDate.text = article.source+"|"+article.date.toString()
-        articleContent.text = article.content
+        articleContent.text = article.content + "\n" + article.author
         articleCategory.text = article.categories.name
-        articleImage.setBackgroundResource(com.esi.dz_now.R.drawable.article_image)
+        //articleImage.setImageResource(article.img)
+        articleImage.setBackgroundResource(article.img)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

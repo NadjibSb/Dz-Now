@@ -28,6 +28,7 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
         holder.titleText.text = article.title
         holder.catgoryText.text = article.categories.name
         holder.sourceDateText.text = article.source+"|"+article.date.toString()
+        holder.image.setBackgroundResource(article.img)
         handleClick(holder.container,article.id)
         Glide.with(context).load(article.img).to(holder.image)
     }

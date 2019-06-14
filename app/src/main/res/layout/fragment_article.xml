@@ -28,7 +28,7 @@
 
                 <TextView
                         android:text="source/date go here"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/articleSourceDate"
                         style="@style/TextAppearance.MaterialComponents.Caption"
@@ -40,22 +40,19 @@
 
                 <TextView
                         android:text="Title goes Here"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/articleTitle"
-                        android:textAlignment="viewStart"
                         android:fontFamily="sans-serif"
                         android:textColor="#000"
-                        android:layout_marginRight="0dp"
                         android:textStyle="bold"
                         android:textSize="24sp"
                         android:textDirection="anyRtl"/>
                 <TextView
                         android:text="category goes here"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/articleCategory"
-                        android:textAlignment="viewStart"
                         android:fontFamily="sans-serif"
                         android:textDirection="anyRtl"
                         android:textSize="18sp"/>
@@ -67,9 +64,10 @@
                         android:id="@+id/articleContent"
                         android:textColor="#000"
                         android:layout_marginTop="16dp"
-                        android:textDirection="anyRtl"
+
                         android:fontFamily="serif"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:textDirection="anyRtl"/>
             </LinearLayout>
 
 
