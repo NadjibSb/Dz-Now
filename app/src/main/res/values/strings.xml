@@ -2,7 +2,7 @@
     <string name="app_name">Dz-Now</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_title">DZ News</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Paramètres</string>
@@ -19,6 +19,7 @@
     <string name="health_category">Santé</string>
     <string name="international_category">International</string>
     <string name="science_category">Science</string>
+    <string name="all_category">Tous</string>
 
     <string name="sport">Sport</string>
     <string name="technologie">Technologie</string>

@@ -12,6 +12,16 @@ class DataUtil {
     }
 
     fun getCategories(): List<Categories>{
+        var list= mutableListOf<Categories>()
+        for (cat in Categories.values().toList()){
+            if (cat.isActivated){
+                list.add(cat)
+            }
+        }
+        return list
+    }
+
+    fun getAllCategories():List<Categories>{
         return Categories.values().toList()
     }
 
@@ -30,6 +40,7 @@ class DataUtil {
 
     private fun creatArticleList() {
         val articles = mutableListOf<Article>()
+
         var article0:Article = Article(
             id = 0,
             title = "توقيف حفيد جمال ولد عباس",
@@ -291,6 +302,7 @@ class DataUtil {
         )
         var articles_ = listOf<Article>(article0, article1, article2, article3, article4, article5, article6, article7, article8, article9, article10)
         articles.addAll(articles_)
+
         articlesList = articles
     }
 

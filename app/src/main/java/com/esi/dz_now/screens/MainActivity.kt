@@ -63,6 +63,11 @@ class MainActivity : AppCompatActivity(), SharedData {
         return dataUtil.getArticlesListByCategorie(categories)!!
     }
 
+
+    override fun getAllCategories(): List<Categories> {
+        return dataUtil.getAllCategories()
+    }
+
     override fun getCategories(): List<Categories> {
         return dataUtil.getCategories()
     }

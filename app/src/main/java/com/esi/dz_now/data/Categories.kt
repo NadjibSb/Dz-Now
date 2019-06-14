@@ -1,5 +1,6 @@
 package com.esi.dz_now.data
 
+import android.provider.Settings.System.getString
 import com.esi.dz_now.R
 
 enum class Categories(val title: Int, var isActivated:Boolean) {
@@ -9,5 +10,6 @@ enum class Categories(val title: Int, var isActivated:Boolean) {
     CULTURE(R.string.culture_category, true),
     SANTE(R.string.health_category, true),
     TECH(R.string.tech_category, true)
+
 
 }

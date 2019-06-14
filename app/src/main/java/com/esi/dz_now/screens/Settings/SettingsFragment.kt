@@ -33,7 +33,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         data = activity as SharedData
-        categories = data.getCategories()
+        categories = data.getAllCategories()
 
         checkBoxSport.isChecked = categories[0].isActivated
         checkBoxSport.setOnCheckedChangeListener { view, isChecked ->
@@ -93,7 +93,7 @@ class SettingsFragment : Fragment() {
                 // The toggle is disabled
                 Toast.makeText(context,"Dark Theme off",Toast.LENGTH_SHORT).show()
 
-                activity?.setTheme(com.esi.dz_now.R.style.AppTheme_DARK)
+                //activity?.setTheme(com.esi.dz_now.R.style.AppTheme_DARK)
 
             }
         }

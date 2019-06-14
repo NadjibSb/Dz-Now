@@ -19,11 +19,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="AppTheme.DARK" parent="Theme.AppCompat.DayNight.DarkActionBar">
+
+    <style name="AppTheme.DARK1" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryDarkTheme</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkDarkTheme</item>
         <item name="colorAccent">@color/colorAccentDarkTheme</item>
     </style>
+    <!--
+        <style name="AppTheme.DARK" parent="Theme.AppCompat.DayNight.DarkActionBar">
+             Customize your theme here.
+        <item name="colorPrimary">@color/primaryColorAmber</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColorAmber</item>
+        <item name="colorAccent">@color/secondaryColorAmber</item>
 
+    </style>
+-->
 </resources>
