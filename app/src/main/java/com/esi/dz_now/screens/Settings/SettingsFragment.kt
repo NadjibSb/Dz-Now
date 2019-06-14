@@ -2,7 +2,7 @@ package com.esi.dz_now.screens.Settings
 
 
 import android.os.Bundle
-import android.util.Log
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +10,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.esi.dz_now.R
@@ -19,6 +21,11 @@ import com.esi.dz_now.databinding.FragmentSettingsBinding
 import com.esi.dz_now.screens.MainActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.util.*
+
+
+const val KEY_CURRENT_THEME = "current_theme"
+const val LIGHT_THEME = "light"
+const val DARK_THEME = "dark"
 
 
 class SettingsFragment : Fragment() {
@@ -45,11 +52,27 @@ class SettingsFragment : Fragment() {
 
         spinnerSetup()
         categorieSelectionSetup(categories)
+
+
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
+
+        binding.themeSwitch.isChecked = currentTheme == DARK_THEME
+
+        binding.themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                Toast.makeText(context, "Dark theme", Toast.LENGTH_SHORT).show()
+                //sharedPref.edit().putString(KEY_CURRENT_THEME, DARK_THEME).apply()
+            }else
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                //sharedPref.edit().putString(KEY_CURRENT_THEME, LIGHT_THEME).apply()
+            //activity?.recreate()
+        }
     }
 
 
-
-    private fun spinnerSetup(){
+    private fun spinnerSetup() {
         val spinner: Spinner = binding.languageSpinner
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -67,24 +90,26 @@ class SettingsFragment : Fragment() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (id==0L)
-                    switchLanguage("fr")
-                else
-                    switchLanguage("ar")
+                when(id){
+                    0L -> switchLanguage("en")
+                    1L -> switchLanguage("fr")
+                    2L -> switchLanguage("ar")
+                }
             }
         }
     }
 
-    private fun switchLanguage(newlanguage:String){
+    private fun switchLanguage(newlanguage: String) {
         var currentLanguage = Locale.getDefault().language
-        if (!currentLanguage.equals(newlanguage)){
+        if (!currentLanguage.equals(newlanguage)) {
             var locale = Locale(newlanguage)
             Locale.setDefault(locale)
             var res = this@SettingsFragment.activity!!.resources
             var config = res.configuration
             config.setLocale(locale)
-            res.updateConfiguration(config,res.displayMetrics)
+            res.updateConfiguration(config, res.displayMetrics)
             activity?.recreate()
         }
         /* if (Build.VERSION.SDK_INT >= 17) {
@@ -96,7 +121,7 @@ class SettingsFragment : Fragment() {
          }*/
     }
 
-    private fun categorieSelectionSetup(categories: List<Categories>){
+    private fun categorieSelectionSetup(categories: List<Categories>) {
         checkBoxSport.isChecked = categories[0].isActivated
         checkBoxSport.setOnCheckedChangeListener { view, isChecked ->
             categories[0].isActivated = isChecked

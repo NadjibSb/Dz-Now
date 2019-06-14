@@ -21,6 +21,7 @@
     <string name="home_fragment_title">Home</string>
     <string name="language">Language</string>
     <string-array name="languages">
+        <item>English</item>
         <item>French</item>
         <item>Arabic</item>
     </string-array>
