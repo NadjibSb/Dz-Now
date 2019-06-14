@@ -15,4 +15,10 @@
     <string name="tech_category">Technologie</string>
     <string name="themes_title">Thème</string>
     <string name="article_fragment_title">Article</string>
+    <string name="language">Langue</string>
+
+    <string-array name="languages">
+        <item>Français</item>
+        <item>Arabe</item>
+    </string-array>
 </resources>

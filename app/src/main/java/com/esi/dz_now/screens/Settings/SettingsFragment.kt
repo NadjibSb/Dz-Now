@@ -1,12 +1,14 @@
 package com.esi.dz_now.screens.Settings
 
 
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -32,6 +34,7 @@ class SettingsFragment : Fragment() {
             R.layout.fragment_settings, container, false
         )
         (activity as MainActivity).supportActionBar?.title = getString(R.string.settings_fragment_title)
+
         return binding.root
     }
 
@@ -40,6 +43,60 @@ class SettingsFragment : Fragment() {
         data = activity as SharedData
         categories = data.getAllCategories()
 
+        spinnerSetup()
+        categorieSelectionSetup(categories)
+    }
+
+
+
+    private fun spinnerSetup(){
+        val spinner: Spinner = binding.languageSpinner
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            context,
+            R.array.languages,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (id==0L)
+                    switchLanguage("fr")
+                else
+                    switchLanguage("ar")
+            }
+        }
+    }
+
+    private fun switchLanguage(newlanguage:String){
+        var currentLanguage = Locale.getDefault().language
+        if (!currentLanguage.equals(newlanguage)){
+            var locale = Locale(newlanguage)
+            Locale.setDefault(locale)
+            var res = this@SettingsFragment.activity!!.resources
+            var config = res.configuration
+            config.setLocale(locale)
+            res.updateConfiguration(config,res.displayMetrics)
+            activity?.recreate()
+        }
+        /* if (Build.VERSION.SDK_INT >= 17) {
+             config.setLocale(locale)
+             var context2 = context!!.createConfigurationContext(config)
+         } else {
+             config.locale = locale
+             res.updateConfiguration(config, res.getDisplayMetrics())
+         }*/
+    }
+
+    private fun categorieSelectionSetup(categories: List<Categories>){
         checkBoxSport.isChecked = categories[0].isActivated
         checkBoxSport.setOnCheckedChangeListener { view, isChecked ->
             categories[0].isActivated = isChecked
@@ -85,38 +142,6 @@ class SettingsFragment : Fragment() {
             categories[5].isActivated = isChecked
             val msg = "Catégorie Technologie " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
         }
-
-
-        binding.arabic.setOnClickListener { v ->
-            //LocaleManagerMew.setLocale(this@LoginCustomerFragment.activity?.applicationContext)
-            var locale = Locale("ar")
-            Locale.setDefault(locale)
-            var res = this@SettingsFragment.activity!!.resources
-            var config = res.configuration
-            config.setLocale(locale)
-            res.updateConfiguration(config,res.displayMetrics)
-            activity?.recreate()
-        }
-        binding.french.setOnClickListener { v ->
-            //LocaleManagerMew.setLocale(this@LoginCustomerFragment.activity?.applicationContext)
-            var locale = Locale("fr")
-            var res = this@SettingsFragment.activity!!.resources
-            var config = res.configuration
-           /* if (Build.VERSION.SDK_INT >= 17) {
-                config.setLocale(locale)
-                var context2 = context!!.createConfigurationContext(config)
-            } else {
-                config.locale = locale
-                res.updateConfiguration(config, res.getDisplayMetrics())
-            }*/
-            config.setLocale(locale)
-            res.updateConfiguration(config,res.displayMetrics)
-            activity?.recreate()
-
-        }
-
-
     }
 }

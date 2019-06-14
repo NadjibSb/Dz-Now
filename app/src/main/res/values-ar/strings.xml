@@ -15,4 +15,10 @@
     <string name="favourites_fragment_title">المفضلة</string>
     <string name="themes_title">نمط العرض</string>
     <string name="article_fragment_title">المقال</string>
+    <string name="language">اللغة</string>
+
+    <string-array name="languages">
+        <item>الفرنسية</item>
+        <item>العربية</item>
+    </string-array>
 </resources>
