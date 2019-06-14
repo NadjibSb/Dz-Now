@@ -1,6 +1,7 @@
 package com.esi.dz_now.screens.Article
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -39,9 +40,12 @@ class ArticleFragment : Fragment() {
         data = activity as SharedData
         article = data.getArticleById(articleID)
         articleTitle.text = article.title
-        articleContent.text = article.content
-        articleCategory.text = article.categories.title.toString()
-        articleImage.setBackgroundResource(R.drawable.article_image)
+
+        articleSourceDate.text = article.source + "|" + article.date.toString()
+        articleContent.text = article.content + "\n" + article.author
+        articleCategory.text = article.categories.name
+        //articleImage.setImageResource(article.img)
+        articleImage.setBackgroundResource(article.img)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -59,10 +63,14 @@ class ArticleFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         var id = item.itemId
-        if (id == R.id.shareAction)
-            Toast.makeText(context, "Share clicked!", Toast.LENGTH_SHORT).show()
-        if (id == R.id.readModeAction)
-            Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
+        if (id == com.esi.dz_now.R.id.shareAction) {
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.type = "text/plain"
+            startActivity(Intent.createChooser(shareIntent, "Partager Article"))
+        }
+        if (id == com.esi.dz_now.R.id.readModeAction)
+        Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
         if (id == R.id.addToFavoriteAction) {
             if (item.title == "stared") {
                 item.title = "unstared"
