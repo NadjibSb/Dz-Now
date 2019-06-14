@@ -42,7 +42,7 @@ class ArticleFragment : Fragment() {
         article = data.getArticleById(articleID)
         articleTitle.text = article.title
 
-        articleSourceDate.text = article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
+        articleSourceDate.text = article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
         articleContent.text = article.content + "\n" + article.author
         articleCategory.text = getString(article.categories.title)
         //articleImage.setImageResource(article.img)

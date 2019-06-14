@@ -32,7 +32,7 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context, v
         val article = list[position]
         holder.titleText.text = article.title
         holder.catgoryText.text = context.getString(article.categories.title)
-        holder.sourceDateText.text = article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
+        holder.sourceDateText.text = article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
         holder.image.setBackgroundResource(article.img)
         holder.toggleButton.isChecked = article.favorit
         handleClick(holder.container, article.id)
