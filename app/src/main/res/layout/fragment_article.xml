@@ -10,9 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+
             <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="205dp"
@@ -20,94 +18,62 @@
                     android:id="@+id/articleImage"
                     android:contentDescription="Description"/>
 
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                   >
 
-                <TextView
-                        android:id="@+id/articleSource"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:textSize="13dp"
-                        android:text="Source"
-
-                        />
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp">
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp">
-                <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    <TextView
-                            android:text="3 mai 2019, 15:25"
-                            android:layout_width="343dp"
-                            android:layout_height="match_parent"
-                            android:id="@+id/articleDate"
-                            android:textAlignment="viewStart"
-                            android:fontFamily="sans-serif"
-                            android:layout_marginRight="0dp"
-
-                            android:textSize="18sp"/>
-
-
-                </LinearLayout>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
 
                 <TextView
-                        android:text="Text View"
+                        android:text="source/date go here"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/articleSourceDate"
+                        style="@style/TextAppearance.MaterialComponents.Caption"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/articleCategory"
+                        app:layout_constraintVertical_bias="0.625"
+                        android:textDirection="anyRtl"
+                        android:fontFamily="sans-serif-smallcaps"/>
+
+                <TextView
+                        android:text="Title goes Here"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/articleTitle"
                         android:textAlignment="viewStart"
                         android:fontFamily="sans-serif"
+                        android:textColor="#000"
                         android:layout_marginRight="0dp"
                         android:textStyle="bold"
-                        android:textSize="24sp"/>
+                        android:textSize="24sp"
+                        android:textDirection="anyRtl"/>
                 <TextView
-                        android:text="TextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/articlePublicationDate"
-                        android:textAlignment="viewStart"
-                        android:fontFamily="sans-serif"
-                        android:layout_marginRight="0dp"
-                        android:textSize="18sp"/>
-                <TextView
-                        android:text="TextView"
+                        android:text="category goes here"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/articleCategory"
-                        android:textSize="14sp"/>
+                        android:textAlignment="viewStart"
+                        android:fontFamily="sans-serif"
+                        android:textDirection="anyRtl"
+                        android:textSize="18sp"/>
+
+                <TextView
+                        android:text="content goes here"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/articleContent"
+                        android:textColor="#000"
+                        android:layout_marginTop="16dp"
+                        android:textDirection="anyRtl"
+                        android:fontFamily="serif"
+                        android:textSize="18sp"/>
             </LinearLayout>
 
 
-        </LinearLayout>
-        <TextView
-                android:text="Text View"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/articleContent"
-                android:layout_marginLeft="16dp"
-                android:layout_margin="16dp"/>
+
     </LinearLayout>
 </ScrollView>
 </layout>

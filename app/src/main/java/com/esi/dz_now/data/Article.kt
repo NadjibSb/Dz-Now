@@ -11,6 +11,7 @@ data class Article(
     val categories: Categories,
     val date: Date,
     var favorit:Boolean,
-    val source: String
+    val source: String,
+    val author: String
 ) {
 }

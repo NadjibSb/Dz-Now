@@ -41,8 +41,10 @@ class ArticleFragment : Fragment() {
         data = activity as SharedData
         article = data.getArticleById(articleID)
         articleTitle.text = article.title
+
+        articleSourceDate.text = article.source+"|"+article.date.toString()
         articleContent.text = article.content
-        articleCategory.text = article.categories.title.toString()
+        articleCategory.text = article.categories.name
         articleImage.setBackgroundResource(com.esi.dz_now.R.drawable.article_image)
     }
 

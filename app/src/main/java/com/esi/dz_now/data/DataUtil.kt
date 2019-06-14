@@ -42,13 +42,21 @@ class DataUtil {
                 articles.add(
                     Article(
                         i,
-                        "article de ${categorie.title} ${i}",
+                        "Ali Ghediri interpellé par les services de sécurité",
                         "",
-                        "Ceci est le contenu d'un article sur la ${categorie.title}",
+                      /*  "Le général à la retraite Ali Ghediri a été placé en détention par le tribunal de Dar El Beida, prés la cour d’Alger, devant lequel il a été déféré durant l’aprés midi de ce jeudi.\n" +
+                                "Après une audition de plusieurs heures par le juge d’instruction, il a été placé sous mandat de dépôt en milieu de soirée. Ali Ghediri a été interpellé, hier, en fin de journée par des éléments des services de sécurité.\n" +
+                                "Conduit dans une caserne de la direction de la sécurité du territoire, il a été interrogé durant une bonne partie de la nuit. Libéré à 3h du matin, avec une convocation pour se présenter ce jeudi au tribunal de Dar El Beida à 15h.  \n" +
+                                "Selon nos informations, Ghediri est poursuivi, avec un certain Hacene Gouasmiya, pour falsification de signature lors de la collecte des signature pour la présidentielle annulée d’avril dernier.",
+                        */
+                        "أودع قاضي التحقيق بمحكمة الدار البيضاء، مساء الخميس، الجنرال المتقاعد علي غديري الحبس المؤقت بالحراش.\n" +
+                                "وأكد بيان نشرته صفحة غديري، أنه “تم ايداع المترشح السابق للرئاسيات السيد علي غديري الحبس المؤقت، بعد مثوله أمام قاضي التحقيق لدى محكمة الدار البيضاء.\n" +
+                                "وأوضح أنه “سيتم نشر بيان كاملا لاحقا” دون تقديم تفاصيل أكثر حول التهم التي يتابع فيها.",
                         categorie,
                         Date(),
                         true,
-                        "El WATAN"
+                        "El WATAN",
+                        "Salima"
                     )
                 )
             }
