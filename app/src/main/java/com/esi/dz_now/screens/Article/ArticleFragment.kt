@@ -13,6 +13,7 @@ import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentArticleBinding
 import com.esi.dz_now.screens.MainActivity
 import kotlinx.android.synthetic.main.fragment_article.*
+import java.text.SimpleDateFormat
 
 class ArticleFragment : Fragment() {
 
@@ -41,9 +42,9 @@ class ArticleFragment : Fragment() {
         article = data.getArticleById(articleID)
         articleTitle.text = article.title
 
-        articleSourceDate.text = article.source + "|" + article.date.toString()
+        articleSourceDate.text = article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
         articleContent.text = article.content + "\n" + article.author
-        articleCategory.text = article.categories.name
+        articleCategory.text = getString(article.categories.title)
         //articleImage.setImageResource(article.img)
         articleImage.setBackgroundResource(article.img)
     }
@@ -55,6 +56,10 @@ class ArticleFragment : Fragment() {
         if (!article.favorit) {
             addToFavoriteActionMenuItem.setIcon(R.drawable.ic_menu_star)
             addToFavoriteActionMenuItem.title = "unstared"
+        }
+        else{
+            addToFavoriteActionMenuItem.setIcon(R.drawable.ic_menu_fullstar)
+            addToFavoriteActionMenuItem.title = "stared"
         }
 
 
@@ -75,11 +80,11 @@ class ArticleFragment : Fragment() {
             if (item.title == "stared") {
                 item.title = "unstared"
                 item.setIcon(R.drawable.ic_menu_star)
-                article.favorit = true
+                article.favorit = false
             } else {
                 item.title = "stared"
                 item.setIcon(R.drawable.ic_menu_fullstar)
-                article.favorit = false
+                article.favorit = true
                 Toast.makeText(context, getString(R.string.addToFav), Toast.LENGTH_SHORT).show()
             }
         }

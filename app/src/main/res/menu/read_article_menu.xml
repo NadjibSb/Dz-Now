@@ -6,8 +6,7 @@
     <item
             android:id="@+id/addToFavoriteAction"
             android:orderInCategory="100"
-            android:icon="@drawable/ic_menu_fullstar"
-            android:title="stared"
+
             app:showAsAction="always" />
     <item
             android:id="@+id/readModeAction"

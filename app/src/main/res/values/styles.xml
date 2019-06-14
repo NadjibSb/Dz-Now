@@ -21,9 +21,9 @@
 
     <style name="AppTheme.DARK1" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryDarkTheme</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkDarkTheme</item>
-        <item name="colorAccent">@color/colorAccentDarkTheme</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
     <!--
         <style name="AppTheme.DARK" parent="Theme.AppCompat.DayNight.DarkActionBar">

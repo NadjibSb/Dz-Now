@@ -55,7 +55,7 @@ class SettingsFragment : Fragment() {
 
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
+      /*  val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
 
         binding.themeSwitch.isChecked = currentTheme == DARK_THEME
 
@@ -68,7 +68,7 @@ class SettingsFragment : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 //sharedPref.edit().putString(KEY_CURRENT_THEME, LIGHT_THEME).apply()
             //activity?.recreate()
-        }
+        }*/
     }
 
 

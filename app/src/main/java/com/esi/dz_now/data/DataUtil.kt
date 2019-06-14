@@ -330,14 +330,14 @@ class DataUtil {
 
     fun getArticleById(articleId: Int): Article {
         var i = 0
-        var article = articlesList[0]
-        while (i < articlesList.size) {
+        var found = 0
+        while (found == 0) {
             if (articlesList[i].id == articleId) {
-                article = articlesList[i]
+                found = 1
             }
-            i++
+            else i++
         }
-        return article
+        return articlesList[i]
     }
 
     fun getFavories():MutableList<Article>{
