@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.text.SimpleDateFormat
 
 
 class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
@@ -29,13 +30,12 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = list[position]
         holder.titleText.text = article.title
-        holder.catgoryText.text = article.categories.name
-        holder.sourceDateText.text = article.source + "|" + article.date.toString()
+        holder.catgoryText.text = context.getString(article.categories.title)
+        holder.sourceDateText.text = article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
         holder.image.setBackgroundResource(article.img)
-        holder.star.isChecked = article.favorit
-        Log.i("nadjib",holder.star.isChecked.toString())
+        holder.toggleButton.isChecked = article.favorit
         handleClick(holder.container, article.id)
-        Glide.with(context).load(article.img).to(holder.image)
+        //Glide.with(context).load(article.img).into(holder.image)
     }
 
     private fun handleClick(view: View, articleID: Int) {
@@ -63,7 +63,7 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
         var sourceDateText: TextView
         var image: ImageView
         var container: View
-        var star: ToggleButton
+        var toggleButton: ToggleButton
 
         init {
             titleText = parent.findViewById(R.id.articleTitle)
@@ -71,7 +71,7 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
             sourceDateText = parent.findViewById(R.id.articleSourceDate)
             image = parent.findViewById(R.id.articleImage)
             container = parent.findViewById(R.id.itemContainer)
-            star = parent.findViewById(R.id.readLaterArticle)
+            toggleButton = parent.findViewById(R.id.readLaterArticle)
         }
     }
 

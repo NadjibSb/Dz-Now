@@ -36,7 +36,8 @@
                         android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/articleCategory"
                         app:layout_constraintVertical_bias="0.625"
                         android:textDirection="anyRtl"
-                        android:fontFamily="sans-serif-smallcaps"/>
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:textAlignment="center"/>
 
                 <TextView
                         android:text="Title goes Here"
@@ -47,7 +48,8 @@
                         android:textColor="#000"
                         android:textStyle="bold"
                         android:textSize="24sp"
-                        android:textDirection="anyRtl"/>
+                        android:textDirection="anyRtl"
+                        android:textAlignment="center"/>
                 <TextView
                         android:text="category goes here"
                         android:layout_width="match_parent"
@@ -55,7 +57,8 @@
                         android:id="@+id/articleCategory"
                         android:fontFamily="sans-serif"
                         android:textDirection="anyRtl"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:textAlignment="center"/>
 
                 <TextView
                         android:text="content goes here"
