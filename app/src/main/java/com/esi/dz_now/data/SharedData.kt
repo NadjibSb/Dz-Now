@@ -6,5 +6,5 @@ interface SharedData {
     fun getAllCategories(): List<Categories>
     fun getCategories(): List<Categories>
     fun getArticleById(articleId: Int): Article
-    fun getFavories():MutableList<Article>
+    fun getFavories(): MutableList<Article>
 }

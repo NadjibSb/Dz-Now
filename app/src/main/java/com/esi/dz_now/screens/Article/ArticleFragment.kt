@@ -42,10 +42,10 @@ class ArticleFragment : Fragment() {
         article = data.getArticleById(articleID)
         articleTitle.text = article.title
 
-        articleSourceDate.text = article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
+        articleSourceDate.text =
+            article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
         articleContent.text = article.content + "\n" + article.author
         articleCategory.text = getString(article.categories.title)
-        //articleImage.setImageResource(article.img)
         articleImage.setBackgroundResource(article.img)
     }
 
@@ -56,8 +56,7 @@ class ArticleFragment : Fragment() {
         if (!article.favorit) {
             addToFavoriteActionMenuItem.setIcon(R.drawable.ic_menu_star)
             addToFavoriteActionMenuItem.title = "unstared"
-        }
-        else{
+        } else {
             addToFavoriteActionMenuItem.setIcon(R.drawable.ic_menu_fullstar)
             addToFavoriteActionMenuItem.title = "stared"
         }
@@ -68,14 +67,14 @@ class ArticleFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         var id = item.itemId
-        if (id == com.esi.dz_now.R.id.shareAction) {
+        if (id == R.id.shareAction) {
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.type = "text/plain"
             startActivity(Intent.createChooser(shareIntent, "Partager Article"))
         }
-        if (id == com.esi.dz_now.R.id.readModeAction)
-        Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
+        if (id == R.id.readModeAction)
+            Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
         if (id == R.id.addToFavoriteAction) {
             if (item.title == "stared") {
                 item.title = "unstared"

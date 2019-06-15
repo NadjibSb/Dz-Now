@@ -11,26 +11,26 @@ import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentHomeBinding
 import com.esi.dz_now.screens.MainActivity
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var data: SharedData
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_home, container,false)
+        val binding: FragmentHomeBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_home, container, false
+        )
         data = this.activity as SharedData
 
 
         (activity as MainActivity).supportActionBar?.title = getString(R.string.home_fragment_title)
 
         val viewPager = binding.viewPager
-        viewPager.adapter = ViewPagerAdapter(context!!,data.getAllArticles(),data.getCategories())
+        viewPager.adapter = ViewPagerAdapter(context!!, data.getAllArticles(), data.getCategories())
         binding.slidingTabs.setupWithViewPager(viewPager)
         return binding.root
     }
-
-
 
 
 }

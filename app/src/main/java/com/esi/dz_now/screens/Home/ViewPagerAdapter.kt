@@ -17,12 +17,13 @@ class ViewPagerAdapter(
     private val categoriesList: List<Categories>
 ) : PagerAdapter() {
 
-    private lateinit var mCategoriesList: MutableList<ViewPagerHeader>
+    private var mCategoriesList: MutableList<ViewPagerHeader>
 
     init {
         mCategoriesList = initializeList(categoriesList)
     }
 
+    //setup the 'All' tab with the categories tabs
     private fun initializeList(categories: List<Categories>): MutableList<ViewPagerHeader> {
         var list = mutableListOf<ViewPagerHeader>()
         list.add(ViewPagerHeader.AllHeader())

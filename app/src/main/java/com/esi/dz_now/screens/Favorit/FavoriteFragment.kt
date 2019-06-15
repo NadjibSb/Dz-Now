@@ -17,8 +17,6 @@ import com.esi.dz_now.databinding.FragmentFavoriteBinding
 import com.esi.dz_now.screens.MainActivity
 
 
-
-
 class FavoriteFragment : Fragment() {
 
     private lateinit var data: SharedData
@@ -40,10 +38,10 @@ class FavoriteFragment : Fragment() {
     private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
 
-
+        //realtime list change
         var adapter = FavorisArticleListAdapter(list, context!!)
         adapter.itemChanged.observe(this, Observer { state ->
-            if (state){
+            if (state) {
                 adapter.notifyDataSetChanged()
                 adapter.itemChanged.value = false
             }
@@ -58,7 +56,6 @@ class FavoriteFragment : Fragment() {
         }
         recyclerView.setHasFixedSize(true)
     }
-
 
 
 }

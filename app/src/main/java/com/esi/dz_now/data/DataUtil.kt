@@ -11,18 +11,27 @@ class DataUtil {
         creatArticleList()
     }
 
-    fun getCategories(): List<Categories>{
-        var list= mutableListOf<Categories>()
-        for (cat in Categories.values().toList()){
-            if (cat.isActivated){
+    fun getCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+        for (cat in Categories.values().toList()) {
+            if (cat.isActivated) {
                 list.add(cat)
             }
+        }
+        list.sortBy { categories ->
+            categories.title
         }
         return list
     }
 
-    fun getAllCategories():List<Categories>{
-        return Categories.values().toList()
+    fun getAllCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+
+        list.addAll(Categories.values().toList())
+        list.sortBy { categories ->
+            categories.title
+        }
+        return list
     }
 
     fun getArticlesListByCategorie(categories: Categories): MutableList<Article>? {
@@ -33,8 +42,8 @@ class DataUtil {
     fun getAllArticles(): MutableList<Article> {
         var list = mutableListOf<Article>()
         var activatedCategories = getCategories()
-        for (article in articlesList){
-            if (activatedCategories.contains(article.categories)){
+        for (article in articlesList) {
+            if (activatedCategories.contains(article.categories)) {
                 list.add(article)
             }
         }
@@ -48,22 +57,7 @@ class DataUtil {
     private fun creatArticleList() {
         val articles = mutableListOf<Article>()
 
-//        for (categorie in Categories.values()) {
-//            for (i in 0..5) {
-//                articles.add(
-//                    Article(
-//                        i,
-//                        "article de ${categorie.title.toString()} ${i}",
-//                        "",
-//                        "Ceci est le contenu d'un article sur la ${categorie.title.toString()}",
-//                        categorie,
-//                        Date(),
-//                        false
-//                    )
-//                )
-//            }
-//        }
-        var article0:Article = Article(
+        var article0: Article = Article(
             id = 0,
             title = "توقيف حفيد جمال ولد عباس",
             img = R.drawable.article0_img,
@@ -73,13 +67,13 @@ class DataUtil {
                     "\n" +
                     "يذكر أن المعني، وهو الذي يحمل اسم جده، مسبوق قضائيا، وسبق وأن تم القبض عليه مع مجموعة أشرار نظمت عملية سطو على محل للمجوهرات في مدينة أرزيو بولاية وهران، حين كان جده وزيرا للتضامن الوطني. وقد أحيل حينها كل المقبوض عليهم في تلك القضية أمام محكمة الجنايات لدى مجلس قضاء وهران، باستثنائه هو، والذي تم \"إخراجه من الملف الجنائي في مجلس قضاء وهران\". كما أفادت ذات المصادر أنه \"مسبوق في العديد من القضايا أمام محكمة عين تموشنت\".",
             categories = Categories.POLITICS,
-            date= Date(2019, 6, 14, 13, 0),
+            date = Date(2019, 6, 14, 13, 0),
             favorit = true,
             source = "الخبر",
             author = "ل.ب"
         )
 
-        var article1:Article = Article(
+        var article1: Article = Article(
             id = 1,
             title = "الخضر يتقدم بمركزين",
             img = R.drawable.article_image,
@@ -89,13 +83,13 @@ class DataUtil {
                     "وعلى الصعيد العالمي بقي المنتخب البلجيكي في الصدارة بمجموع (1746نقطة ) متقدما على كل من فرنسا في المركز الثاني ب (1718نقطة) والبرازيل في المركز الثالث ب(1681نقطة ) ثم انجلترا في المركز الرابع ب (1652 نقطة ). \n" +
                     "وسيصدر التصنيف المقبل للاتحاد الدولي يوم 25 يوليو المقبل.",
             categories = Categories.SPORTS,
-            date= Date(2019, 6, 14, 12, 20),
+            date = Date(2019, 6, 14, 12, 20),
             favorit = false,
             source = "الخبر",
             author = "ف.ن/ وأج"
         )
 
-        var article2:Article = Article(
+        var article2: Article = Article(
             id = 2,
             title = "\"دوري في \"أولاد الحلال\" علامة فارقة في مساري الفني\"",
             img = R.drawable.article2_img,
@@ -133,13 +127,13 @@ class DataUtil {
                     "\n" +
                     "أعترف، رغم أن مساري يمتد منذ سنة 1974 بالمشاركة في عدد لا يحصى من المسرحيات رفقة العملاق عبد القادر علولة، وحوالي عشرين عمل تلفزيوني وثلاثة أعمال سينمائية، أن السهيلي تمكن من إخراج الأحسن من كل الممثلين، فتحية كبيرة له ولكل فريق الإخراج حتى التقنيين وطريقة كتابة النص والحوارات والإخراج القوي. والمخرج كان يشتغل مع كل ممثل ويأخذ الوقت الكافي لشرح ما يريده من اللقطة، دون إهمال الجزئيات الصغيرة. كما أن الخبرة المكتسبة مع الراحل علولة سهلت من مهمتي، بحيث كان يقول لنا تقمصوا الشخصية بكل حرية، مع التعبير الجسدي. صراحة، ارتحنا كثيرا مع نصر الدين لدرجة أن بعض الممثلين تحملوا لقطات عنف وضرب بكل أريحية. كما أنوّه بدور المنتج والفريق التقني في توفير أحسن الظروف لأداء الدور، وهو ما عشته شخصيا عندما وجدت صعوبة في إتمام التمثيل وفقدت التركيز بسبب التوتر الشديد وضيق الوقت؛ لأنني كنت مطالبة بإنهاء التمثيل داخل الشقة المستأجرة في فترة لا تتعدى عشرة أيام. لكن وقوف فريق الإنتاج والتقنيين إلى جانبي، ساعدني على تجاوز الأمر والعودة إلى التمثيل. أستعيد دائما طريقة تعامل علولة مع الممثلين وملازمته لغاية إتقان الدور وإعطائه ما يريده منه.",
             categories = Categories.CULTURE,
-            date= Date(2019, 6, 11),
+            date = Date(2019, 6, 11),
             favorit = true,
             source = "الخبر",
             author = "جعفر بن صالح"
         )
 
-        var article3:Article = Article(
+        var article3: Article = Article(
             id = 3,
             title = "جلسة لمجلس الأمن بعد استهداف سفينتين في الخليج",
             img = R.drawable.article3_img,
@@ -158,13 +152,13 @@ class DataUtil {
                     "وأفادت وكالة الأنباء الإيرانية الرسمية \"إرنا\" بإجلاء 44 بحارا من متن الناقلتين المنكوبتين القادمتين من قطر والسعودية.\n" +
                     "\n",
             categories = Categories.INTERNATIONAL,
-            date= Date(13, 6, 2019, 12, 20),
+            date = Date(13, 6, 2019, 12, 20),
             favorit = false,
             source = "الخبر",
             author = "إ.ب/رويترز"
         )
 
-        var article4:Article = Article(
+        var article4: Article = Article(
             id = 4,
             title = "Ouyahia, la chute !",
             img = R.drawable.article4_img,
@@ -185,13 +179,13 @@ class DataUtil {
                     "\n" +
                     "Scènes de liesse aux abords de la Cour suprême et de la prison d’El-Harrach",
             categories = Categories.POLITICS,
-            date= Date(13, 6, 2019, 11, 0),
+            date = Date(13, 6, 2019, 11, 0),
             favorit = false,
             source = "Le Soir",
             author = "Abla Chérif"
         )
 
-        var article5:Article = Article(
+        var article5: Article = Article(
             id = 5,
             title = "Belkebla, l’autre face cachée des Verts",
             img = R.drawable.article5_img,
@@ -199,13 +193,13 @@ class DataUtil {
                     "L’EN de football est-elle devenue maudite qu’il faudrait procéder à sa dissolution pour ne pas s’encombrer d’autres farces qui sont légion dans la pratique du jeu à onze en Algérie ? Chicha, cocaïne, mœurs et autres «excès» qui ne sont pas le propre des seuls sportifs, sont des scandales qui ont marqué l’ambiance «moderne» des Verts. Ce n’est pas que les sélections des années 1970, 80 et 90 n’ont pas connu ce genre d’histoires parfois tolérées, gérées pour certains cas, souvent ignorées et dissimulées du grand public, mais qui ont fini avec le temps à affecter la réputation et de l’EN et des éléments qui sont à l’origine de ces erreurs de jeunesse. C’est tellement facile de nos jours de sanctionner les auteurs de tels actes qui nuisent à la discipline du groupe. Les preuves sont là. Implacables. \n" +
                     "Les sanctions si exemplaires, si punitives qu’elles soient n’empêchent pourtant pas les récidives. Avant Belkebla il y a eu Boudebouz et avant Boudebouz il y a d’autres affaires du genre, parfois autrement plus gravissimes, dont les auteurs sont aujourd’hui de bons pères de famille. Pour dire que l’écart de Haris Belkebla est un éternel recommencement. Le joueur de Reims qui n’est plus apparu dans les radars des sélectionneurs algériens depuis le match contre l’Argentine aux JO de Rio-2016 (il était suspendu lors du 3è match du premier tour contre le Portugal) a été sélectionné pour la CAN-2019 à la grande surprise de tous. Belmadi l’a retenu alors que d’autres éléments évoluant aussi bien en Algérie qu’à l’étranger avaient le profil pour remplacer les Taïder (choix technique), Bentaleb et Chita (blessés et opérés) ainsi que Mehdi Abeid pas totalement remis de sa blessure et qui manquait de compétition (il n’a disputé que les 5 dernières minutes du play-off entre Dijon, son club, et Lens, où il a été formé, et ce, après deux mois d’inactivité due à une blessure contractée en sélection contre la Tunisie, le 26 mars dernier). Le Brestois qui a certes réussi l’accession avec son club en Ligue 1 Conforama n’était pas le médian tant espéré par Belmadi pour combler les lacunes de la sélection dans ce compartiment. Le sélectionneur national s’est peut-être rappelé de l’ancien Tourangeau dès lors que le Stade Brestois a réussi l’exploit de remonter parmi l’élite après six années de purgatoire en comptant sur son milieu algérien auteur de bonnes statistiques (36 matchs joués dont 33 en Ligue 2, 4 buts marqués et seulement 8 cartons jaunes reçus). Son entraîneur à Brest, Jean-Marc Furlan, dit de lui que c’est un joueur précieux. Dans un entretien à nos confères de Le Buteur, l’ancien coach de l’ESTAC où évoluaient d’autres ex-internationaux algériens dont Rafik Saïfi, Farid Ghazi, Karim Ziani, Mehdi Meniri et Mohamed Berradja a ainsi résumé le profil de Belkebla. «Ce qui est intéressant chez Haris c’est sa grande récupération et un très grand volume de jeu. Pour moi sincèrement, c’est le vrai footballeur, qui a beaucoup d’endurance et qui connaît et adore ce sport. Il possède tout ce qu’on aime dans un milieu de terrain moderne. Une bonne récupération de balles et une très bonne lecture du jeu», confiait-il. Et de préciser à la question de la sélection surprise de son joueur : «Belkebla a cette personnalité qui peut lui permettre de vite s’intégrer. Maintenant, techniquement, tactiquement et sur le plan stratégique, c’est vraiment un très bon élément. Sur le plan aérobie, c’est un marathonien. C’est aussi très important pour un milieu de terrain». Et de montrer cette autre facette du joueur qui peut surprendre à la lumière de ce qui s’est passé à Doha. «Je peux vous dire que c’est une belle personne. C’est un garçon très bien éduqué et très agréable à vivre dans le vestiaire et en dehors. C’est aussi important pour un entraîneur», a-t-il indiqué. ",
             categories = Categories.SPORTS,
-            date= Date(13, 6, 2019, 11, 0),
+            date = Date(13, 6, 2019, 11, 0),
             favorit = false,
             source = "Le Soir",
             author = "Mohamed Bouchama"
         )
 
-        var article6:Article = Article(
+        var article6: Article = Article(
             id = 6,
             title = "«Par Azar», une belle rencontre avec l’art",
             img = R.drawable.article6_img,
@@ -218,13 +212,13 @@ class DataUtil {
                     "Les œuvres d’Azar sont vivantes ! «Renaissance des esprits quand parle le dessin», nous dit un extrait du poème accompagnant cette très belle exposition. Chaque rencontre laisse une impression. «J’aime conserver les belles âmes par l’encre et le papier.»\n" +
                     "L’expo  «Par Azar», à la galerie Ifru Design au Télemly, restera ouverte jusqu’au 19 juin 2019, au bonheur des belles âmes.",
             categories = Categories.CULTURE,
-            date= Date(13, 6, 2019, 11, 0),
+            date = Date(13, 6, 2019, 11, 0),
             favorit = false,
             source = "Le Soir",
             author = "Kader Bakou"
         )
 
-        var article7:Article = Article(
+        var article7: Article = Article(
             id = 7,
             title = "Un joyau aux innombrables potentialités écoculturelles",
             img = R.drawable.article7_img,
@@ -242,13 +236,13 @@ class DataUtil {
                     "\n" +
                     "Tout acteur, institutionnel, non institutionnel, société civile et population locale, participe chacun à sa manière au diagnostic des besoins et à l’optimisation de la connaissance du territoire”, souligne la représentante de la direction nationale du PPCA en mettant l’accent sur l’importance du déploiement à l’échelle locale d’une intelligence collective pour la valorisation patrimoniale et territoriale grâce au croisement des données éco-biologiques et ethnosociologiques. ",
             categories = Categories.CULTURE,
-            date= Date(13, 6, 2019, 11, 0),
+            date = Date(13, 6, 2019, 11, 0),
             favorit = true,
             source = "Liberté",
             author = "Rabah Kareche"
         )
 
-        var article8:Article = Article(
+        var article8: Article = Article(
             id = 8,
             title = "Reprise du dialogue au Soudan",
             img = R.drawable.article8_img,
@@ -260,13 +254,13 @@ class DataUtil {
                     "\n" +
                     "Dans un communiqué, les membres du Conseil ont demandé la fin immédiate des violences contre les civils et souligné l’importance du respect des droits humains. L’annonce de la reprise des négociations intervient alors que les meneurs de la contestation avaient annoncé, lundi soir, qu’ils publieraient prochainement la composition de leur propre instance dirigeante avec un Premier ministre. Elle intervient également au lendemain de l’annonce de la venue cette semaine du secrétaire d’État américain adjoint chargé de l’Afrique, Tibor Nagy. Par ailleurs, un groupe d’experts en droits humains de l’ONU a demandé hier une enquête onusienne sur les violences commises au Soudan contre des “manifestants pacifiques” qui demandaient le départ des généraux au pouvoir depuis la chute du président Omar al-Bachir. “Compte tenu de l’ampleur et de la gravité des violations des droits humains signalées et de la nécessité d'agir rapidement pour empêcher une nouvelle escalade, nous demandons au Conseil des droits de l'homme d’ouvrir une enquête indépendante sur les violations (...) au Soudan”, ont déclaré ces cinq experts dans un communiqué.",
             categories = Categories.INTERNATIONAL,
-            date= Date(13, 6, 2019, 11, 0),
+            date = Date(13, 6, 2019, 11, 0),
             favorit = false,
             source = "La Liberté",
             author = "Merzak Tigrine"
         )
 
-        var article9:Article = Article(
+        var article9: Article = Article(
             id = 9,
             title = "يداع الجنرال المتقاعد علي غديري الحبس المؤقت",
             img = R.drawable.article9_img,
@@ -279,13 +273,13 @@ class DataUtil {
                     "وأكد صفحة غديري في بيان ثان أنه وجهت له تهمتان من قبل المحكمة هما “المشاركة في تسليم معلومات إلى عملاء دول أجنبية تمس بالاقتصاد الوطني”\n" +
                     "أما الثانية فهي “المساهمة في وقت السلم في مشروع لإضعاف الروح المعنوية للجيش قصد الإضرار بالدفاع الوطني” ونفت أن تكون محاكمته بسبب ما تم تداوله إعلاميا حول تزوير توكيلات الإنتخابات.",
             categories = Categories.POLITICS,
-            date= Date(13, 6, 2019),
+            date = Date(13, 6, 2019),
             favorit = false,
             source = "الشروق",
             author = "عبد الرزاق بوالقمح"
         )
 
-        var article10:Article = Article(
+        var article10: Article = Article(
             id = 10,
             title = "سريلانكا تسترد خمسة متورطين في تفجيرات عيد الفصح",
             img = R.drawable.article3_img,
@@ -317,12 +311,24 @@ class DataUtil {
                     "\n" +
                     "وردا على ذلك، قال هؤلاء إن سيريسينا تجاهل البروتوكولات الأمنية وينبغي أن يتحمل بنفسه المسؤولية بسبب الثغرات الرئيسية التي سمحت بتنفيذ العمليات الانتحارية.",
             categories = Categories.INTERNATIONAL,
-            date= Date(14, 6, 2019),
+            date = Date(14, 6, 2019),
             favorit = false,
             source = "الشروق",
             author = ""
         )
-        var articles_ = listOf<Article>(article0, article1, article2, article3, article4, article5, article6, article7, article8, article9, article10)
+        var articles_ = listOf<Article>(
+            article0,
+            article1,
+            article2,
+            article3,
+            article4,
+            article5,
+            article6,
+            article7,
+            article8,
+            article9,
+            article10
+        )
         articles.addAll(articles_)
 
         articlesList = articles
@@ -341,15 +347,14 @@ class DataUtil {
         while (found == 0) {
             if (articlesList[i].id == articleId) {
                 found = 1
-            }
-            else i++
+            } else i++
         }
         return articlesList[i]
     }
 
-    fun getFavories():MutableList<Article>{
+    fun getFavories(): MutableList<Article> {
         var list = mutableListOf<Article>()
-        for(article in articlesList){
+        for (article in articlesList) {
             if (article.favorit) list.add(article)
         }
         return list

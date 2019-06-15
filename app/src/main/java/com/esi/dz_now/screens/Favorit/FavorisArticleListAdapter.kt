@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +20,7 @@ class FavorisArticleListAdapter(val list: MutableList<Article>, val context: Con
     RecyclerView.Adapter<FavorisArticleListAdapter.ArticleViewHolder>() {
 
     var itemChanged = MutableLiveData<Boolean>()
+
     init {
         itemChanged.value = false
     }
@@ -60,7 +60,7 @@ class FavorisArticleListAdapter(val list: MutableList<Article>, val context: Con
             }
             article.favorit = !article.favorit
             list.remove(article)
-            itemChanged.value=true
+            itemChanged.value = true
         }
     }
 
