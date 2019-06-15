@@ -13,6 +13,9 @@
     <string name="international_category">International</string>
     <string name="science_category">Science</string>
     <string name="all_category">All</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+
 
 
     <string name="article_fragment_title">Article</string>
