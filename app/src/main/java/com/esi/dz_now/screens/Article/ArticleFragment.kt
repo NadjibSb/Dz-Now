@@ -64,9 +64,11 @@ class ArticleFragment : Fragment() {
 
         var id = item.itemId
         if (id == R.id.shareAction) {
-            val shareIntent = Intent()
-            shareIntent.action = Intent.ACTION_SEND
-            shareIntent.type = "text/plain"
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.setType("text/plain")
+                .putExtra(Intent.EXTRA_SUBJECT,article.title)
+                .putExtra(Intent.EXTRA_TEXT,article.content)
+
             startActivity(Intent.createChooser(shareIntent, "Partager Article"))
         }
         if (id == R.id.readModeAction)
