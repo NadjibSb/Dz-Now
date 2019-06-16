@@ -135,48 +135,65 @@ class SettingsFragment : Fragment() {
     }
 
     private fun categorieSelectionSetup(categories: List<Categories>) {
+        var category_:Categories
+        var culture_:Categories = categories[0]
+        var health_:Categories =  categories[0]
+        var sport_:Categories = categories[0]
+        var international_:Categories =  categories[0]
+        var politics_:Categories= categories[0]
+        var tech_:Categories = categories[0]
+        var msg:String = ""
+        for(category_ in categories)
+        {
+            if(category_.name == Categories.CULTURE.name) culture_= category_
+            if(category_.name == Categories.SPORTS.name) sport_= category_
+            if(category_.name == Categories.TECH.name) tech_= category_
+            if(category_.name == Categories.POLITICS.name) politics_ = category_
+            if(category_.name == Categories.INTERNATIONAL.name) international_ = category_
+            if(category_.name == Categories.SANTE.name) health_ = category_
 
-
-        checkBoxCulture.isChecked = categories[0].isActivated
+        }
+        checkBoxCulture.isChecked = culture_.isActivated
         checkBoxCulture.setOnCheckedChangeListener { view, isChecked ->
-            categories[0].isActivated = isChecked
-            val msg = "Catégorie Culture " + (if (isChecked) "activée" else "désactivée") + "."
+            culture_.isActivated = isChecked
+            msg = getString(R.string.culture_category)+" "+ (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
-        checkBoxSanté.isChecked = categories[1].isActivated
+        checkBoxSanté.isChecked = health_.isActivated
         checkBoxSanté.setOnCheckedChangeListener { view, isChecked ->
-            categories[1].isActivated = isChecked
-            val msg = "Catégorie Santé " + (if (isChecked) "activée" else "désactivée") + "."
+            health_.isActivated = isChecked
+            msg = getString(R.string.health_category)+" "+ (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
-        checkBoxInternational.isChecked = categories[2].isActivated
+        checkBoxInternational.isChecked = international_.isActivated
         checkBoxInternational.setOnCheckedChangeListener { view, isChecked ->
-            categories[2].isActivated = isChecked
-            val msg = "Catégorie International " + (if (isChecked) "activée" else "désactivée") + "."
+            international_.isActivated = isChecked
+            msg = getString(R.string.international_category)+" "+ (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
-        checkBoxPolitique.isChecked = categories[3].isActivated
+        checkBoxPolitique.isChecked = politics_.isActivated
         checkBoxPolitique.setOnCheckedChangeListener { view, isChecked ->
-            categories[3].isActivated = isChecked
-            val msg = "Catégorie Politique " + (if (isChecked) "activée" else "désactivée") + "."
+            politics_.isActivated = isChecked
+            msg = getString(R.string.politic_category)+" "+ (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
-        checkBoxSport.isChecked = categories[4].isActivated
+        checkBoxSport.isChecked = sport_.isActivated
         checkBoxSport.setOnCheckedChangeListener { view, isChecked ->
-            categories[4].isActivated = isChecked
-            val msg = "Catégorie Sport " + (if (isChecked) "activée" else "désactivée") + "."
+            sport_.isActivated = isChecked
+            msg = getString(R.string.sport_category)+" "+ (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
-        checkBoxTechnologie.isChecked = categories[5].isActivated
+        checkBoxTechnologie.isChecked = tech_.isActivated
         checkBoxTechnologie.setOnCheckedChangeListener { view, isChecked ->
-            categories[5].isActivated = isChecked
-            val msg = "Catégorie Technologie " + (if (isChecked) "activée" else "désactivée") + "."
+            tech_.isActivated = isChecked
+            msg = getString(R.string.tech_category)+" "+ (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
+
     }
 }

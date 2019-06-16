@@ -2,6 +2,8 @@
 <resources>
     <string name="addToFav">Ajouté au favories</string>
     <string name="all_category">Tous</string>
+    <string name="enabled">Affiché</string>
+    <string name="disabled">Masqué</string>
     <string name="category_title">Catégories à affciher</string>
     <string name="culture_category">Culture</string>
     <string name="favourites_fragment_title">Favoris</string>
