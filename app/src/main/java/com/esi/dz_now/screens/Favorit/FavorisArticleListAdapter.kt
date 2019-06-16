@@ -26,7 +26,8 @@ class FavorisArticleListAdapter(val list: MutableList<Article>, val context: Con
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val articleItemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val articleItemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item, parent, false)
         return ArticleViewHolder(articleItemView)
     }
 

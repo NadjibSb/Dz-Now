@@ -78,14 +78,6 @@
                         app:layout_constraintStart_toEndOf="@+id/themeTextView"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintEnd_toEndOf="parent"/>
-                <!--<ToggleButton-->
-                <!--android:text="ToggleButton"-->
-                <!--android:layout_width="100dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/toggleButton"-->
-                <!--android:layout_margin="0dp"-->
-                <!--android:textOff=""-->
-                <!--android:textOn=""/>-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,8 +30,6 @@ class ArticleFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.title = getString(com.esi.dz_now.R.string.article_fragment_title)
         setHasOptionsMenu(true)
 
-
-
         return binding.root
     }
 
@@ -60,8 +58,6 @@ class ArticleFragment : Fragment() {
             addToFavoriteActionMenuItem.setIcon(R.drawable.ic_menu_fullstar)
             addToFavoriteActionMenuItem.title = "stared"
         }
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -87,9 +83,6 @@ class ArticleFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.addToFav), Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
         return super.onOptionsItemSelected(item)
     }
 

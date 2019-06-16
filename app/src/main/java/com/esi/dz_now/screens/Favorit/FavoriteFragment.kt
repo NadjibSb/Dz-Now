@@ -48,6 +48,7 @@ class FavoriteFragment : Fragment() {
         })
         recyclerView.adapter = adapter
 
+        //setup the recucleview depending on screen orientation
         val screenOrientation =
             (context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
         when (screenOrientation) {

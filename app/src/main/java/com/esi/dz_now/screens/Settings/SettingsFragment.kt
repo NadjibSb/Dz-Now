@@ -3,6 +3,7 @@ package com.esi.dz_now.screens.Settings
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,27 +52,11 @@ class SettingsFragment : Fragment() {
 
         spinnerSetup()
         categorieSelectionSetup(categories)
-
-
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
-
-        binding.themeSwitch.isChecked = currentTheme == DARK_THEME
-
-        /*binding.themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                //sharedPref.edit().putString(KEY_CURRENT_THEME, DARK_THEME).apply()
-                Toast.makeText(context, "Dark theme", Toast.LENGTH_SHORT).show()
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                //sharedPref.edit().putString(KEY_CURRENT_THEME, LIGHT_THEME).apply()
-            }
-            activity?.recreate()
-        }*/
+        setupTheme()
     }
 
 
+    //Setup the Language spinner
     private fun spinnerSetup() {
         val spinner: Spinner = binding.languageSpinner
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -86,6 +71,14 @@ class SettingsFragment : Fragment() {
             spinner.adapter = adapter
         }
 
+        spinner.setSelection(
+            when (Locale.getDefault().language) {
+                "en" -> 0
+                "fr" -> 1
+                "ar" -> 2
+                else -> 0
+            }
+        )
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -114,6 +107,33 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    private fun setupTheme() {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
+
+        binding.themeSwitch.isChecked = currentTheme == DARK_THEME
+
+
+        binding.themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            val oldTheme = sharedPref.getString(KEY_CURRENT_THEME, "first")
+            Log.i("nadjib", oldTheme)
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                sharedPref.edit().putString(KEY_CURRENT_THEME, DARK_THEME).apply()
+                Toast.makeText(context, "Dark theme", Toast.LENGTH_SHORT).show()
+                //activity?.recreate()
+            } else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                sharedPref.edit().putString(KEY_CURRENT_THEME, LIGHT_THEME).apply()
+                //activity?.recreate()
+            }
+            val newTheme = sharedPref.getString(KEY_CURRENT_THEME, "first")
+            if (!oldTheme.equals(newTheme))
+                activity?.recreate()
+
+        }
+    }
+
     private fun categorieSelectionSetup(categories: List<Categories>) {
 
 
@@ -122,7 +142,6 @@ class SettingsFragment : Fragment() {
             categories[0].isActivated = isChecked
             val msg = "Catégorie Culture " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
         }
 
         checkBoxSanté.isChecked = categories[1].isActivated
@@ -130,7 +149,6 @@ class SettingsFragment : Fragment() {
             categories[1].isActivated = isChecked
             val msg = "Catégorie Santé " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
         }
 
         checkBoxInternational.isChecked = categories[2].isActivated
@@ -138,7 +156,6 @@ class SettingsFragment : Fragment() {
             categories[2].isActivated = isChecked
             val msg = "Catégorie International " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
         }
 
         checkBoxPolitique.isChecked = categories[3].isActivated
@@ -146,7 +163,6 @@ class SettingsFragment : Fragment() {
             categories[3].isActivated = isChecked
             val msg = "Catégorie Politique " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
         }
 
         checkBoxSport.isChecked = categories[4].isActivated
@@ -154,7 +170,6 @@ class SettingsFragment : Fragment() {
             categories[4].isActivated = isChecked
             val msg = "Catégorie Sport " + (if (isChecked) "activée" else "désactivée") + "."
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
         }
 
         checkBoxTechnologie.isChecked = categories[5].isActivated

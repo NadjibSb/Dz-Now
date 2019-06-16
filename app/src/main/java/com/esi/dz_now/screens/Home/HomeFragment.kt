@@ -22,8 +22,6 @@ class HomeFragment : Fragment() {
             R.layout.fragment_home, container, false
         )
         data = this.activity as SharedData
-
-
         (activity as MainActivity).supportActionBar?.title = getString(R.string.home_fragment_title)
 
         val viewPager = binding.viewPager

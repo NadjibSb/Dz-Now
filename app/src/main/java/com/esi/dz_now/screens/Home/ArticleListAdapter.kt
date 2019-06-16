@@ -19,7 +19,8 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
     RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val articleItemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val articleItemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item, parent, false)
         return ArticleViewHolder(articleItemView)
     }
 
@@ -34,7 +35,6 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
         holder.image.setBackgroundResource(article.img)
         holder.toggleButton.isChecked = article.favorit
         handleClick(holder.container, article.id)
-        //Glide.with(context).load(article.img).into(holder.image)
     }
 
     private fun handleClick(view: View, articleID: Int) {
