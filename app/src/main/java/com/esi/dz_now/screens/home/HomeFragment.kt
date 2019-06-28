@@ -1,4 +1,4 @@
-package com.esi.dz_now.screens.Home
+package com.esi.dz_now.screens.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -5,24 +5,24 @@
             app:startDestination="@id/homeFragment">
 
     <fragment android:id="@+id/settingsFragment"
-              android:name="com.esi.dz_now.screens.Settings.SettingsFragment"
+              android:name="com.esi.dz_now.screens.settings.SettingsFragment"
               android:label="fragment_settings"
               tools:layout="@layout/fragment_settings"/>
 
     <fragment android:id="@+id/favoriteFragment"
-              android:name="com.esi.dz_now.screens.Favorit.FavoriteFragment"
+              android:name="com.esi.dz_now.screens.favorit.FavoriteFragment"
               android:label="fragment_favorite"
               tools:layout="@layout/fragment_favorite">
         <action android:id="@+id/action_favoriteFragment_to_articleFragment" app:destination="@id/articleFragment"/>
     </fragment>
 
     <fragment android:id="@+id/homeFragment"
-              android:name="com.esi.dz_now.screens.Home.HomeFragment"
+              android:name="com.esi.dz_now.screens.home.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_homeFragment_to_articleFragment" app:destination="@id/articleFragment"/>
     </fragment>
-    <fragment android:id="@+id/articleFragment" android:name="com.esi.dz_now.screens.Article.ArticleFragment"
+    <fragment android:id="@+id/articleFragment" android:name="com.esi.dz_now.screens.article.ArticleFragment"
               android:label="fragment_article" tools:layout="@layout/fragment_article">
         <argument android:name="articleID" app:argType="integer"/>
     </fragment>

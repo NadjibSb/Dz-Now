@@ -1,6 +1,7 @@
 package com.esi.dz_now.screens
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
@@ -13,7 +14,18 @@ import com.esi.dz_now.data.Categories
 import com.esi.dz_now.data.DataUtil
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
+import java.util.*
 
+
+const val KEY_CURRENT_THEME = "Theme"
+const val LIGHT_THEME = "light"
+const val DARK_THEME = "dark"
+
+
+const val KEY_CURRENT_LANGUAGE = "Language"
+const val FR = "fr"
+const val EN = "en"
+const val AR = "ar"
 
 class MainActivity : AppCompatActivity(), SharedData {
 
@@ -29,8 +41,17 @@ class MainActivity : AppCompatActivity(), SharedData {
     private var dataUtil = DataUtil()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
+        //check the App Theme
+        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
+        if (currentTheme == DARK_THEME) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        //check the App language
+        val currentLanguage = sharedPref.getString(KEY_CURRENT_LANGUAGE, EN)
+        if (currentLanguage != EN) switchLanguage(currentLanguage)
         super.onCreate(savedInstanceState)
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
@@ -76,5 +97,17 @@ class MainActivity : AppCompatActivity(), SharedData {
 
     override fun getFavories(): MutableList<Article> {
         return dataUtil.getFavories()
+    }
+
+    private fun switchLanguage(newlanguage: String) {
+        var currentLanguage = Locale.getDefault().language
+        if (!currentLanguage.equals(newlanguage)) {
+            var locale = Locale(newlanguage)
+            Locale.setDefault(locale)
+            var res = resources
+            var config = res.configuration
+            config.setLocale(locale)
+            res.updateConfiguration(config, res.displayMetrics)
+        }
     }
 }

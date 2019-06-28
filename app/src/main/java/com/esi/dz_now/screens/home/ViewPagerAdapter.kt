@@ -1,4 +1,4 @@
-package com.esi.dz_now.screens.Home
+package com.esi.dz_now.screens.home
 
 import android.content.Context
 import android.view.*
@@ -14,7 +14,7 @@ import com.esi.dz_now.data.Categories
 class ViewPagerAdapter(
     private val mContext: Context,
     private val articlesList: MutableList<Article>,
-    private val categoriesList: List<Categories>
+    categoriesList: List<Categories>
 ) : PagerAdapter() {
 
     private var mCategoriesList: MutableList<ViewPagerHeader>
@@ -40,7 +40,7 @@ class ViewPagerAdapter(
 
         //to check if it's a Categorie tab or the 'All' tab
         val list: MutableList<Article> = if (header is ViewPagerHeader.CategorieHeader) {
-            getarticlesByCategories(header.categorie, articlesList)
+            getArticlesByCategories(header.categorie, articlesList)
         } else {//in case it's the 'All' tab, pass the list of all articles
             articlesList
         }
@@ -87,7 +87,7 @@ class ViewPagerAdapter(
         recyclerView.setHasFixedSize(true)
     }
 
-    fun getarticlesByCategories(categorie: Categories, allArticles: List<Article>): MutableList<Article> {
+    private fun getArticlesByCategories(categorie: Categories, allArticles: List<Article>): MutableList<Article> {
         var newList = mutableListOf<Article>()
         for (article in allArticles) {
             if (article.categories == categorie) {

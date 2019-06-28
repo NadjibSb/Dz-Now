@@ -1,4 +1,4 @@
-package com.esi.dz_now.screens.Favorit
+package com.esi.dz_now.screens.favorit
 
 
 import android.content.Context

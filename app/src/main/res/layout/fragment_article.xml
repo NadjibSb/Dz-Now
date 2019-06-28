@@ -3,13 +3,13 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         tools:context=".ArticleFragment">
-<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <ImageView
                     android:layout_width="match_parent"
@@ -19,84 +19,84 @@
                     android:contentDescription="Description"/>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-
-            <TextView
-                    android:text="category goes here"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/articleCategory"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textDirection="anyRtl"
-                    android:textSize="16sp"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
 
-            <View
-                    android:id="@+id/divider2"
-                    android:layout_width="120dp"
-                    android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintTop_toBottomOf="@+id/articleCategory" android:layout_marginStart="32dp"
-                    android:layout_marginEnd="32dp"/>
+                <TextView
+                        android:text="category goes here"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/articleCategory"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textDirection="anyRtl"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
+                        android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                    android:text="Title goes Here"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/articleTitle"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/colorFont"
-                    android:textStyle="bold"
-                    android:textSize="24sp"
-                    android:textDirection="anyRtl"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintTop_toBottomOf="@+id/divider2"
-                    android:layout_marginTop="16dp"/>
+                <View
+                        android:id="@+id/divider2"
+                        android:layout_width="120dp"
+                        android:layout_height="1dp"
+                        android:background="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintTop_toBottomOf="@+id/articleCategory" android:layout_marginStart="32dp"
+                        android:layout_marginEnd="32dp"/>
 
-            <TextView
-                    android:text="source/date go here"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/articleSourceDate"
-                    style="@style/TextAppearance.MaterialComponents.Caption"
-                    android:textDirection="anyRtl"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/articleTitle"/>
+                <TextView
+                        android:text="Title goes Here"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/articleTitle"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@color/colorFont"
+                        android:textStyle="bold"
+                        android:textSize="24sp"
+                        android:textDirection="anyRtl"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintTop_toBottomOf="@+id/divider2"
+                        android:layout_marginTop="16dp"/>
 
-
-            <TextView
-                    android:text="content goes here"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/articleContent"
-                    android:textColor="@color/colorFont"
-
-                    android:fontFamily="serif"
-                    android:textSize="18sp"
-                    android:textDirection="anyRtl"
-                    android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/articleSourceDate"
-                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="32dp"
-                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                        android:text="source/date go here"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/articleSourceDate"
+                        style="@style/TextAppearance.MaterialComponents.Caption"
+                        android:textDirection="anyRtl"
+                        android:fontFamily="sans-serif-smallcaps"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/articleTitle"/>
 
 
-    </LinearLayout>
-</ScrollView>
+                <TextView
+                        android:text="content goes here"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/articleContent"
+                        android:textColor="@color/colorFont"
+
+                        android:fontFamily="serif"
+                        android:textSize="18sp"
+                        android:textDirection="anyRtl"
+                        android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/articleSourceDate"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="32dp"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
 </layout>
