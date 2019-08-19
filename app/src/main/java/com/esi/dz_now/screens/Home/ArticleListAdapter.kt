@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import kotlinx.android.synthetic.main.list_item.view.*
@@ -31,8 +32,9 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
         holder.titleText.text = article.title
         holder.catgoryText.text = context.getString(article.categories.title)
         holder.sourceDateText.text =
-            article.source + " | " + SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
-        holder.image.setBackgroundResource(article.img)
+            article.source + " | " + article.date//SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
+        Glide.with(holder.container).load(article.imgUrl).into(holder.image)
+//        holder.image.setBackgroundResource(article.img)
         holder.toggleButton.isChecked = article.favorit
         handleClick(holder.container, article.id)
     }

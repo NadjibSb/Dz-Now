@@ -1,6 +1,7 @@
 package com.esi.dz_now.screens
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,11 @@ import com.esi.dz_now.data.Categories
 import com.esi.dz_now.data.DataUtil
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
+import com.esi.dz_now.model.di.appModule
+import com.esi.dz_now.screens.Settings.DARK_THEME
+import com.esi.dz_now.screens.Settings.KEY_CURRENT_THEME
+import com.esi.dz_now.screens.Settings.LIGHT_THEME
+import org.koin.android.ext.android.startKoin
 
 
 class MainActivity : AppCompatActivity(), SharedData {
@@ -29,8 +35,17 @@ class MainActivity : AppCompatActivity(), SharedData {
     private var dataUtil = DataUtil()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
+        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
+
+        if(currentTheme == DARK_THEME) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
         super.onCreate(savedInstanceState)
+        startKoin(this, listOf(appModule))
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)

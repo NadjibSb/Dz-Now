@@ -1,6 +1,7 @@
 package com.esi.dz_now.screens.Home
 
 import android.content.Context
+import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +27,7 @@ class ViewPagerAdapter(
     //setup the 'All' tab with the categories tabs
     private fun initializeList(categories: List<Categories>): MutableList<ViewPagerHeader> {
         var list = mutableListOf<ViewPagerHeader>()
-        list.add(ViewPagerHeader.AllHeader())
+        //list.add(ViewPagerHeader.AllHeader())
         for (cat in categories) {
             list.add(ViewPagerHeader.CategorieHeader(cat))
         }
@@ -76,6 +77,7 @@ class ViewPagerAdapter(
 
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
+        Log.e("setUpRecycleView", list.toString())
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
         recyclerView.adapter = ArticleListAdapter(list, mContext)
         val screenOrientation =
