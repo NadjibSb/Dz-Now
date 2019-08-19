@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface ApiInterface {
 
     @GET("/api/articles")
-    fun getArticles(
+    fun getArticlesByCategory(
         @Query("category")category: String
 
     ): Observable<List<ArticleModel>>

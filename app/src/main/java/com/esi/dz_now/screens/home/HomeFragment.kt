@@ -23,7 +23,6 @@ import com.esi.dz_now.viewmodel.HomeFragmentViewModel
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
-import kotlin.text.Typography.quote
 
 
 class HomeFragment : Fragment() {
@@ -43,7 +42,7 @@ class HomeFragment : Fragment() {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.home_fragment_title)
 
         val viewPager = binding.viewPager
-        viewPager.adapter = ViewPagerAdapter(context!!, getData(true), data.getCategories())
+        viewPager.adapter = ViewPagerAdapter(context!!, getData(true), data.getCategories(), viewModel, this)
         binding.slidingTabs.setupWithViewPager(viewPager)
         return binding.root
     }
@@ -102,8 +101,5 @@ class HomeFragment : Fragment() {
     private fun toast(msg: String){
         Toast.makeText(context,msg,Toast.LENGTH_SHORT).show()
     }
-
-
-
 
 }

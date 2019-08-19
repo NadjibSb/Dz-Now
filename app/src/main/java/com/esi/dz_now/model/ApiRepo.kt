@@ -20,27 +20,21 @@ class ApiRepo{
 
 
         val apiService = endpoints.getClient()!!.create(ApiInterface::class.java)
-        mCompositeDisposable?.add(apiService.getArticles("POLITICS")
+        mCompositeDisposable?.add(apiService.getArticlesByCategory("POLITICS")
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(this::handleResponse, this::handleError))
-       /* val call : Observable<List<ArticleModel>> = apiService.getArticles("POLITICS")
+        return apiResponse
+    }
 
-        call.enqueue(object : Callback<List<ArticleModel>> {
-            override fun onFailure(call: Call<List<ArticleModel>>?, t: Throwable?) {
-                apiResponse.postValue(ApiResponse(t!!))
-            }
+    fun getArticlesByCategory(category: String) : LiveData<ApiResponse> {
 
-            override fun onResponse(call: Call<List<ArticleModel>>?, response: Response<List<ArticleModel>>?) {
-                if (response!!.isSuccessful) {
-                    apiResponse.postValue(ApiResponse(response.body()!!))
-                }else{
-                    apiResponse.postValue(ApiResponse(response.code()))
-                }
-            }
 
-        })*/
-
+        val apiService = endpoints.getClient()!!.create(ApiInterface::class.java)
+        mCompositeDisposable?.add(apiService.getArticlesByCategory(category)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(this::handleResponse, this::handleError))
         return apiResponse
     }
 

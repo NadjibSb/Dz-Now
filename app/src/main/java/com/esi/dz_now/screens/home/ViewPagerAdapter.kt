@@ -1,8 +1,11 @@
 package com.esi.dz_now.screens.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.*
+import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,12 +13,20 @@ import androidx.viewpager.widget.PagerAdapter
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
+import com.esi.dz_now.model.ArticleModel
+import com.esi.dz_now.viewmodel.HomeFragmentViewModel
+import java.util.*
+
+import androidx.lifecycle.Observer
+
 
 
 class ViewPagerAdapter(
     private val mContext: Context,
     private val articlesList: MutableList<Article>,
-    categoriesList: List<Categories>
+    categoriesList: List<Categories>,
+    val viewModel: HomeFragmentViewModel,
+    val owner: LifecycleOwner
 ) : PagerAdapter() {
 
     private var mCategoriesList: MutableList<ViewPagerHeader>
@@ -41,7 +52,7 @@ class ViewPagerAdapter(
 
         //to check if it's a Categorie tab or the 'All' tab
         val list: MutableList<Article> = if (header is ViewPagerHeader.CategorieHeader) {
-            getArticlesByCategories(header.categorie, articlesList)
+            getArticleByCategory(true, header.categorie)
         } else {//in case it's the 'All' tab, pass the list of all articles
             articlesList
         }
@@ -77,7 +88,6 @@ class ViewPagerAdapter(
 
     //RecycleView--------------------------------------------
     private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
-        Log.e("setUpRecycleView", list.toString())
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
         recyclerView.adapter = ArticleListAdapter(list, mContext)
         val screenOrientation =
@@ -103,6 +113,62 @@ class ViewPagerAdapter(
         data class CategorieHeader(val categorie: Categories) : ViewPagerHeader()
         data class AllHeader(val text: Int = R.string.all_category) : ViewPagerHeader()
     }
+
+    @SuppressLint("SetTextI18n")
+    private fun getArticleByCategory(refresh : Boolean, category: Categories):MutableList<Article> {
+        var list_articles = mutableListOf<Article>()
+        viewModel.getArticleDataByCategory(refresh, category.name).observe(owner, Observer {
+            if(it == null){
+                logInfo("Handle Error")
+            }
+            if(it?.error == null){
+                if(it?.code==null) {
+                    val articles: List<ArticleModel>? = it!!.posts
+
+                    var article_data: Article?
+                    for (article in articles!!) {
+                        Log.e("errot", ""+article.toString())
+                        article_data = Article(
+                            article.id.toInt(),
+                            article.title,
+                            1,
+                            "",
+                            category,
+                            Date(),
+                            false,
+                            "Elwatan",
+                            "",
+                            article.img,
+                            article.category,
+                            article.date,
+                            article.url
+                        )
+                        list_articles.add(article_data)
+                    }
+                }else{
+                    when(it.code!!){
+                        404 -> toast("Sorry not found! :(")
+                        else ->{
+                            toast("Error! Please try again..")
+                        }
+                    }
+                }
+            }else{
+                val e : Throwable = it.error!!
+                logInfo("Error is " + e.message)
+            }
+        })
+        return list_articles
+    }
+
+    private fun logInfo(msg: String){
+        Log.i("MainActivity", msg)
+    }
+
+    private fun toast(msg: String){
+        //Toast.makeText(context,msg, Toast.LENGTH_SHORT).show()
+    }
+
 
 
 }

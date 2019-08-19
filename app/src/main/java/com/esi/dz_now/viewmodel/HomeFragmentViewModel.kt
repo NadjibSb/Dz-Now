@@ -19,4 +19,15 @@ class HomeFragmentViewModel(private val mApiRepo: ApiRepo) : ViewModel(){
         }
         return article as LiveData<ApiResponse>
     }
+
+    fun getArticleDataByCategory(refresh: Boolean, category: String): LiveData<ApiResponse>{
+        if(refresh){
+            article = null
+        }
+        if (this.article == null) {
+            article = mApiRepo.getArticlesByCategory(category)
+            return article as LiveData<ApiResponse>
+        }
+        return article as LiveData<ApiResponse>
+    }
 }
