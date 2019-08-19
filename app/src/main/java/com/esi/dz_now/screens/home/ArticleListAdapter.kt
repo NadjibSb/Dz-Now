@@ -1,4 +1,4 @@
-package com.esi.dz_now.screens.Home
+package com.esi.dz_now.screens.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -20,9 +20,7 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
     RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val articleItemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item, parent, false)
-        return ArticleViewHolder(articleItemView)
+        return ArticleViewHolder.creat(parent)
     }
 
     override fun getItemCount() = list.size
@@ -58,7 +56,7 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
         }
     }
 
-    class ArticleViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
+    class ArticleViewHolder private constructor(parent: View) : RecyclerView.ViewHolder(parent) {
         var titleText: TextView
         var catgoryText: TextView
         var sourceDateText: TextView
@@ -74,6 +72,15 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
             container = parent.findViewById(R.id.itemContainer)
             toggleButton = parent.findViewById(R.id.readLaterArticle)
         }
+
+        companion object {
+            fun creat(parent: ViewGroup): ArticleViewHolder {
+                val articleItemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.list_item, parent, false)
+                return ArticleViewHolder(articleItemView)
+            }
+        }
     }
+
 
 }

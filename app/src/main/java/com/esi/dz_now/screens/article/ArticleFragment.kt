@@ -1,4 +1,4 @@
-package com.esi.dz_now.screens.Article
+package com.esi.dz_now.screens.article
 
 
 import android.content.Intent
@@ -66,8 +66,8 @@ class ArticleFragment : Fragment() {
         if (id == R.id.shareAction) {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.setType("text/plain")
-                .putExtra(Intent.EXTRA_SUBJECT,article.title)
-                .putExtra(Intent.EXTRA_TEXT,article.content)
+                .putExtra(Intent.EXTRA_SUBJECT, article.title)
+                .putExtra(Intent.EXTRA_TEXT, article.content)
 
             startActivity(Intent.createChooser(shareIntent, "Partager Article"))
         }

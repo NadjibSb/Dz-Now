@@ -14,12 +14,24 @@ import com.esi.dz_now.data.Categories
 import com.esi.dz_now.data.DataUtil
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
+
 import com.esi.dz_now.model.di.appModule
-import com.esi.dz_now.screens.Settings.DARK_THEME
-import com.esi.dz_now.screens.Settings.KEY_CURRENT_THEME
-import com.esi.dz_now.screens.Settings.LIGHT_THEME
+
 import org.koin.android.ext.android.startKoin
 
+import java.util.*
+
+
+
+const val KEY_CURRENT_THEME = "Theme"
+const val LIGHT_THEME = "light"
+const val DARK_THEME = "dark"
+
+
+const val KEY_CURRENT_LANGUAGE = "Language"
+const val FR = "fr"
+const val EN = "en"
+const val AR = "ar"
 
 class MainActivity : AppCompatActivity(), SharedData {
 
@@ -36,15 +48,19 @@ class MainActivity : AppCompatActivity(), SharedData {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
-        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
 
-        if(currentTheme == DARK_THEME) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
+        //check the App Theme
+        val currentTheme = sharedPref.getString(KEY_CURRENT_THEME, LIGHT_THEME)
+        if (currentTheme == DARK_THEME) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+        //check the App language
+        val currentLanguage = sharedPref.getString(KEY_CURRENT_LANGUAGE, EN)
+        if (currentLanguage != EN) switchLanguage(currentLanguage)
         super.onCreate(savedInstanceState)
         startKoin(this, listOf(appModule))
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+
 
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -91,5 +107,17 @@ class MainActivity : AppCompatActivity(), SharedData {
 
     override fun getFavories(): MutableList<Article> {
         return dataUtil.getFavories()
+    }
+
+    private fun switchLanguage(newlanguage: String) {
+        var currentLanguage = Locale.getDefault().language
+        if (!currentLanguage.equals(newlanguage)) {
+            var locale = Locale(newlanguage)
+            Locale.setDefault(locale)
+            var res = resources
+            var config = res.configuration
+            config.setLocale(locale)
+            res.updateConfiguration(config, res.displayMetrics)
+        }
     }
 }
