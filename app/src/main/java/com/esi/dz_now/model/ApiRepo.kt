@@ -6,10 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.esi.dz_now.model.service.ApiClient
 import com.esi.dz_now.model.service.ApiInterface
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import io.reactivex.Observable
+
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
