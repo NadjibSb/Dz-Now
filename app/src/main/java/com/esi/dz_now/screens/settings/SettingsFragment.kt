@@ -145,11 +145,11 @@ class SettingsFragment : Fragment() {
         var msg: String = ""
         for (category_ in categories) {
             if (category_.name == Categories.CULTURE.name) culture_ = category_
-            if (category_.name == Categories.SPORTS.name) sport_ = category_
+            if (category_.name == Categories.SPORT.name) sport_ = category_
             if (category_.name == Categories.TECH.name) tech_ = category_
             if (category_.name == Categories.POLITICS.name) politics_ = category_
             if (category_.name == Categories.INTERNATIONAL.name) international_ = category_
-            if (category_.name == Categories.SANTE.name) health_ = category_
+            if (category_.name == Categories.HEALTH.name) health_ = category_
 
         }
         checkBoxCulture.isChecked = culture_.isActivated

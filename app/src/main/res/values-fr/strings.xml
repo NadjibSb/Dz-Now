@@ -6,6 +6,7 @@
     <string name="disabled">Masqué</string>
     <string name="category_title">Catégories à afficher</string>
     <string name="culture_category">Culture</string>
+    <string name="economy_category">Economie</string>
     <string name="favourites_fragment_title">Favoris</string>
     <string name="health_category">Santé</string>
     <string name="home_fragment_title">Acceuil</string>
@@ -24,4 +25,6 @@
         <item>Français</item>
         <item>Arabe</item>
     </string-array>
+
+
 </resources>

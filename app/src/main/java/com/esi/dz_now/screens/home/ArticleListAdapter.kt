@@ -1,62 +1,69 @@
 package com.esi.dz_now.screens.home
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
+import com.esi.dz_now.databinding.ListItemBinding
+import com.esi.dz_now.model.ArticleModel
+import com.esi.dz_now.viewmodel.ArticleViewModel
 import kotlinx.android.synthetic.main.list_item.view.*
-import java.text.SimpleDateFormat
 
 
-class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
-    RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
+class ArticleListAdapter:
+    RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        return ArticleViewHolder.creat(parent)
+    private lateinit var articlesList: List<ArticleModel>
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleListAdapter.ViewHolder {
+        val binding: ListItemBinding =
+            DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.list_item, parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun getItemCount() = list.size
-
-    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val article = list[position]
-        holder.titleText.text = article.title
-        holder.catgoryText.text = context.getString(article.categories.title)
-        holder.sourceDateText.text =
-            article.source + " | " + article.date//SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm").format(article.date)
-        Glide.with(holder.container).load(article.imgUrl).into(holder.image)
-//        holder.image.setBackgroundResource(article.img)
-        holder.toggleButton.isChecked = article.favorit
-        handleClick(holder.container, article.id)
+    override fun onBindViewHolder(holder: ArticleListAdapter.ViewHolder, position: Int) {
+        holder.bind(articlesList[position])
+        Log.e("ads list", articlesList.toString())
+        handleClick(holder.container, articlesList[position])
+        Glide.with(holder.container).load(articlesList[position].img).into(holder.articleImage)
     }
 
-    private fun handleClick(view: View, articleID: Int) {
-        val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(articleID)
+    private fun handleClick(view: View, article: ArticleModel) {
+        val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(article.id.toInt())
         view.setOnClickListener { v: View ->
             v.findNavController().navigate(action)
         }
 
         view.readLaterArticle.setOnClickListener {
-            var i = 0
-            var article = list[0]
-            while (i < list.size) {
-                if (list[i].id == articleID) {
-                    article = list[i]
-                }
-                i++
-            }
-            article.favorit = !article.favorit
+            article.favoris = !article.favoris
         }
     }
 
-    class ArticleViewHolder private constructor(parent: View) : RecyclerView.ViewHolder(parent) {
+    class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val viewModel = ArticleViewModel()
+        val container: View = binding.itemContainer
+        val articleImage: ImageView = binding.articleImage
+
+        fun bind(article: ArticleModel) {
+
+            viewModel.bind(article)
+            binding.viewModel = viewModel
+        }
+
+
+    }
+
+   /* class ArticleViewHolder private constructor(parent: View) : RecyclerView.ViewHolder(parent) {
         var titleText: TextView
         var catgoryText: TextView
         var sourceDateText: TextView
@@ -80,6 +87,16 @@ class ArticleListAdapter(val list: MutableList<Article>, val context: Context) :
                 return ArticleViewHolder(articleItemView)
             }
         }
+    }*/
+
+
+    override fun getItemCount(): Int {
+        return if (::articlesList.isInitialized) articlesList.size else 0
+    }
+
+    fun updateArticlesList(adsList: List<ArticleModel>) {
+        this.articlesList = adsList
+        notifyDataSetChanged()
     }
 
 

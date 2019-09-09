@@ -1,6 +1,5 @@
 package com.esi.dz_now.model
 
-import java.security.CodeSource
 
 data class ArticleModel(
 
@@ -11,6 +10,7 @@ data class ArticleModel(
     var img: String,
     var category: String = "",
     var date: String = "",
-    var source: String = ""
+    var source: String = "",
+    var favoris: Boolean = false
 
 )

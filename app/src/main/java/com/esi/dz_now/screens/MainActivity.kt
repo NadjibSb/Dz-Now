@@ -15,10 +15,6 @@ import com.esi.dz_now.data.DataUtil
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
 
-import com.esi.dz_now.model.di.appModule
-
-import org.koin.android.ext.android.startKoin
-
 import java.util.*
 
 
@@ -59,7 +55,6 @@ class MainActivity : AppCompatActivity(), SharedData {
         val currentLanguage = sharedPref.getString(KEY_CURRENT_LANGUAGE, EN)
         if (currentLanguage != EN) switchLanguage(currentLanguage)
         super.onCreate(savedInstanceState)
-        startKoin(this, listOf(appModule))
 
 
 

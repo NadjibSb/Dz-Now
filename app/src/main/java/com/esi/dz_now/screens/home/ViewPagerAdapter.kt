@@ -1,10 +1,8 @@
 package com.esi.dz_now.screens.home
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.*
-import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,22 +11,21 @@ import androidx.viewpager.widget.PagerAdapter
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
-import com.esi.dz_now.model.ArticleModel
-import com.esi.dz_now.viewmodel.HomeFragmentViewModel
-import java.util.*
 
 import androidx.lifecycle.Observer
-
+import com.esi.dz_now.viewmodel.ArticlesListViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class ViewPagerAdapter(
     private val mContext: Context,
-    private val articlesList: MutableList<Article>,
     categoriesList: List<Categories>,
-    val viewModel: HomeFragmentViewModel,
-    val owner: LifecycleOwner
-) : PagerAdapter() {
+    val viewModel: ArticlesListViewModel,
+    val lifeCycleOwner : LifecycleOwner
+    ) : PagerAdapter() {
 
+    private var errorSnackbar: Snackbar? = null
+    private var first: Boolean = true
     private var mCategoriesList: MutableList<ViewPagerHeader>
 
     init {
@@ -49,14 +46,13 @@ class ViewPagerAdapter(
         val header = mCategoriesList[position]
         val inflater = LayoutInflater.from(mContext)
         val layout = inflater.inflate(R.layout.viewpager_content, collection, false) as ViewGroup
-
-        //to check if it's a Categorie tab or the 'All' tab
-        val list: MutableList<Article> = if (header is ViewPagerHeader.CategorieHeader) {
-            getArticleByCategory(true, header.categorie)
-        } else {//in case it's the 'All' tab, pass the list of all articles
-            articlesList
+        if(header is ViewPagerHeader.CategorieHeader){
+            viewModel.loadArticles(header.categorie.toString())
         }
-        setUpRecycleView(layout, list)
+        viewModel.errorMessage.observe(lifeCycleOwner, Observer {
+                errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+        })
+        setUpRecycleView(layout)
         collection.addView(layout)
         return layout
     }
@@ -76,9 +72,7 @@ class ViewPagerAdapter(
     override fun getPageTitle(position: Int): CharSequence? {
         var title = ""
         val header = mCategoriesList[position]
-        title = if (header is ViewPagerHeader.AllHeader) {
-            mContext.getString(header.text)
-        } else if (header is ViewPagerHeader.CategorieHeader) {
+        title =  if (header is ViewPagerHeader.CategorieHeader) {
             mContext.getString(header.categorie.title)
         } else {
             ""
@@ -87,9 +81,9 @@ class ViewPagerAdapter(
     }
 
     //RecycleView--------------------------------------------
-    private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
+    private fun setUpRecycleView(rootView: View) {
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
-        recyclerView.adapter = ArticleListAdapter(list, mContext)
+        recyclerView.adapter = viewModel.articlesListadapter
         val screenOrientation =
             (mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
         when (screenOrientation) {
@@ -98,6 +92,17 @@ class ViewPagerAdapter(
         }
         recyclerView.setHasFixedSize(true)
     }
+
+    private fun showError(@StringRes errorMessage:Int){
+       // errorSnackbar = Snackbar.make(, errorMessage, Snackbar.LENGTH_INDEFINITE)
+        errorSnackbar?.setAction("Retry", viewModel.errorClickListener)
+        errorSnackbar?.show()
+    }
+
+    private fun hideError(){
+        errorSnackbar?.dismiss()
+    }
+
 
     private fun getArticlesByCategories(categorie: Categories, allArticles: List<Article>): MutableList<Article> {
         var newList = mutableListOf<Article>()
@@ -111,63 +116,10 @@ class ViewPagerAdapter(
 
     sealed class ViewPagerHeader {
         data class CategorieHeader(val categorie: Categories) : ViewPagerHeader()
-        data class AllHeader(val text: Int = R.string.all_category) : ViewPagerHeader()
+
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun getArticleByCategory(refresh : Boolean, category: Categories):MutableList<Article> {
-        var list_articles = mutableListOf<Article>()
-        viewModel.getArticleDataByCategory(refresh, category.name).observe(owner, Observer {
-            if(it == null){
-                logInfo("Handle Error")
-            }
-            if(it?.error == null){
-                if(it?.code==null) {
-                    val articles: List<ArticleModel>? = it!!.posts
 
-                    var article_data: Article?
-                    for (article in articles!!) {
-                        Log.e("errot", ""+article.toString())
-                        article_data = Article(
-                            article.id.toInt(),
-                            article.title,
-                            1,
-                            "",
-                            category,
-                            Date(),
-                            false,
-                            "Elwatan",
-                            "",
-                            article.img,
-                            article.category,
-                            article.date,
-                            article.url
-                        )
-                        list_articles.add(article_data)
-                    }
-                }else{
-                    when(it.code!!){
-                        404 -> toast("Sorry not found! :(")
-                        else ->{
-                            toast("Error! Please try again..")
-                        }
-                    }
-                }
-            }else{
-                val e : Throwable = it.error!!
-                logInfo("Error is " + e.message)
-            }
-        })
-        return list_articles
-    }
-
-    private fun logInfo(msg: String){
-        Log.i("MainActivity", msg)
-    }
-
-    private fun toast(msg: String){
-        //Toast.makeText(context,msg, Toast.LENGTH_SHORT).show()
-    }
 
 
 

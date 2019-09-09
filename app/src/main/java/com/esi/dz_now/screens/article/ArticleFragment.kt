@@ -11,6 +11,7 @@ import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentArticleBinding
+import com.esi.dz_now.screens.article.ArticleFragmentArgs
 import com.esi.dz_now.screens.MainActivity
 import kotlinx.android.synthetic.main.fragment_article.*
 import java.text.SimpleDateFormat

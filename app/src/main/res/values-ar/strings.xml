@@ -6,6 +6,7 @@
     <string name="international_category">الدولي</string>
     <string name="health_category">الصحة</string>
     <string name="culture_category">الثقافة</string>
+    <string name="economy_category">الاقتصاد</string>
     <string name="all_category">الكل</string>
     <string name="enabled">مفعلة</string>
     <string name="disabled">معطلة</string>
@@ -24,4 +25,6 @@
         <item>الفرنسية</item>
         <item>العربية</item>
     </string-array>
+
+
 </resources>
