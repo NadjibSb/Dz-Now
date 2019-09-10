@@ -85,6 +85,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
     implementation 'com.facebook.android:facebook-login:[5,6)'
+    ext.room_version = '1.1.1'
+    // Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+
+
 
 
 }

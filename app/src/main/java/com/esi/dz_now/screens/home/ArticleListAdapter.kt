@@ -33,13 +33,22 @@ class ArticleListAdapter:
 
     override fun onBindViewHolder(holder: ArticleListAdapter.ViewHolder, position: Int) {
         holder.bind(articlesList[position])
-        Log.e("ads list", articlesList.toString())
         handleClick(holder.container, articlesList[position])
         Glide.with(holder.container).load(articlesList[position].img).into(holder.articleImage)
     }
 
     private fun handleClick(view: View, article: ArticleModel) {
-        val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(article.id.toInt())
+
+        val action = HomeFragmentDirections.actionHomeFragmentToArticleFragment(
+            articleID = if(article.id==null) "" else article.id,
+            articleDate = if(article.date==null) "" else article.date,
+            articleImg = if(article.img==null) "" else article.img,
+            articleSource = if(article.source==null) "" else article.source,
+            articleTitle = if(article.title==null) "" else article.title,
+            articleUrl =  if(article.url==null) "" else article.url,
+            articleCategory = if(article.category==null) "" else article.category,
+            articleContent = if(article.content==null) "" else article.content
+        )
         view.setOnClickListener { v: View ->
             v.findNavController().navigate(action)
         }
@@ -50,7 +59,7 @@ class ArticleListAdapter:
     }
 
     class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val viewModel = ArticleViewModel()
+        val viewModel = ArticleViewModel()
         val container: View = binding.itemContainer
         val articleImage: ImageView = binding.articleImage
 

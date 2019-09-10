@@ -48,10 +48,11 @@ class ViewPagerAdapter(
         val layout = inflater.inflate(R.layout.viewpager_content, collection, false) as ViewGroup
         if(header is ViewPagerHeader.CategorieHeader){
             viewModel.loadArticles(header.categorie.toString())
+            viewModel.errorMessage.observe(lifeCycleOwner, Observer {
+                    errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+            })
         }
-        viewModel.errorMessage.observe(lifeCycleOwner, Observer {
-                errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
-        })
+
         setUpRecycleView(layout)
         collection.addView(layout)
         return layout

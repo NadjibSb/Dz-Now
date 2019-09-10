@@ -24,6 +24,13 @@
     </fragment>
     <fragment android:id="@+id/articleFragment" android:name="com.esi.dz_now.screens.article.ArticleFragment"
               android:label="fragment_article" tools:layout="@layout/fragment_article">
-        <argument android:name="articleID" app:argType="integer"/>
+        <argument android:name="articleID" app:argType="string"/>
+        <argument android:name="articleCategory" app:argType="string"/>
+        <argument android:name="articleContent" app:argType="string"/>
+        <argument android:name="articleDate" app:argType="string"/>
+        <argument android:name="articleSource" app:argType="string"/>
+        <argument android:name="articleImg" app:argType="string"/>
+        <argument android:name="articleTitle" app:argType="string"/>
+        <argument android:name="articleUrl" app:argType="string"/>
     </fragment>
 </navigation>

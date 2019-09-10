@@ -1,10 +1,30 @@
 package com.esi.dz_now.viewmodel
+import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.esi.dz_now.R
 import com.esi.dz_now.base.BaseViewModel
 import com.esi.dz_now.model.ArticleModel
+import com.esi.dz_now.network.ArticleApi
+import com.esi.dz_now.screens.home.ArticleListAdapter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
 class ArticleViewModel: BaseViewModel() {
+
+
+    val errorMessage: MutableLiveData<Int> = MutableLiveData()
+
+    @Inject
+    lateinit var ArticleApi: ArticleApi
+
+    val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+
+    private lateinit var subscription: Disposable
+    val errorClickListener = View.OnClickListener {  }
+
 
     private val articleId = MutableLiveData<String>()
     private val articleCategory = MutableLiveData<String>()
@@ -68,5 +88,33 @@ class ArticleViewModel: BaseViewModel() {
 
     fun getArticleDateAndSource():MutableLiveData<String>{
         return articleDateAndSource
+    }
+
+    fun loadArticleContent(source: String, url: String){
+        subscription = ArticleApi.getArticleContent(com.esi.dz_now.network.ArticleApi.GetArticleContentBody(url, source))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveArticleContentStart() }
+            .doOnTerminate { onRetrieveArticleContentFinish() }
+            .subscribe(
+                // Articled result
+                { result -> onRetrieveArticleContentSuccess(result) },
+                { error -> onRetrieveArticleContentError(error) }
+            )
+    }
+
+    private fun onRetrieveArticleContentStart(){
+        errorMessage.value = null
+    }
+
+    private fun onRetrieveArticleContentFinish(){
+    }
+
+    private fun onRetrieveArticleContentSuccess(content: ArticleModel){
+        articleContent.value = content.content
+    }
+
+    private fun onRetrieveArticleContentError(error: Throwable){
+        errorMessage.value = R.string.disabled
     }
 }
