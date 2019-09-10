@@ -72,8 +72,8 @@ class FavorisArticleListAdapter:
         return if (::articlesList.isInitialized) articlesList.size else 0
     }
 
-    fun updateArticlesList(adsList: List<ArticleModel>) {
-        this.articlesList = adsList
+    fun updateArticlesList(articlesList: List<ArticleModel>) {
+        this.articlesList = articlesList
         notifyDataSetChanged()
     }
 }

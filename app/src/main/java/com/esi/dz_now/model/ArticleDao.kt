@@ -6,11 +6,11 @@ import androidx.room.Query
 
 @Dao
 interface ArticleDao {
-    @get:Query("SELECT * FROM articlemodel")
+    @get:Query("SELECT * FROM articleModel")
     val getArticles: List<ArticleModel>
 
     @Insert
-    fun insertArticle(posts: ArticleModel)
+    fun insertArticle(post: ArticleModel)
 
 
 }

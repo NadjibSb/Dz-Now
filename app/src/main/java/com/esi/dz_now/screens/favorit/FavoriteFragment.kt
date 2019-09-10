@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +18,7 @@ import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentFavoriteBinding
+import com.esi.dz_now.injection.ViewModelFactory
 import com.esi.dz_now.model.ArticleModel
 import com.esi.dz_now.screens.MainActivity
 import com.esi.dz_now.viewmodel.SavedArticlesListViewModel
@@ -43,7 +45,7 @@ class FavoriteFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_favorite, container, false)
         // val view = inflater.inflate(R.layout.fragment_ads, container, false)
-        viewModel = ViewModelProviders.of(this).get(SavedArticlesListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(activity!! as AppCompatActivity)).get(SavedArticlesListViewModel::class.java)
 
         viewModel.errorMessage.observe(this, Observer {
                 errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
@@ -59,7 +61,6 @@ class FavoriteFragment : Fragment() {
 
         /*  val rvAdapter = UsedCarAdapter(adsList, context!!)
           recyclerView.adapter = rvAdapter*/
-        activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.VISIBLE
 
 
         return binding.root

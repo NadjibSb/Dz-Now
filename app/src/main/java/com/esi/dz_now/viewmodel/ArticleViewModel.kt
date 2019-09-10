@@ -117,4 +117,6 @@ class ArticleViewModel: BaseViewModel() {
     private fun onRetrieveArticleContentError(error: Throwable){
         errorMessage.value = R.string.disabled
     }
+
+
 }

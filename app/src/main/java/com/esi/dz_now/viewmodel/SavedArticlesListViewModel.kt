@@ -31,8 +31,11 @@ class SavedArticlesListViewModel(private val articleDao: ArticleDao): BaseViewMo
     private lateinit var subscription: Disposable
     val errorClickListener = View.OnClickListener {  }
 
+    init {
+        loadSavedArticles()
+    }
 
-    fun loadArticles(category: String){
+    fun loadSavedArticles(){
         subscription = Observable.fromCallable { articleDao.getArticles }
             .concatMap {
                     dbArticlesList -> Observable.just(dbArticlesList)
@@ -69,5 +72,15 @@ class SavedArticlesListViewModel(private val articleDao: ArticleDao): BaseViewMo
     override fun onCleared() {
         super.onCleared()
         subscription.dispose()
+    }
+
+    fun saveArticle(article: ArticleModel){
+
+        subscription = Observable.fromCallable { articleDao.insertArticle(article)}
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onRetrieveArticlesListStart() }
+            .doOnTerminate { onRetrieveArticlesListFinish() }
+            .subscribe()
     }
 }

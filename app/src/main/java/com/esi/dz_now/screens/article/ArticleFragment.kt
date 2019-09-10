@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentArticleBinding
+import com.esi.dz_now.injection.ViewModelFactory
 import com.esi.dz_now.model.ArticleModel
 import com.esi.dz_now.screens.article.ArticleFragmentArgs
 import com.esi.dz_now.screens.MainActivity
@@ -100,14 +102,22 @@ class ArticleFragment : Fragment() {
         if (id == R.id.readModeAction)
             Toast.makeText(context, "Read Mode clicked!", Toast.LENGTH_SHORT).show()
         if (id == R.id.addToFavoriteAction) {
+
             if (item.title == "stared") {
                 item.title = "unstared"
                 item.setIcon(R.drawable.ic_menu_star)
+
                 article.favoris = false
             } else {
                 item.title = "stared"
                 item.setIcon(R.drawable.ic_menu_fullstar)
                 article.favoris = true
+                var viewModel_save: SavedArticlesListViewModel = ViewModelProviders.of(this, ViewModelFactory(activity!! as AppCompatActivity)).get(SavedArticlesListViewModel::class.java)
+                viewModel_save.saveArticle(article)
+                viewModel.errorMessage.observe(this, Observer {
+                        errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+                })
+
                 Toast.makeText(context, getString(R.string.addToFav), Toast.LENGTH_SHORT).show()
             }
         }
