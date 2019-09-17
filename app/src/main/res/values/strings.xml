@@ -48,6 +48,7 @@
     </string>
     <string name="title_activity_login" translatable="false">LoginActivity</string>
     <string name="facebook_app_id" translatable="false">372651746759671</string>
+
     <string name="fb_login_protocol_scheme" translatable="false">fb372651746759671</string>
 
 

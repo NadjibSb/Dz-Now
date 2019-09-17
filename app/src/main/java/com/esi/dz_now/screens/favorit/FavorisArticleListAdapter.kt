@@ -1,5 +1,6 @@
 package com.esi.dz_now.screens.favorit
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class FavorisArticleListAdapter:
     }
 
     private fun handleClick(view: View, article: ArticleModel) {
+        Log.e("Article", article.content)
         val action = FavoriteFragmentDirections.actionFavoriteFragmentToArticleFragment(
             articleID = article.id,
             articleDate = article.date,

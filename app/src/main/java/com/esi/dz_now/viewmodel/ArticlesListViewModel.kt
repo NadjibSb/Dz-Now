@@ -52,6 +52,7 @@ class ArticlesListViewModel: BaseViewModel(){
     }
 
     private fun onRetrieveArticlesListSuccess(articlesList:List<ArticleModel>){
+        loadingVisibility.value = View.GONE
         articlesListadapter.updateArticlesList(articlesList)
     }
 

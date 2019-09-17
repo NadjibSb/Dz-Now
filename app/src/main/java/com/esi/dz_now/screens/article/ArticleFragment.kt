@@ -1,12 +1,16 @@
 package com.esi.dz_now.screens.article
 
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -43,10 +47,17 @@ class ArticleFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ArticleViewModel::class.java)
 
         binding.viewModel = viewModel
-        viewModel.loadArticleContent(ArticleFragmentArgs.fromBundle(arguments!!).articleSource, ArticleFragmentArgs.fromBundle(arguments!!).articleUrl)
-        viewModel.errorMessage.observe(this, Observer {
-                errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
-        })
+
+
+        if(isOnline(context!!)){
+            viewModel.loadArticleContent(ArticleFragmentArgs.fromBundle(arguments!!).articleSource, ArticleFragmentArgs.fromBundle(arguments!!).articleUrl)
+            viewModel.errorMessage.observe(this, Observer {
+                //errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+            })
+        }
+
+
+
         article= ArticleModel(
             ArticleFragmentArgs.fromBundle(arguments!!).articleID,
             ArticleFragmentArgs.fromBundle(arguments!!).articleTitle,
@@ -112,6 +123,7 @@ class ArticleFragment : Fragment() {
                 item.title = "stared"
                 item.setIcon(R.drawable.ic_menu_fullstar)
                 article.favoris = true
+                article.content=viewModel.getArticleContent().value!!
                 var viewModel_save: SavedArticlesListViewModel = ViewModelProviders.of(this, ViewModelFactory(activity!! as AppCompatActivity)).get(SavedArticlesListViewModel::class.java)
                 viewModel_save.saveArticle(article)
                 viewModel.errorMessage.observe(this, Observer {
@@ -123,6 +135,15 @@ class ArticleFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
+
+
 
 
 }
