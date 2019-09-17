@@ -16,11 +16,7 @@
             android:layout_weight="1"
             android:background="#ccc">
 
-        <com.facebook.login.widget.LoginButton
-                android:id="@+id/buttonFacebookLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
+
 
         <com.google.android.gms.common.SignInButton
                 android:id="@+id/signInButton"

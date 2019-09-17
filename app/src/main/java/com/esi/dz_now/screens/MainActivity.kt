@@ -151,4 +151,11 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
         super.onDestroy()
     }
 
+    public fun stopTts() {
+        // Shutdown TTS
+        if (tts != null) {
+            tts!!.stop()
+        }
+    }
+
 }

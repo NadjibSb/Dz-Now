@@ -145,6 +145,11 @@ class ArticleFragment : Fragment() {
         return networkInfo != null && networkInfo.isConnected
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as MainActivity).stopTts()
+    }
+
 
 
 
