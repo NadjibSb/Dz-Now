@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
+
         // [END config_signin]
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)

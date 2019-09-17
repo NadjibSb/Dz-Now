@@ -20,7 +20,7 @@ import com.esi.dz_now.viewmodel.ArticleViewModel
 import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class ArticleListAdapter:
+class       ArticleListAdapter:
     RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
 
     private lateinit var articlesList: List<ArticleModel>

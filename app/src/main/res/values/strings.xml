@@ -49,6 +49,7 @@
     <string name="title_activity_login" translatable="false">LoginActivity</string>
     <string name="facebook_app_id" translatable="false">372651746759671</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb372651746759671</string>
+    <string name="default_web_client_id">456454191277-or12jg4re4cvplp4ljc2pdn5o83599rh.apps.googleusercontent.com</string>
 
 
 </resources>
