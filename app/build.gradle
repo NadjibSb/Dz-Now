@@ -7,6 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 
 android {
@@ -99,3 +100,4 @@ dependencies {
 }
 
 //apply plugin: 'com.google.gms.google-services'
+

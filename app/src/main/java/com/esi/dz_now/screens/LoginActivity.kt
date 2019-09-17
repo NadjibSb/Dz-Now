@@ -1,37 +1,30 @@
 package com.esi.dz_now.screens
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.esi.dz_now.R
-import com.facebook.AccessToken
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login2.*
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener  {
+class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
 
     private lateinit var googleSignInClient: GoogleSignInClient
-
     private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,10 +52,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         // [START initialize_fblogin]
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create()
-
-
-
-
     }
 
     // [START on_start_check_user]
@@ -85,7 +74,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
-               // startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                // startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
@@ -116,12 +105,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
+                        .show()
                     updateUI(null)
                 }
 
                 // [START_EXCLUDE]
-               // hideProgressDialog()
+                // hideProgressDialog()
                 // [END_EXCLUDE]
             }
     }
