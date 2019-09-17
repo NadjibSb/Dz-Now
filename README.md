@@ -10,7 +10,8 @@ DZ-Now is a mobile application for Algerian news. The basic principle of the app
 
 * Ajouter la fonction sites préférés et thèmes préférés. L’application scanne les sites préférés et affiche une notification dès qu’un nouvel article concernant une des thématiques préférées est publié
 
-* Ajouter la fonction signets qui ajoute des liens d’articles sauvegardés sur un backend pour être retrouvés sur n’importe quel device (tablette ou téléphone). Utiliser une authentification facebook ou gmail
+* Ajouter la fonction signets qui ajoute des liens d’articles sauvegardés sur un backend pour être retrouvés sur n’importe quel device (tablette ou téléphone). 
+Utiliser une authentification facebook ou gmail [Gmail] Done
 
 * Ajouter la fonction multimédia qui extrait toutes les vidéos trouvées dans les pages consultées pour les afficher dans une activité dédiée
 
@@ -19,4 +20,4 @@ DZ-Now is a mobile application for Algerian news. The basic principle of the app
 ## Bonus
 * Avant de sauvegarder un article, effectuer le nettoyage (supprimer les pubs,…)  Done
 * Extraire toutes les dates intéressantes d’un article et proposer de les ajouter au calendrier. Par exemple, l’article parle d’un spectacle
-* Ajouter la fonction de lecture audio automatique d’un article
+* Ajouter la fonction de lecture audio automatique d’un article: Done
