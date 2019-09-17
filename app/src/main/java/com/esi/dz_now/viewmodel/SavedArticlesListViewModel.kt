@@ -76,6 +76,8 @@ class SavedArticlesListViewModel(private val articleDao: ArticleDao): BaseViewMo
 
     fun saveArticle(article: ArticleModel){
 
+        Log.e("Article", article.toString())
+
         subscription = Observable.fromCallable { articleDao.insertArticle(article)}
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

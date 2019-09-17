@@ -1,5 +1,9 @@
 package com.esi.dz_now.viewmodel
+import android.content.Context
+import android.net.ConnectivityManager
+import android.os.AsyncTask
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import com.esi.dz_now.R
 import com.esi.dz_now.base.BaseViewModel
@@ -9,6 +13,9 @@ import com.esi.dz_now.screens.home.ArticleListAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.io.IOException
+import java.net.InetSocketAddress
+import java.net.Socket
 import javax.inject.Inject
 
 
@@ -91,6 +98,7 @@ class ArticleViewModel: BaseViewModel() {
     }
 
     fun loadArticleContent(source: String, url: String){
+
         subscription = ArticleApi.getArticleContent(com.esi.dz_now.network.ArticleApi.GetArticleContentBody(url, source))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -118,5 +126,27 @@ class ArticleViewModel: BaseViewModel() {
         errorMessage.value = R.string.disabled
     }
 
+    internal class InternetCheck(private val onInternetChecked: (Boolean) -> Boolean) :
+        AsyncTask<Void, Void, Boolean>() {
+        init {
+            execute()
+        }
+
+        override fun doInBackground(vararg voids: Void): Boolean {
+            return try {
+                val sock = Socket()
+                sock.connect(InetSocketAddress("8.8.8.8", 53), 1500)
+                sock.close()
+                true
+            } catch (e: IOException) {
+                false
+            }
+
+        }
+
+        override fun onPostExecute(internet: Boolean) {
+            onInternetChecked(internet)
+        }
+    }
 
 }

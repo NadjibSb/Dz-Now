@@ -5,13 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.esi.dz_now.R
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -24,6 +31,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
     // [END declare_auth]
 
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +55,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
         // [END initialize_auth]
+
+        // [START initialize_fblogin]
+        // Initialize Facebook Login button
+        callbackManager = CallbackManager.Factory.create()
+
+
 
 
     }
@@ -79,6 +94,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
                 // [END_EXCLUDE]
             }
         }
+
     }
     // [END onactivityresult]
 
@@ -143,7 +159,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         if (user != null) {
 
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-            
+
         } else {
             //status.setText(R.string.signed_out)
 
@@ -155,6 +171,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         when (i) {
             R.id.signInButton -> signIn()
         }
+
     }
 
     companion object {

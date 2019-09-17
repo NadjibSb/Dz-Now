@@ -7,25 +7,7 @@
               android:orientation="vertical"
               android:weightSum="4">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
 
-
-
-        <TextView
-                android:id="@+id/titleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="sign in google"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-
-
-    </LinearLayout>
 
 
     <RelativeLayout
@@ -33,6 +15,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#ccc">
+
+
 
         <com.google.android.gms.common.SignInButton
                 android:id="@+id/signInButton"

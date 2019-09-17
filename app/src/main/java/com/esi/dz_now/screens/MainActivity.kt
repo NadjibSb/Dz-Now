@@ -2,6 +2,8 @@ package com.esi.dz_now.screens
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
@@ -29,7 +31,7 @@ const val FR = "fr"
 const val EN = "en"
 const val AR = "ar"
 
-class MainActivity : AppCompatActivity(), SharedData {
+class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity(), SharedData {
             R.id.settingsFragment
         )
     )
+    private var tts: TextToSpeech? = null
     private var dataUtil = DataUtil()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +68,8 @@ class MainActivity : AppCompatActivity(), SharedData {
         // setup NavController with actionBar & Drawer
         multiStartNavigationUi.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
+
+        tts = TextToSpeech(this, this)
 
 
     }
@@ -115,4 +120,42 @@ class MainActivity : AppCompatActivity(), SharedData {
             res.updateConfiguration(config, res.displayMetrics)
         }
     }
+
+    override fun onInit(status: Int) {
+
+        if (status == TextToSpeech.SUCCESS) {
+            // set US English as language for tts
+            val result = tts!!.setLanguage(Locale.FRANCE)
+
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS","The Language specified is not supported!")
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!")
+        }
+
+    }
+
+    public fun speakOut(text: String) {
+
+        tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null)
+    }
+
+    public override fun onDestroy() {
+        // Shutdown TTS
+        if (tts != null) {
+            tts!!.stop()
+            tts!!.shutdown()
+        }
+        super.onDestroy()
+    }
+
+    public fun stopTts() {
+        // Shutdown TTS
+        if (tts != null) {
+            tts!!.stop()
+        }
+    }
+
 }
