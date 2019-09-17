@@ -59,28 +59,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create()
 
-        buttonFacebookLogin.setReadPermissions("email", "public_profile")
-        buttonFacebookLogin.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(loginResult: LoginResult) {
-                Log.d(TAG, "facebook:onSuccess:$loginResult")
-                handleFacebookAccessToken(loginResult.accessToken)
-            }
 
-            override fun onCancel() {
-                Log.d(TAG, "facebook:onCancel")
-                // [START_EXCLUDE]
-                updateUI(null)
-                // [END_EXCLUDE]
-            }
-
-            override fun onError(error: FacebookException) {
-                Log.d(TAG, "facebook:onError", error)
-                // [START_EXCLUDE]
-                updateUI(null)
-                // [END_EXCLUDE]
-            }
-        })
-        // [END initialize_fblogin]
 
 
     }
@@ -114,11 +93,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
                 // [END_EXCLUDE]
             }
         }
-        else
-        {
-            // Pass the activity result back to the Facebook SDK
-            callbackManager.onActivityResult(requestCode, resultCode, data)
-        }
+
     }
     // [END onactivityresult]
 
@@ -197,32 +172,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         }
 
     }
-
-    // [START auth_with_facebook]
-    private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
-
-        val credential = FacebookAuthProvider.getCredential(token.token)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-
-
-            }
-    }
-    // [END auth_with_facebook]
-
+    
     companion object {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
