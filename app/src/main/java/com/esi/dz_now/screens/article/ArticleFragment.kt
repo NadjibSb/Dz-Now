@@ -110,10 +110,10 @@ class ArticleFragment : Fragment() {
 
             startActivity(Intent.createChooser(shareIntent, "Partager Article"))
         }
-        if (id == R.id.readModeAction)
+        if (id == R.id.readModeAction) {
             Toast.makeText(context, "Voice Mode clicked!", Toast.LENGTH_SHORT).show()
-            (activity as MainActivity).speakOut(viewModel.getArticleTitle().value+ " "+ viewModel.getArticleContent().value)
-
+            (activity as MainActivity).speakOut(viewModel.getArticleTitle().value + " " + viewModel.getArticleContent().value)
+        }
         if (id == R.id.addToFavoriteAction) {
 
             if (item.title == "stared") {
