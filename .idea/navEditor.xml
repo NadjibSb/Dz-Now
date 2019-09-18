@@ -62,13 +62,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="logoutFragment2">
+                  <entry key="logoutFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="212" />
                             <option name="y" value="386" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="multimediaFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="23" />
+                            <option name="y" value="35" />
                           </Point>
                         </option>
                       </LayoutPositions>

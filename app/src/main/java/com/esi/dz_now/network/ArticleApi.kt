@@ -1,7 +1,9 @@
 package com.esi.dz_now.network
 
+import com.esi.dz_now.data.VideoModel
 import com.esi.dz_now.model.ArticleModel
 import io.reactivex.Observable
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -12,7 +14,7 @@ interface ArticleApi {
      * Get the list of articles from the API
      */
     @GET("/api/articles")
-    fun getArticles(@Query("category")category: String): Observable<List<ArticleModel>>
+    fun getArticles(@Query("category") category: String): Observable<List<ArticleModel>>
 
 
     /**
@@ -26,8 +28,8 @@ interface ArticleApi {
         var source: String
     )
 
-
-
+    @GET("api/videos")
+    fun getMultimedia(): Call<List<VideoModel>>
 
 
 }

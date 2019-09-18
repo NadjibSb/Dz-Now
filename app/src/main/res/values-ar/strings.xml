@@ -26,6 +26,7 @@
         <item>العربية</item>
     </string-array>
     <string name="log_out">خروج</string>
+    <string name="multimedia_fragment_title">الوسائط</string>
 
 
 </resources>

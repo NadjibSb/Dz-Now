@@ -38,4 +38,9 @@
             android:name="com.esi.dz_now.screens.logout.LogoutFragment"
             android:label="logout_fragment"
             tools:layout="@layout/logout_fragment" />
+    <fragment
+            android:id="@+id/multimediaFragment"
+            android:name="com.esi.dz_now.screens.multimedia.MultimediaFragment"
+            android:label="multimedia_fragment"
+            tools:layout="@layout/multimedia_fragment" />
 </navigation>

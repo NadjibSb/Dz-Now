@@ -26,6 +26,7 @@
         <item>Français</item>
         <item>Arabe</item>
     </string-array>
+    <string name="multimedia_fragment_title">Multimédia</string>
 
 
 </resources>
