@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         // [START config_signin]
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken("456454191277-jrqrjv3je5jukfchcvulmjc4af36e5sp.apps.googleusercontent.com")
             .requestEmail()
             .build()
         // [END config_signin]
@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener  {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
+        Log.e("tag", auth.currentUser!!.uid)
         updateUI(currentUser)
     }
     // [END on_start_check_user]
