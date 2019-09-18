@@ -29,6 +29,7 @@ class MultimediaFragment : Fragment() {
             R.layout.multimedia_fragment, container, false
         )
         (activity as MainActivity).supportActionBar?.title = getString(R.string.multimedia_fragment_title)
+        (activity as MainActivity).supportActionBar?.show()
         return binding.root
     }
 

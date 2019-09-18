@@ -54,6 +54,7 @@
     <string name="multimedia_fragment_title">Multimedia</string>
     <string name="please_wait">Please wait...</string>
     <string name="videoDisplay_fragment_title">Watch Video</string>
+    <string name="senditvia">Send it via :</string>
 
 
 </resources>

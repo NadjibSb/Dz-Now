@@ -23,7 +23,7 @@ class ArticleListAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ArticleListAdapter.ViewHolder {
+    ): ViewHolder {
         val binding: ListItemBinding =
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
@@ -34,7 +34,7 @@ class ArticleListAdapter :
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ArticleListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(articlesList[position])
         handleClick(holder.container, articlesList[position])
         Glide.with(holder.container).load(articlesList[position].img).into(holder.articleImage)

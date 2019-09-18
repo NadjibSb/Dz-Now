@@ -8,6 +8,5 @@ enum class Categories(val title: Int, var isActivated: Boolean) {
     INTERNATIONAL(R.string.international_category, true),
     POLITICS(R.string.politic_category, true),
     SPORT(R.string.sport_category, true),
-    TECH(R.string.tech_category, true),
-    ECONOMY(R.string.economy_category, true)
+    TECH(R.string.tech_category, true)
 }
