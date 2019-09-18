@@ -50,6 +50,10 @@
     <string name="facebook_app_id" translatable="false">372651746759671</string>
 
     <string name="fb_login_protocol_scheme" translatable="false">fb372651746759671</string>
+    <string name="log_out">Sign out</string>
+    <string name="multimedia_fragment_title">Multimedia</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="videoDisplay_fragment_title">Watch Video</string>
 
 
 </resources>

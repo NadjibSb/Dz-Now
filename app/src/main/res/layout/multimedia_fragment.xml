@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".screens.multimedia.MultimediaFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/video_recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/video_list_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <include
+                android:id="@+id/loading_view"
+                layout="@layout/loading_view"></include>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

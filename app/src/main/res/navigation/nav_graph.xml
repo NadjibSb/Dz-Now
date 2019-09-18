@@ -33,4 +33,27 @@
         <argument android:name="articleTitle" app:argType="string"/>
         <argument android:name="articleUrl" app:argType="string"/>
     </fragment>
+    <fragment
+            android:id="@+id/logoutFragment"
+            android:name="com.esi.dz_now.screens.logout.LogoutFragment"
+            android:label="logout_fragment"
+            tools:layout="@layout/logout_fragment" />
+    <fragment
+            android:id="@+id/multimediaFragment"
+            android:name="com.esi.dz_now.screens.multimedia.MultimediaFragment"
+            android:label="@string/multimedia_fragment_title"
+            tools:layout="@layout/multimedia_fragment" >
+        <action
+                android:id="@+id/action_multimediaFragment_to_videoDisplayFragment"
+                app:destination="@id/videoDisplayFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/videoDisplayFragment"
+            android:name="com.esi.dz_now.screens.videoDisplay.VideoDisplayFragment"
+            android:label="@string/videoDisplay_fragment_title"
+            tools:layout="@layout/video_display_fragment" >
+        <argument
+                android:name="url"
+                app:argType="string" />
+    </fragment>
 </navigation>

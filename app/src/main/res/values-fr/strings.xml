@@ -19,12 +19,16 @@
     <string name="themes_title">Thème</string>
     <string name="article_fragment_title">Article</string>
     <string name="language">Langue</string>
+    <string name="log_out">Déconnecter</string>
 
     <string-array name="languages">
         <item>Anglais</item>
         <item>Français</item>
         <item>Arabe</item>
     </string-array>
+    <string name="multimedia_fragment_title">Multimédia</string>
+    <string name="please_wait">Attendez svp ...</string>
+    <string name="videoDisplay_fragment_title">Regarder la video</string>
 
 
 </resources>

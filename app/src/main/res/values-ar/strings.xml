@@ -25,6 +25,10 @@
         <item>الفرنسية</item>
         <item>العربية</item>
     </string-array>
+    <string name="log_out">خروج</string>
+    <string name="multimedia_fragment_title">الوسائط</string>
+    <string name="please_wait">الرجاء الانتظار</string>
+    <string name="videoDisplay_fragment_title">شاهد الفيديو</string>
 
 
 </resources>

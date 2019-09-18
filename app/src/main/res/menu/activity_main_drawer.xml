@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_menu_home"
-        android:title="@string/home_fragment_title" />
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/home_fragment_title" />
     <item
-        android:id="@+id/favoriteFragment"
-        android:icon="@drawable/ic_menu_stars"
-        android:title="@string/favourites_fragment_title" />
+            android:id="@+id/favoriteFragment"
+            android:icon="@drawable/ic_menu_stars"
+            android:title="@string/favourites_fragment_title" />
+
+
+    <item
+            android:id="@+id/multimediaFragment"
+            android:icon="@drawable/ic_multimedia"
+            android:title="@string/multimedia_fragment_title" />
 
     <group
             android:id="@+id/bottom_menu"
             android:checkableBehavior="none">
         <item
-            android:id="@+id/settingsFragment"
-            android:icon="@drawable/ic_menu_settings"
-            android:title="@string/settings_fragment_title"/>
+                android:id="@+id/settingsFragment"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="@string/settings_fragment_title" />
+        <item
+                android:id="@+id/logoutFragment"
+                android:icon="@drawable/ic_keyboard_return_black_24dp"
+                android:title="@string/log_out" />
 
     </group>
 
