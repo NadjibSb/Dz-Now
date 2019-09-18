@@ -29,6 +29,11 @@
     <string name="multimedia_fragment_title">Multimédia</string>
     <string name="please_wait">Patientez quelques instants  ...</string>
     <string name="videoDisplay_fragment_title">Regarder la video</string>
+    <string name="Article">Article</string>
+    <string name="Favoris">Favoris</string>
+    <string name="Home">Accueil</string>
+    <string name="Settings">Parametre</string>
+    <string name="senditvia">Envoyer via</string>
 
 
 </resources>

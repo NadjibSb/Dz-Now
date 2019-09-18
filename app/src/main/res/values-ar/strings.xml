@@ -29,6 +29,7 @@
     <string name="multimedia_fragment_title">الوسائط</string>
     <string name="please_wait">...الرجاء الانتظار</string>
     <string name="videoDisplay_fragment_title">شاهد الفيديو</string>
+    <string name="senditvia">إرسال عبر</string>
 
 
 </resources>
