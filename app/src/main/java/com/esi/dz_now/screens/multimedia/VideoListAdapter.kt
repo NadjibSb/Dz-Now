@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esi.dz_now.R
@@ -17,7 +18,7 @@ class VideoListAdapter(val list: List<VideoModel>?) :
         return VideoViewHolder.create(parent)
     }
 
-    override fun getItemCount() = list?.size ?:0
+    override fun getItemCount() = list?.size ?: 0
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
         holder.bind(list?.get(position))
@@ -33,12 +34,13 @@ class VideoListAdapter(val list: List<VideoModel>?) :
         fun bind(video: VideoModel?) {
             video?.apply {
                 titleV.text = title
-                sourceV.text =  source
+                sourceV.text = source
                 dateV.text = date
                 Glide.with(imageV.context)
                     .load(img)
                     //.apply(RequestOptions().placeholder(R.drawable.ic_image_loading).error(R.drawable.ic_image_error))
                     .into(imageV)
+                handleClick(layout,url)
             }
         }
 
@@ -47,6 +49,14 @@ class VideoListAdapter(val list: List<VideoModel>?) :
                 val itemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.video_list_item, parent, false)
                 return VideoViewHolder(itemView)
+            }
+        }
+
+
+        private fun handleClick(view: View, url: String) {
+            val action = MultimediaFragmentDirections.actionMultimediaFragmentToVideoDisplayFragment(url)
+            view.setOnClickListener { v: View ->
+                v.findNavController().navigate(action)
             }
         }
 

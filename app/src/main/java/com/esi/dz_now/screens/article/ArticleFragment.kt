@@ -118,12 +118,12 @@ class ArticleFragment : Fragment() {
 
             if (item.title == "stared") {
                 item.title = "unstared"
-                item.setIcon(R.drawable.ic_menu_star)
+                item.setIcon(R.drawable.ic_bookmark_border)
 
                 article.favoris = false
             } else {
                 item.title = "stared"
-                item.setIcon(R.drawable.ic_menu_fullstar)
+                item.setIcon(R.drawable.ic_bookmark)
                 article.favoris = true
                 article.content=viewModel.getArticleContent().value!!
                 var viewModel_save: SavedArticlesListViewModel = ViewModelProviders.of(this, ViewModelFactory(activity!! as AppCompatActivity)).get(SavedArticlesListViewModel::class.java)

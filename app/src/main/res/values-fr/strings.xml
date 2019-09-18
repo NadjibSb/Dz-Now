@@ -27,6 +27,8 @@
         <item>Arabe</item>
     </string-array>
     <string name="multimedia_fragment_title">Multimédia</string>
+    <string name="please_wait">Attendez svp ...</string>
+    <string name="videoDisplay_fragment_title">Regarder la video</string>
 
 
 </resources>

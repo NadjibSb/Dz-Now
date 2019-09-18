@@ -6,20 +6,21 @@
     <item
             android:id="@+id/addToFavoriteAction"
             android:orderInCategory="100"
-
+            android:title="Add to favorite"
+            android:icon="@drawable/ic_bookmark_border"
             app:showAsAction="always" />
     <item
             android:id="@+id/readModeAction"
             android:orderInCategory="100"
-            android:title="read_mode"
-            android:icon="@drawable/book"
-            app:showAsAction="ifRoom" />
+            android:title="Enable voice reading"
+            android:icon="@drawable/ic_record_voice"
+            app:showAsAction="never" />
     <item
             android:id="@+id/shareAction"
             android:orderInCategory="100"
             android:icon="@drawable/ic_menu_share"
-            android:title="Block"
-            app:showAsAction="ifRoom" />
+            android:title="Share"
+            app:showAsAction="never" />
 
 
 </menu>

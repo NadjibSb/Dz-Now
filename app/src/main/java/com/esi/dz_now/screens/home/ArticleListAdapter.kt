@@ -55,10 +55,6 @@ class ArticleListAdapter :
         view.setOnClickListener { v: View ->
             v.findNavController().navigate(action)
         }
-
-        view.readLaterArticle.setOnClickListener {
-            article.favoris = !article.favoris
-        }
     }
 
     class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {

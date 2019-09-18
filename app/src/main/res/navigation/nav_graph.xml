@@ -41,6 +41,19 @@
     <fragment
             android:id="@+id/multimediaFragment"
             android:name="com.esi.dz_now.screens.multimedia.MultimediaFragment"
-            android:label="multimedia_fragment"
-            tools:layout="@layout/multimedia_fragment" />
+            android:label="@string/multimedia_fragment_title"
+            tools:layout="@layout/multimedia_fragment" >
+        <action
+                android:id="@+id/action_multimediaFragment_to_videoDisplayFragment"
+                app:destination="@id/videoDisplayFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/videoDisplayFragment"
+            android:name="com.esi.dz_now.screens.videoDisplay.VideoDisplayFragment"
+            android:label="@string/videoDisplay_fragment_title"
+            tools:layout="@layout/video_display_fragment" >
+        <argument
+                android:name="url"
+                app:argType="string" />
+    </fragment>
 </navigation>

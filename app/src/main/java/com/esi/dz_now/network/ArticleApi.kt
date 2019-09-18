@@ -1,13 +1,13 @@
 package com.esi.dz_now.network
 
 import com.esi.dz_now.data.VideoModel
+import com.esi.dz_now.data.VideoUrl
 import com.esi.dz_now.model.ArticleModel
 import io.reactivex.Observable
+import org.json.JSONObject
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
+import java.util.*
 
 interface ArticleApi {
     /**
@@ -30,6 +30,10 @@ interface ArticleApi {
 
     @GET("api/videos")
     fun getMultimedia(): Call<List<VideoModel>>
+
+
+    @POST("api/videoUrl")
+    fun getVideoUrl(@Body url: VideoUrl): Call<VideoUrl?>
 
 
 }
