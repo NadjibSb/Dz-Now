@@ -98,6 +98,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:19.0.0'
 
+
     //youtube video player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.4'
 

@@ -2,6 +2,7 @@ package com.esi.dz_now.screens.favorit
 
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -47,6 +48,9 @@ class FavoriteFragment : Fragment() {
         // val view = inflater.inflate(R.layout.fragment_ads, container, false)
         viewModel = ViewModelProviders.of(this, ViewModelFactory(activity!! as AppCompatActivity)).get(SavedArticlesListViewModel::class.java)
 
+       if(isOnline(context!!)) viewModel.loadSavedOnlineArticles("")
+       else  viewModel.loadSavedArticles()
+
         viewModel.errorMessage.observe(this, Observer {
                 errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
         })
@@ -75,6 +79,13 @@ class FavoriteFragment : Fragment() {
     private fun hideError(){
         errorSnackbar?.dismiss()
     }
+
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
+
 
 
 

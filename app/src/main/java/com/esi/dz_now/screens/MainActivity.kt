@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
         tts = TextToSpeech(this, this)
 
 
+
     }
 
 
