@@ -25,6 +25,7 @@
         <item>الفرنسية</item>
         <item>العربية</item>
     </string-array>
+    <string name="log_out">خروج</string>
 
 
 </resources>

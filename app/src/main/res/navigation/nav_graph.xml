@@ -33,4 +33,9 @@
         <argument android:name="articleTitle" app:argType="string"/>
         <argument android:name="articleUrl" app:argType="string"/>
     </fragment>
+    <fragment
+            android:id="@+id/logoutFragment"
+            android:name="com.esi.dz_now.screens.logout.LogoutFragment"
+            android:label="logout_fragment"
+            tools:layout="@layout/logout_fragment" />
 </navigation>

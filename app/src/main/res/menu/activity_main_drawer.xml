@@ -16,9 +16,13 @@
             android:id="@+id/bottom_menu"
             android:checkableBehavior="none">
         <item
-            android:id="@+id/settingsFragment"
-            android:icon="@drawable/ic_menu_settings"
-            android:title="@string/settings_fragment_title"/>
+                android:id="@+id/settingsFragment"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="@string/settings_fragment_title"/>
+        <item
+                android:id="@+id/logoutFragment"
+                android:icon="@drawable/ic_keyboard_return_black_24dp"
+                android:title="@string/log_out"/>
 
     </group>
 

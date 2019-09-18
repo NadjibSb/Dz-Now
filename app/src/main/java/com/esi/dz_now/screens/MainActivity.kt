@@ -20,7 +20,6 @@ import com.esi.dz_now.databinding.ActivityMainBinding
 import java.util.*
 
 
-
 const val KEY_CURRENT_THEME = "Theme"
 const val LIGHT_THEME = "light"
 const val DARK_THEME = "dark"
@@ -33,6 +32,7 @@ const val AR = "ar"
 
 class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListener {
 
+    private val TAG = "TAG-MainActivity"
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val multiStartNavigationUi = MultiStartNavigationUI(
@@ -66,7 +66,11 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
 
         navController = this.findNavController(R.id.nav_host_fragment)
         // setup NavController with actionBar & Drawer
-        multiStartNavigationUi.setupActionBarWithNavController(this, navController, binding.drawerLayout)
+        multiStartNavigationUi.setupActionBarWithNavController(
+            this,
+            navController,
+            binding.drawerLayout
+        )
         NavigationUI.setupWithNavController(binding.navView, navController)
 
         tts = TextToSpeech(this, this)
@@ -81,7 +85,8 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
         }
     }
 
-    override fun onSupportNavigateUp() = multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
+    override fun onSupportNavigateUp() =
+        multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
 
 
     override fun getAllArticles(): MutableList<Article> {
@@ -111,13 +116,12 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
 
     private fun switchLanguage(newlanguage: String) {
         var currentLanguage = Locale.getDefault().language
-        if (!currentLanguage.equals(newlanguage)) {
+        if (currentLanguage != newlanguage) {
             var locale = Locale(newlanguage)
             Locale.setDefault(locale)
-            var res = resources
-            var config = res.configuration
+            var config = resources.configuration
             config.setLocale(locale)
-            res.updateConfiguration(config, res.displayMetrics)
+            resources.updateConfiguration(config, resources.displayMetrics)
         }
     }
 
@@ -128,7 +132,7 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
             val result = tts!!.setLanguage(Locale.FRANCE)
 
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TTS","The Language specified is not supported!")
+                Log.e("TTS", "The Language specified is not supported!")
             }
 
         } else {
@@ -137,7 +141,7 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
 
     }
 
-    public fun speakOut(text: String) {
+    fun speakOut(text: String) {
 
         tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null)
     }
@@ -151,7 +155,7 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
         super.onDestroy()
     }
 
-    public fun stopTts() {
+    fun stopTts() {
         // Shutdown TTS
         if (tts != null) {
             tts!!.stop()

@@ -60,6 +60,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
+
     }
     // [END on_start_check_user]
 
@@ -147,8 +148,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun updateUI(user: FirebaseUser?) {
         //hideProgressDialog()
         if (user != null) {
+            var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(intent)
+            //this@LoginActivity.finish()
 
         } else {
             //status.setText(R.string.signed_out)
@@ -168,4 +172,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
+
+
 }
