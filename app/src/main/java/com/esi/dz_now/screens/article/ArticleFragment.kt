@@ -131,6 +131,10 @@ class ArticleFragment : Fragment() {
                 viewModel.errorMessage.observe(this, Observer {
                         errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
                 })
+                viewModel_save.saveArticleOnline("",article)
+                viewModel.errorMessage.observe(this, Observer {
+                        errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+                })
 
                 Toast.makeText(context, getString(R.string.addToFav), Toast.LENGTH_SHORT).show()
             }

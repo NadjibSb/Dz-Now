@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        Log.e("tag", auth.currentUser!!.uid)
+//        Log.e("tag", auth.currentUser!!.uid)
         updateUI(currentUser)
 
     }

@@ -35,5 +35,20 @@ interface ArticleApi {
     @POST("api/videoUrl")
     fun getVideoUrl(@Body url: VideoUrl): Call<VideoUrl?>
 
+    @GET("api/saved-articles/{userId}")
+    fun getSavedArticles(@Path("userId") userId: String): Observable<List<SaveArticleBody>>
 
+    @POST("/api/saved-articles")
+    fun saveArticle(@Body body: SaveArticleBody): Observable<SaveArticleBody>
+
+    class SaveArticleBody(
+        var userId: String,
+        var title: String,
+        var content: String,
+        var source: String,
+        var category: String,
+        var img: String,
+        var date: String,
+        var url:String
+    )
 }

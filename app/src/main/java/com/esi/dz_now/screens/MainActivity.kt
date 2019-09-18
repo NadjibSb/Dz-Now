@@ -16,10 +16,6 @@ import com.esi.dz_now.data.Categories
 import com.esi.dz_now.data.DataUtil
 import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 import java.util.*
 
