@@ -38,9 +38,8 @@ class VideoListAdapter(val list: List<VideoModel>?) :
                 dateV.text = date
                 Glide.with(imageV.context)
                     .load(img)
-                    //.apply(RequestOptions().placeholder(R.drawable.ic_image_loading).error(R.drawable.ic_image_error))
                     .into(imageV)
-                handleClick(layout,url)
+                handleClick(layout, url)
             }
         }
 
@@ -54,7 +53,8 @@ class VideoListAdapter(val list: List<VideoModel>?) :
 
 
         private fun handleClick(view: View, url: String) {
-            val action = MultimediaFragmentDirections.actionMultimediaFragmentToVideoDisplayFragment(url)
+            val action =
+                MultimediaFragmentDirections.actionMultimediaFragmentToVideoDisplayFragment(url)
             view.setOnClickListener { v: View ->
                 v.findNavController().navigate(action)
             }

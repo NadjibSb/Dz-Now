@@ -7,10 +7,14 @@ import androidx.room.Room
 import com.esi.dz_now.model.database.AppDatabase
 import com.esi.dz_now.viewmodel.SavedArticlesListViewModel
 
-class ViewModelFactory(private val activity: AppCompatActivity): ViewModelProvider.Factory{
+class ViewModelFactory(private val activity: AppCompatActivity) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SavedArticlesListViewModel::class.java)) {
-            val db = Room.databaseBuilder(activity.applicationContext, AppDatabase::class.java, "articles").build()
+            val db = Room.databaseBuilder(
+                activity.applicationContext,
+                AppDatabase::class.java,
+                "articles"
+            ).build()
             @Suppress("UNCHECKED_CAST")
             return SavedArticlesListViewModel(db.articleDao()) as T
         }

@@ -23,7 +23,7 @@ class VideoDisplayViewModel : ViewModel() {
         var videoUrl: VideoUrl?
         val video = MutableLiveData<String?>()
 
-        val u = VideoUrl(url,"")
+        val u = VideoUrl(url, "")
 
         api.getVideoUrl(u).enqueue(object : Callback<VideoUrl?> {
             override fun onFailure(call: Call<VideoUrl?>, t: Throwable) {

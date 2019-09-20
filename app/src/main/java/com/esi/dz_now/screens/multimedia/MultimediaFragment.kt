@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esi.dz_now.R
@@ -22,13 +21,18 @@ class MultimediaFragment : Fragment() {
     private lateinit var viewModel: MultimediaViewModel
     private lateinit var binding: MultimediaFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.multimedia_fragment, container, false
         )
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.multimedia_fragment_title)
+        (activity as MainActivity).supportActionBar?.title =
+            getString(R.string.multimedia_fragment_title)
         (activity as MainActivity).supportActionBar?.show()
         return binding.root
     }
@@ -39,7 +43,7 @@ class MultimediaFragment : Fragment() {
 
 
 
-        viewModel.getMultimediaList().observe(this, Observer { videos->
+        viewModel.getMultimediaList().observe(this, Observer { videos ->
             binding.loadingView.visibility = View.GONE
             setupRecyclerView(videos)
         })

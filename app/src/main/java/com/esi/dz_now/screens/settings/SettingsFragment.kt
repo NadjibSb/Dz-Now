@@ -16,36 +16,37 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Categories
-import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentSettingsBinding
 import com.esi.dz_now.screens.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.util.*
 
 
-
-
 class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsBinding
-    private lateinit var data: SharedData
     private lateinit var categories: List<Categories>
+    private val TAG = "TAG-SettingsFragment"
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_settings, container, false
         )
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.settings_fragment_title)
+        (activity as MainActivity).supportActionBar?.title =
+            getString(R.string.settings_fragment_title)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        data = activity as SharedData
-        categories = data.getAllCategories()
+        categories = getAllCategories()
 
         spinnerSetup()
         categorieSelectionSetup(categories)
@@ -81,7 +82,12 @@ class SettingsFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 when (id) {
                     0L -> switchLanguage("en")
                     1L -> switchLanguage("fr")
@@ -118,7 +124,7 @@ class SettingsFragment : Fragment() {
 
         binding.themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             val oldTheme = sharedPref.getString(KEY_CURRENT_THEME, "first")
-            Log.i("nadjib", oldTheme)
+            Log.i(TAG, oldTheme)
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPref.edit().putString(KEY_CURRENT_THEME, DARK_THEME).apply()
@@ -128,21 +134,20 @@ class SettingsFragment : Fragment() {
                 sharedPref.edit().putString(KEY_CURRENT_THEME, LIGHT_THEME).apply()
             }
             val newTheme = sharedPref.getString(KEY_CURRENT_THEME, "first")
-            if (!oldTheme.equals(newTheme))
+            if (oldTheme != newTheme)
                 activity?.recreate()
 
         }
     }
 
     private fun categorieSelectionSetup(categories: List<Categories>) {
-        var category_: Categories
         var culture_: Categories = categories[0]
         var health_: Categories = categories[0]
         var sport_: Categories = categories[0]
         var international_: Categories = categories[0]
         var politics_: Categories = categories[0]
         var tech_: Categories = categories[0]
-        var msg: String = ""
+        var msg = ""
         for (category_ in categories) {
             if (category_.name == Categories.CULTURE.name) culture_ = category_
             if (category_.name == Categories.SPORT.name) sport_ = category_
@@ -166,7 +171,9 @@ class SettingsFragment : Fragment() {
         checkBoxSanté.setOnCheckedChangeListener { view, isChecked ->
             health_.isActivated = isChecked
             msg =
-                getString(R.string.health_category) + " " + (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
+                getString(R.string.health_category) + " " + (if (isChecked) getString(R.string.enabled) else getString(
+                    R.string.disabled
+                ))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
@@ -194,7 +201,9 @@ class SettingsFragment : Fragment() {
         checkBoxSport.setOnCheckedChangeListener { view, isChecked ->
             sport_.isActivated = isChecked
             msg =
-                getString(R.string.sport_category) + " " + (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
+                getString(R.string.sport_category) + " " + (if (isChecked) getString(R.string.enabled) else getString(
+                    R.string.disabled
+                ))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
@@ -202,9 +211,21 @@ class SettingsFragment : Fragment() {
         checkBoxTechnologie.setOnCheckedChangeListener { view, isChecked ->
             tech_.isActivated = isChecked
             msg =
-                getString(R.string.tech_category) + " " + (if (isChecked) getString(R.string.enabled) else getString(R.string.disabled))
+                getString(R.string.tech_category) + " " + (if (isChecked) getString(R.string.enabled) else getString(
+                    R.string.disabled
+                ))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun getAllCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+
+        list.addAll(Categories.values().toList())
+        list.sortBy { categories ->
+            categories.title
+        }
+        return list
     }
 }

@@ -12,7 +12,6 @@ import com.esi.dz_now.R
 import com.esi.dz_now.databinding.ListItemBinding
 import com.esi.dz_now.model.ArticleModel
 import com.esi.dz_now.viewmodel.ArticleViewModel
-import kotlinx.android.synthetic.main.list_item.view.*
 
 
 class ArticleListAdapter :
@@ -67,36 +66,7 @@ class ArticleListAdapter :
             viewModel.bind(article)
             binding.viewModel = viewModel
         }
-
-
     }
-
-    /* class ArticleViewHolder private constructor(parent: View) : RecyclerView.ViewHolder(parent) {
-         var titleText: TextView
-         var catgoryText: TextView
-         var sourceDateText: TextView
-         var image: ImageView
-         var container: View
-         var toggleButton: ToggleButton
-
-         init {
-             titleText = parent.findViewById(R.id.articleTitle)
-             catgoryText = parent.findViewById(R.id.articleCategory)
-             sourceDateText = parent.findViewById(R.id.articleSourceDate)
-             image = parent.findViewById(R.id.articleImage)
-             container = parent.findViewById(R.id.itemContainer)
-             toggleButton = parent.findViewById(R.id.readLaterArticle)
-         }
-
-         companion object {
-             fun creat(parent: ViewGroup): ArticleViewHolder {
-                 val articleItemView = LayoutInflater.from(parent.context)
-                     .inflate(R.layout.list_item, parent, false)
-                 return ArticleViewHolder(articleItemView)
-             }
-         }
-     }*/
-
 
     override fun getItemCount(): Int {
         return if (::articlesList.isInitialized) articlesList.size else 0

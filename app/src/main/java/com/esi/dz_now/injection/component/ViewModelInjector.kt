@@ -21,7 +21,6 @@ interface ViewModelInjector {
     fun inject(savedArticlesListViewModel: SavedArticlesListViewModel)
 
 
-
     @Component.Builder
     interface Builder {
         fun build(): ViewModelInjector

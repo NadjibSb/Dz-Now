@@ -20,10 +20,7 @@ import kotlinx.android.synthetic.main.activity_login2.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    // [START declare_auth]
     private lateinit var auth: FirebaseAuth
-    // [END declare_auth]
-
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var callbackManager: CallbackManager
 
@@ -34,23 +31,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         signInButton.setOnClickListener(this)
 
         // [START config_signin]
-        // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("456454191277-jrqrjv3je5jukfchcvulmjc4af36e5sp.apps.googleusercontent.com")
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        // [END config_signin]
-
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // [START initialize_auth]
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
-        // [END initialize_auth]
-
-        // [START initialize_fblogin]
-        // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create()
     }
 
@@ -59,11 +48,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-//        Log.e("tag", auth.currentUser!!.uid)
+        // Log.e("tag", auth.currentUser!!.uid)
         updateUI(currentUser)
-
     }
-    // [END on_start_check_user]
 
     // [START onactivityresult]
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -76,25 +63,18 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
-                // startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
-                // [START_EXCLUDE]
                 updateUI(null)
-                // [END_EXCLUDE]
             }
         }
-
     }
-    // [END onactivityresult]
 
     // [START auth_with_google]
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
-        // [START_EXCLUDE silent]
-        //showProgressDialog()
-        // [END_EXCLUDE]
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
@@ -111,20 +91,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         .show()
                     updateUI(null)
                 }
-
-                // [START_EXCLUDE]
-                // hideProgressDialog()
-                // [END_EXCLUDE]
             }
     }
-    // [END auth_with_google]
 
     // [START signin]
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
-    // [END signin]
 
     private fun signOut() {
         // Firebase sign out
@@ -147,30 +121,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        //hideProgressDialog()
         if (user != null) {
             var intent = Intent(this@LoginActivity, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
             startActivity(intent)
-            //this@LoginActivity.finish()
 
         } else {
-            //status.setText(R.string.signed_out)
 
         }
     }
 
     override fun onClick(v: View) {
-        val i = v.id
-        when (i) {
+        when (v.id) {
             R.id.signInButton -> signIn()
         }
 
     }
 
     companion object {
-        private const val TAG = "GoogleActivity"
+        private const val TAG = "TAG-GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
 

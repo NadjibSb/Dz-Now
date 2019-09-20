@@ -15,6 +15,6 @@ data class Article(
     var imgUrl: String = "",
     var category: String = "",
     var articleDate: String = "",
-    var url:String = ""
+    var url: String = ""
 ) {
 }

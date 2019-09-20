@@ -52,7 +52,7 @@ object NetworkModule {
             .build()
     }
 
-    private val REQUEST_TIMEOUT = 6000
+    private const val REQUEST_TIMEOUT = 6000
 
     private var logging = HttpLoggingInterceptor()
 

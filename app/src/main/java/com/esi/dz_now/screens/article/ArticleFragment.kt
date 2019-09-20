@@ -66,8 +66,6 @@ class ArticleFragment : Fragment() {
             })
         }
 
-
-
         article = ArticleModel(
             ArticleFragmentArgs.fromBundle(arguments!!).articleID,
             ArticleFragmentArgs.fromBundle(arguments!!).articleTitle,
@@ -114,17 +112,11 @@ class ArticleFragment : Fragment() {
 
         var id = item.itemId
         if (id == R.id.shareAction) {
-            /*val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.setType("text/plain")
-                .putExtra(Intent.EXTRA_SUBJECT, article.title)
-                .putExtra(Intent.EXTRA_TEXT, article.content)
-
-            startActivity(Intent.createChooser(shareIntent, "Partager Article"))*/
             shareArticle()
         }
         if (id == R.id.readModeAction) {
             Toast.makeText(context, "Voice Mode clicked!", Toast.LENGTH_SHORT).show()
-            (activity as MainActivity).speakOut(viewModel.getArticleTitle().value + " " + viewModel.getArticleContent().value)
+            (activity as MainActivity).speakOut(viewModel.getArticleTitle().value + ". " + viewModel.getArticleContent().value)
         }
         if (id == R.id.addToFavoriteAction) {
 
@@ -145,9 +137,9 @@ class ArticleFragment : Fragment() {
                 viewModel.errorMessage.observe(this, Observer { errorMessage ->
                     if (errorMessage != null) showError(errorMessage) else hideError()
                 })
-                viewModel_save.saveArticleOnline("",article)
-                viewModel.errorMessage.observe(this, Observer {
-                        errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+                viewModel_save.saveArticleOnline("", article)
+                viewModel.errorMessage.observe(this, Observer { errorMessage ->
+                    if (errorMessage != null) showError(errorMessage) else hideError()
                 })
 
                 Toast.makeText(context, getString(R.string.addToFav), Toast.LENGTH_SHORT).show()
@@ -169,6 +161,10 @@ class ArticleFragment : Fragment() {
         (activity as MainActivity).stopTts()
     }
 
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).stopTts()
+    }
 
     private fun shareArticle() {
         val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
@@ -192,15 +188,18 @@ class ArticleFragment : Fragment() {
 
                 //selected contact
                 id = curseur.getString(curseur.getColumnIndexOrThrow(ContactsContract.Contacts._ID))
-                name = curseur.getString(curseur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
+                name =
+                    curseur.getString(curseur.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
                 Log.i(TAG, "Name: $name")
 
                 //Phone number
-                hasPhoneNumber = curseur.getString(curseur.getColumnIndexOrThrow(ContactsContract.Contacts.HAS_PHONE_NUMBER))
+                hasPhoneNumber =
+                    curseur.getString(curseur.getColumnIndexOrThrow(ContactsContract.Contacts.HAS_PHONE_NUMBER))
                 if (hasPhoneNumber == "1") {
                     val phones = context!!.contentResolver.query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null)
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null
+                    )
                     phones.moveToFirst()
                     num = phones.getString(phones.getColumnIndex("data1"))
                     Log.i(TAG, "Num: $num")
@@ -208,17 +207,20 @@ class ArticleFragment : Fragment() {
                 //email
                 val emails = context!!.contentResolver.query(
                     ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
-                    ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = "+id,null, null)
-                if (emails.count>0){
+                    ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + id, null, null
+                )
+                if (emails.count > 0) {
                     emails.moveToFirst()
-                    email = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
-                    if (email != null){
+                    email =
+                        emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+                    if (email != null) {
                         Log.i(TAG, "email: $email")
                     }
                 }
-                val dialog = ShareDialog(email,num,article.title,viewModel.getArticleContent().value)
+                val dialog =
+                    ShareDialog(email, num, article.title, viewModel.getArticleContent().value)
 
-                dialog?.show(fragmentManager!!,"SHARE")
+                dialog?.show(fragmentManager!!, "SHARE")
 
             }
         }

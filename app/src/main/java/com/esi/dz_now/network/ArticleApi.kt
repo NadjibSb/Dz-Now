@@ -4,10 +4,8 @@ import com.esi.dz_now.data.VideoModel
 import com.esi.dz_now.data.VideoUrl
 import com.esi.dz_now.model.ArticleModel
 import io.reactivex.Observable
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
 
 interface ArticleApi {
     /**
@@ -49,6 +47,6 @@ interface ArticleApi {
         var category: String,
         var img: String,
         var date: String,
-        var url:String
+        var url: String
     )
 }

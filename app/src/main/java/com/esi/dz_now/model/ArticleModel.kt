@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 data class ArticleModel(
 
     var id: String = "",
-
     var title: String = "",
     var url: String = "",
     var content: String = "",
@@ -18,7 +17,7 @@ data class ArticleModel(
     var favoris: Boolean = false
 
 
-){
+) {
     @PrimaryKey(autoGenerate = true)
     var articleId: Int = 0
 

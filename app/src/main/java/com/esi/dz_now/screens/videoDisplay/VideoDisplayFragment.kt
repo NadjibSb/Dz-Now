@@ -1,14 +1,13 @@
 package com.esi.dz_now.screens.videoDisplay
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-
+import androidx.lifecycle.ViewModelProviders
 import com.esi.dz_now.R
 import com.esi.dz_now.screens.MainActivity
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer

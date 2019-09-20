@@ -6,14 +6,14 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LogoutViewModel : ViewModel() {
 
-    val is_connected = MutableLiveData<Boolean>()
+    val isConnected = MutableLiveData<Boolean>()
 
     init {
-        is_connected.value = true
+        isConnected.value = true
     }
 
     fun logout() {
         FirebaseAuth.getInstance().signOut()
-        is_connected.value = false
+        isConnected.value = false
     }
 }

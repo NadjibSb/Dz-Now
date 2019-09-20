@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.*
 import androidx.annotation.StringRes
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,6 @@ import androidx.viewpager.widget.PagerAdapter
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
-
-import androidx.lifecycle.Observer
 import com.esi.dz_now.viewmodel.ArticlesListViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -21,11 +20,10 @@ class ViewPagerAdapter(
     private val mContext: Context,
     categoriesList: List<Categories>,
     val viewModel: ArticlesListViewModel,
-    val lifeCycleOwner : LifecycleOwner
-    ) : PagerAdapter() {
+    private val lifeCycleOwner: LifecycleOwner
+) : PagerAdapter() {
 
     private var errorSnackbar: Snackbar? = null
-    private var first: Boolean = true
     private var mCategoriesList: MutableList<ViewPagerHeader>
 
     init {
@@ -46,10 +44,10 @@ class ViewPagerAdapter(
         val header = mCategoriesList[position]
         val inflater = LayoutInflater.from(mContext)
         val layout = inflater.inflate(R.layout.viewpager_content, collection, false) as ViewGroup
-        if(header is ViewPagerHeader.CategorieHeader){
+        if (header is ViewPagerHeader.CategorieHeader) {
             viewModel.loadArticles(header.categorie.toString())
-            viewModel.errorMessage.observe(lifeCycleOwner, Observer {
-                    errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+            viewModel.errorMessage.observe(lifeCycleOwner, Observer { errorMessage ->
+                if (errorMessage != null) showError(errorMessage) else hideError()
             })
         }
 
@@ -73,7 +71,7 @@ class ViewPagerAdapter(
     override fun getPageTitle(position: Int): CharSequence? {
         var title = ""
         val header = mCategoriesList[position]
-        title =  if (header is ViewPagerHeader.CategorieHeader) {
+        title = if (header is ViewPagerHeader.CategorieHeader) {
             mContext.getString(header.categorie.title)
         } else {
             ""
@@ -94,18 +92,20 @@ class ViewPagerAdapter(
         recyclerView.setHasFixedSize(true)
     }
 
-    private fun showError(@StringRes errorMessage:Int){
-       // errorSnackbar = Snackbar.make(, errorMessage, Snackbar.LENGTH_INDEFINITE)
+    private fun showError(@StringRes errorMessage: Int) {
         errorSnackbar?.setAction("Retry", viewModel.errorClickListener)
         errorSnackbar?.show()
     }
 
-    private fun hideError(){
+    private fun hideError() {
         errorSnackbar?.dismiss()
     }
 
 
-    private fun getArticlesByCategories(categorie: Categories, allArticles: List<Article>): MutableList<Article> {
+    private fun getArticlesByCategories(
+        categorie: Categories,
+        allArticles: List<Article>
+    ): MutableList<Article> {
         var newList = mutableListOf<Article>()
         for (article in allArticles) {
             if (article.categories == categorie) {
@@ -119,9 +119,6 @@ class ViewPagerAdapter(
         data class CategorieHeader(val categorie: Categories) : ViewPagerHeader()
 
     }
-
-
-
 
 
 }

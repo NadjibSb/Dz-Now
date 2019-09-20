@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -14,21 +13,25 @@ import com.esi.dz_now.R
 import com.esi.dz_now.databinding.ListItemBinding
 import com.esi.dz_now.model.ArticleModel
 import com.esi.dz_now.viewmodel.ArticleViewModel
-import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class FavorisArticleListAdapter:
+class FavorisArticleListAdapter :
     RecyclerView.Adapter<FavorisArticleListAdapter.ViewHolder>() {
 
     private lateinit var articlesList: List<ArticleModel>
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavorisArticleListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ListItemBinding =
-            DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.list_item, parent, false)
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.list_item,
+                parent,
+                false
+            )
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: FavorisArticleListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(articlesList[position])
         handleClick(holder.container, articlesList[position])
         Glide.with(holder.container).load(articlesList[position].img).into(holder.articleImage)

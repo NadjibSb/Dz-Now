@@ -11,12 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.esi.dz_now.R
-import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
-import com.esi.dz_now.data.DataUtil
-import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
-
 import java.util.*
 
 
@@ -30,7 +26,7 @@ const val FR = "fr"
 const val EN = "en"
 const val AR = "ar"
 
-class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListener {
+class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private val TAG = "TAG-MainActivity"
     private lateinit var binding: ActivityMainBinding
@@ -43,7 +39,6 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
         )
     )
     private var tts: TextToSpeech? = null
-    private var dataUtil = DataUtil()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -74,9 +69,6 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
         NavigationUI.setupWithNavController(binding.navView, navController)
 
         tts = TextToSpeech(this, this)
-
-
-
     }
 
 
@@ -88,32 +80,6 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
 
     override fun onSupportNavigateUp() =
         multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
-
-
-    override fun getAllArticles(): MutableList<Article> {
-        return dataUtil.getAllArticles()
-    }
-
-    override fun getArticlesListByCategorie(categories: Categories): MutableList<Article> {
-        return dataUtil.getArticlesListByCategorie(categories)!!
-    }
-
-
-    override fun getAllCategories(): List<Categories> {
-        return dataUtil.getAllCategories()
-    }
-
-    override fun getCategories(): List<Categories> {
-        return dataUtil.getCategories()
-    }
-
-    override fun getArticleById(articleId: Int): Article {
-        return dataUtil.getArticleById(articleId)
-    }
-
-    override fun getFavories(): MutableList<Article> {
-        return dataUtil.getFavories()
-    }
 
     private fun switchLanguage(newlanguage: String) {
         var currentLanguage = Locale.getDefault().language
@@ -163,4 +129,27 @@ class MainActivity : AppCompatActivity(), SharedData, TextToSpeech.OnInitListene
         }
     }
 
+
+    fun getCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+        for (cat in Categories.values().toList()) {
+            if (cat.isActivated) {
+                list.add(cat)
+            }
+        }
+        list.sortBy { categories ->
+            categories.title
+        }
+        return list
+    }
+
+    fun getAllCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+
+        list.addAll(Categories.values().toList())
+        list.sortBy { categories ->
+            categories.title
+        }
+        return list
+    }
 }

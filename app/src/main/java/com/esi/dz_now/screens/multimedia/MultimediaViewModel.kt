@@ -21,11 +21,14 @@ class MultimediaViewModel : ViewModel() {
 
     fun getMultimediaList(): MutableLiveData<List<VideoModel>?> {
 
-        var videos : List<VideoModel>?
+        var videos: List<VideoModel>?
         val list = MutableLiveData<List<VideoModel>?>()
 
         api.getMultimedia().enqueue(object : Callback<List<VideoModel>> {
-            override fun onResponse(call: Call<List<VideoModel>>, response: Response<List<VideoModel>>) {
+            override fun onResponse(
+                call: Call<List<VideoModel>>,
+                response: Response<List<VideoModel>>
+            ) {
                 Log.i(TAG, "getMultimediaList: call enqueue")
 
                 if (!response.isSuccessful) {

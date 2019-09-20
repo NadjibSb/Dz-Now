@@ -11,8 +11,15 @@ import androidx.fragment.app.DialogFragment
 import com.esi.dz_now.R
 
 
-class ShareDialog(val email: String?, val phone: String?, val title: String, val content: String?) :
+class ShareDialog(
+    private val email: String?,
+    private val phone: String?,
+    val title: String,
+    val content: String?
+) :
     DialogFragment() {
+
+    private val TAG = "TAG-ShareDialog"
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -53,7 +60,7 @@ class ShareDialog(val email: String?, val phone: String?, val title: String, val
 
                         }
                     }
-                    Log.i("TAG-", "$which $phone $email")
+                    Log.i(TAG, "$which $phone $email")
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
