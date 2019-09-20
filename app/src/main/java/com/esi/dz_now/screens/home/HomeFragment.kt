@@ -15,7 +15,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var data: SharedData
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(
             inflater,

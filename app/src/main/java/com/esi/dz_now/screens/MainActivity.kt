@@ -58,7 +58,11 @@ class MainActivity : AppCompatActivity(), SharedData {
 
         navController = this.findNavController(R.id.nav_host_fragment)
         // setup NavController with actionBar & Drawer
-        multiStartNavigationUi.setupActionBarWithNavController(this, navController, binding.drawerLayout)
+        multiStartNavigationUi.setupActionBarWithNavController(
+            this,
+            navController,
+            binding.drawerLayout
+        )
         NavigationUI.setupWithNavController(binding.navView, navController)
 
 
@@ -71,7 +75,8 @@ class MainActivity : AppCompatActivity(), SharedData {
         }
     }
 
-    override fun onSupportNavigateUp() = multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
+    override fun onSupportNavigateUp() =
+        multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
 
 
     override fun getAllArticles(): MutableList<Article> {

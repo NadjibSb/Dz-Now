@@ -41,7 +41,8 @@ class FavorisArticleListAdapter(val list: MutableList<Article>, val context: Con
         holder.image.setBackgroundResource(article.img)
         holder.star.isChecked = article.favorit
         handleClick(holder.container, article.id)
-        Glide.with(context).load(article.img).to(holder.image)
+        Glide.with(context)
+            .load(article.img) to holder.image
     }
 
     private fun handleClick(view: View, articleID: Int) {
@@ -66,22 +67,13 @@ class FavorisArticleListAdapter(val list: MutableList<Article>, val context: Con
     }
 
     class ArticleViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
-        var titleText: TextView
-        var catgoryText: TextView
-        var sourceDateText: TextView
-        var image: ImageView
-        var container: View
-        var star: ToggleButton
+        var titleText: TextView = parent.findViewById(R.id.articleTitle)
+        var catgoryText: TextView = parent.findViewById(R.id.articleCategory)
+        var sourceDateText: TextView = parent.findViewById(R.id.articleSourceDate)
+        var image: ImageView = parent.findViewById(R.id.articleImage)
+        var container: View = parent.findViewById(R.id.itemContainer)
+        var star: ToggleButton = parent.findViewById(R.id.readLaterArticle)
 
-        init {
-            titleText = parent.findViewById(R.id.articleTitle)
-            catgoryText = parent.findViewById(R.id.articleCategory)
-            sourceDateText = parent.findViewById(R.id.articleSourceDate)
-            image = parent.findViewById(R.id.articleImage)
-            container = parent.findViewById(R.id.itemContainer)
-            star = parent.findViewById(R.id.readLaterArticle)
-
-        }
     }
 
 }

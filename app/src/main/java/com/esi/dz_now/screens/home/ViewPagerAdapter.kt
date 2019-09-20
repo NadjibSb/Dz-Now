@@ -87,7 +87,10 @@ class ViewPagerAdapter(
         recyclerView.setHasFixedSize(true)
     }
 
-    private fun getArticlesByCategories(categorie: Categories, allArticles: List<Article>): MutableList<Article> {
+    private fun getArticlesByCategories(
+        categorie: Categories,
+        allArticles: List<Article>
+    ): MutableList<Article> {
         var newList = mutableListOf<Article>()
         for (article in allArticles) {
             if (article.categories == categorie) {
