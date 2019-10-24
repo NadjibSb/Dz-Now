@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     override fun onSupportNavigateUp() =
         multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
 
+
     private fun switchLanguage(newlanguage: String) {
         var currentLanguage = Locale.getDefault().language
         if (currentLanguage != newlanguage) {

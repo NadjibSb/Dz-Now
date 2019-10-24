@@ -23,6 +23,9 @@
         <item name="android:textColorSecondary">#FFFFFF</item>
     </style>
 
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">#FFFFFF</item>
+    </style>
 
     <style name="AppTheme.DARK1" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
