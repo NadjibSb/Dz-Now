@@ -1,29 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/homeFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph"
+        app:startDestination="@id/homeFragment">
 
-    <fragment android:id="@+id/settingsFragment"
-              android:name="com.esi.dz_now.screens.settings.SettingsFragment"
-              android:label="fragment_settings"
-              tools:layout="@layout/fragment_settings"/>
+    <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.esi.dz_now.screens.settings.SettingsFragment"
+            android:label="@string/settings_fragment_title"
+            tools:layout="@layout/fragment_settings" />
 
-    <fragment android:id="@+id/favoriteFragment"
-              android:name="com.esi.dz_now.screens.favorit.FavoriteFragment"
-              android:label="fragment_favorite"
-              tools:layout="@layout/fragment_favorite">
-        <action android:id="@+id/action_favoriteFragment_to_articleFragment" app:destination="@id/articleFragment"/>
+    <fragment
+            android:id="@+id/favoriteFragment"
+            android:name="com.esi.dz_now.screens.favorit.FavoriteFragment"
+            android:label="@string/favourites_fragment_title"
+            tools:layout="@layout/fragment_favorite">
+        <action
+                android:id="@+id/action_favoriteFragment_to_articleFragment"
+                app:destination="@id/articleFragment" />
     </fragment>
 
-    <fragment android:id="@+id/homeFragment"
-              android:name="com.esi.dz_now.screens.home.HomeFragment"
-              android:label="fragment_home"
-              tools:layout="@layout/fragment_home">
-        <action android:id="@+id/action_homeFragment_to_articleFragment" app:destination="@id/articleFragment"/>
+    <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.esi.dz_now.screens.home.HomeFragment"
+            android:label="@string/home_fragment_title"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_homeFragment_to_articleFragment"
+                app:destination="@id/articleFragment" />
     </fragment>
-    <fragment android:id="@+id/articleFragment" android:name="com.esi.dz_now.screens.article.ArticleFragment"
-              android:label="fragment_article" tools:layout="@layout/fragment_article">
-        <argument android:name="articleID" app:argType="integer"/>
+    <fragment
+            android:id="@+id/articleFragment"
+            android:name="com.esi.dz_now.screens.article.ArticleFragment"
+            android:label="@string/article_fragment_title"
+            tools:layout="@layout/fragment_article">
+        <argument
+                android:name="articleID"
+                app:argType="string" />
+        <argument
+                android:name="articleCategory"
+                app:argType="string" />
+        <argument
+                android:name="articleContent"
+                app:argType="string" />
+        <argument
+                android:name="articleDate"
+                app:argType="string" />
+        <argument
+                android:name="articleSource"
+                app:argType="string" />
+        <argument
+                android:name="articleImg"
+                app:argType="string" />
+        <argument
+                android:name="articleTitle"
+                app:argType="string" />
+        <argument
+                android:name="articleUrl"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/logoutFragment"
+            android:name="com.esi.dz_now.screens.logout.LogoutFragment"
+            android:label="Logout"
+            tools:layout="@layout/logout_fragment" />
+    <fragment
+            android:id="@+id/multimediaFragment"
+            android:name="com.esi.dz_now.screens.multimedia.MultimediaFragment"
+            android:label="@string/multimedia_fragment_title"
+            tools:layout="@layout/multimedia_fragment">
+        <action
+                android:id="@+id/action_multimediaFragment_to_videoDisplayFragment"
+                app:destination="@id/videoDisplayFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/videoDisplayFragment"
+            android:name="com.esi.dz_now.screens.videoDisplay.VideoDisplayFragment"
+            android:label="@string/videoDisplay_fragment_title"
+            tools:layout="@layout/video_display_fragment">
+        <argument
+                android:name="url"
+                app:argType="string" />
     </fragment>
 </navigation>

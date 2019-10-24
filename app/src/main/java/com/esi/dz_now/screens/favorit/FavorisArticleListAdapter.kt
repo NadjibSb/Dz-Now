@@ -1,79 +1,80 @@
 package com.esi.dz_now.screens.favorit
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.ToggleButton
-import androidx.lifecycle.MutableLiveData
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.esi.dz_now.R
-import com.esi.dz_now.data.Article
-import kotlinx.android.synthetic.main.list_item.view.*
+import com.esi.dz_now.databinding.ListItemBinding
+import com.esi.dz_now.model.ArticleModel
+import com.esi.dz_now.viewmodel.ArticleViewModel
 
 
-class FavorisArticleListAdapter(val list: MutableList<Article>, val context: Context) :
-    RecyclerView.Adapter<FavorisArticleListAdapter.ArticleViewHolder>() {
+class FavorisArticleListAdapter :
+    RecyclerView.Adapter<FavorisArticleListAdapter.ViewHolder>() {
 
-    var itemChanged = MutableLiveData<Boolean>()
+    private lateinit var articlesList: List<ArticleModel>
 
-    init {
-        itemChanged.value = false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding: ListItemBinding =
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.list_item,
+                parent,
+                false
+            )
+        return ViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val articleItemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item, parent, false)
-        return ArticleViewHolder(articleItemView)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(articlesList[position])
+        handleClick(holder.container, articlesList[position])
+        Glide.with(holder.container).load(articlesList[position].img).into(holder.articleImage)
     }
 
-    override fun getItemCount() = list.size
-
-    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val article = list[position]
-        holder.titleText.text = article.title
-        holder.catgoryText.text = article.categories.name
-        holder.sourceDateText.text = article.source + "|" + article.date.toString()
-        holder.image.setBackgroundResource(article.img)
-        holder.star.isChecked = article.favorit
-        handleClick(holder.container, article.id)
-        Glide.with(context)
-            .load(article.img) to holder.image
-    }
-
-    private fun handleClick(view: View, articleID: Int) {
-        val action = FavoriteFragmentDirections.actionFavoriteFragmentToArticleFragment(articleID)
+    private fun handleClick(view: View, article: ArticleModel) {
+        Log.e("Article", article.content)
+        val action = FavoriteFragmentDirections.actionFavoriteFragmentToArticleFragment(
+            articleID = article.id,
+            articleDate = article.date,
+            articleImg = article.img,
+            articleSource = article.source,
+            articleTitle = article.title,
+            articleUrl = article.url,
+            articleCategory = article.category,
+            articleContent = article.content
+        )
         view.setOnClickListener { v: View ->
             v.findNavController().navigate(action)
         }
+    }
 
-        view.readLaterArticle.setOnClickListener {
-            var i = 0
-            var article = list[0]
-            while (i < list.size) {
-                if (list[i].id == articleID) {
-                    article = list[i]
-                }
-                i++
-            }
-            article.favorit = !article.favorit
-            list.remove(article)
-            itemChanged.value = true
+    class ViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val viewModel = ArticleViewModel()
+        val container: View = binding.itemContainer
+        val articleImage: ImageView = binding.articleImage
+
+        fun bind(article: ArticleModel) {
+
+            viewModel.bind(article)
+            binding.viewModel = viewModel
         }
-    }
 
-    class ArticleViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
-        var titleText: TextView = parent.findViewById(R.id.articleTitle)
-        var catgoryText: TextView = parent.findViewById(R.id.articleCategory)
-        var sourceDateText: TextView = parent.findViewById(R.id.articleSourceDate)
-        var image: ImageView = parent.findViewById(R.id.articleImage)
-        var container: View = parent.findViewById(R.id.itemContainer)
-        var star: ToggleButton = parent.findViewById(R.id.readLaterArticle)
 
     }
 
+
+    override fun getItemCount(): Int {
+        return if (::articlesList.isInitialized) articlesList.size else 0
+    }
+
+    fun updateArticlesList(articlesList: List<ArticleModel>) {
+        this.articlesList = articlesList
+        notifyDataSetChanged()
+    }
 }

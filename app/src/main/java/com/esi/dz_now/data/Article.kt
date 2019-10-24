@@ -9,8 +9,12 @@ data class Article(
     val content: String,
     val categories: Categories,
     val date: Date,
-    var favorit: Boolean,
-    val source: String,
-    val author: String
+    var favorit: Boolean = false,
+    val source: String = "",
+    val author: String = "",
+    var imgUrl: String = "",
+    var category: String = "",
+    var articleDate: String = "",
+    var url: String = ""
 ) {
 }

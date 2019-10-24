@@ -2,6 +2,9 @@ package com.esi.dz_now.screens.home
 
 import android.content.Context
 import android.view.*
+import androidx.annotation.StringRes
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,14 +12,18 @@ import androidx.viewpager.widget.PagerAdapter
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
+import com.esi.dz_now.viewmodel.ArticlesListViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class ViewPagerAdapter(
     private val mContext: Context,
-    private val articlesList: MutableList<Article>,
-    categoriesList: List<Categories>
+    categoriesList: List<Categories>,
+    val viewModel: ArticlesListViewModel,
+    private val lifeCycleOwner: LifecycleOwner
 ) : PagerAdapter() {
 
+    private var errorSnackbar: Snackbar? = null
     private var mCategoriesList: MutableList<ViewPagerHeader>
 
     init {
@@ -26,7 +33,7 @@ class ViewPagerAdapter(
     //setup the 'All' tab with the categories tabs
     private fun initializeList(categories: List<Categories>): MutableList<ViewPagerHeader> {
         var list = mutableListOf<ViewPagerHeader>()
-        list.add(ViewPagerHeader.AllHeader())
+        //list.add(ViewPagerHeader.AllHeader())
         for (cat in categories) {
             list.add(ViewPagerHeader.CategorieHeader(cat))
         }
@@ -37,14 +44,14 @@ class ViewPagerAdapter(
         val header = mCategoriesList[position]
         val inflater = LayoutInflater.from(mContext)
         val layout = inflater.inflate(R.layout.viewpager_content, collection, false) as ViewGroup
-
-        //to check if it's a Categorie tab or the 'All' tab
-        val list: MutableList<Article> = if (header is ViewPagerHeader.CategorieHeader) {
-            getArticlesByCategories(header.categorie, articlesList)
-        } else {//in case it's the 'All' tab, pass the list of all articles
-            articlesList
+        if (header is ViewPagerHeader.CategorieHeader) {
+            viewModel.loadArticles(header.categorie.toString())
+            viewModel.errorMessage.observe(lifeCycleOwner, Observer { errorMessage ->
+                if (errorMessage != null) showError(errorMessage) else hideError()
+            })
         }
-        setUpRecycleView(layout, list)
+
+        setUpRecycleView(layout)
         collection.addView(layout)
         return layout
     }
@@ -64,9 +71,7 @@ class ViewPagerAdapter(
     override fun getPageTitle(position: Int): CharSequence? {
         var title = ""
         val header = mCategoriesList[position]
-        title = if (header is ViewPagerHeader.AllHeader) {
-            mContext.getString(header.text)
-        } else if (header is ViewPagerHeader.CategorieHeader) {
+        title = if (header is ViewPagerHeader.CategorieHeader) {
             mContext.getString(header.categorie.title)
         } else {
             ""
@@ -75,9 +80,9 @@ class ViewPagerAdapter(
     }
 
     //RecycleView--------------------------------------------
-    private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
+    private fun setUpRecycleView(rootView: View) {
         var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
-        recyclerView.adapter = ArticleListAdapter(list, mContext)
+        recyclerView.adapter = viewModel.articlesListadapter
         val screenOrientation =
             (mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
         when (screenOrientation) {
@@ -86,6 +91,16 @@ class ViewPagerAdapter(
         }
         recyclerView.setHasFixedSize(true)
     }
+
+    private fun showError(@StringRes errorMessage: Int) {
+        errorSnackbar?.setAction("Retry", viewModel.errorClickListener)
+        errorSnackbar?.show()
+    }
+
+    private fun hideError() {
+        errorSnackbar?.dismiss()
+    }
+
 
     private fun getArticlesByCategories(
         categorie: Categories,
@@ -102,7 +117,7 @@ class ViewPagerAdapter(
 
     sealed class ViewPagerHeader {
         data class CategorieHeader(val categorie: Categories) : ViewPagerHeader()
-        data class AllHeader(val text: Int = R.string.all_category) : ViewPagerHeader()
+
     }
 
 

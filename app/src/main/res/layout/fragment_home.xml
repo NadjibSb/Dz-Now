@@ -3,7 +3,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".screens.home.HomeFragment">
+        tools:context=".screens.Home.HomeFragment">
+    <data>
+        <variable
+                name="viewModel"
+                type="com.esi.dz_now.viewmodel.ArticlesListViewModel" />
+    </data>
 
     <LinearLayout
             android:orientation="vertical"
@@ -20,6 +25,12 @@
                 app:tabMode="scrollable">
         </com.google.android.material.tabs.TabLayout>
 
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:mutableVisibility="@{viewModel.getLoadingVisibility()}"
+                android:visibility="gone"
+                android:layout_gravity="center_horizontal"/>
         <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"

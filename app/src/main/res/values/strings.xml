@@ -12,10 +12,10 @@
     <string name="health_category">Health</string>
     <string name="international_category">International</string>
     <string name="science_category">Science</string>
+    <string name="economy_category">Economy</string>
     <string name="all_category">All</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
-
 
 
     <string name="article_fragment_title">Article</string>
@@ -30,13 +30,15 @@
     </string-array>
 
     <string name="addToFav">Add to favorites</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+    <string name="facebook_app_id" translatable="false">372651746759671</string>
 
-
-
-
-    <string name="articleContent" translatable="false">"Battue chez elle par la Zambie (1-0), l’Algérie a définitivement mis une croix sur le Mondial 2018. C’est une grosse désillusion pour l’équipe huitième de finaliste de la Coupe du monde 2014 qui s’attend à une grosse crise du football. De son côté, la Zambie garde espoir de doubler le Nigeria sur le fil.
-        Même si mathématiquement tout restait possible, l’espoir d’une qualification au Mondial 2018 avait déserté les rangs des suiveurs de l’équipe d’Algérie depuis la défaite samedi dernier à Lusaka (3-1). Il ne subsistait dès lors qu’un honneur à sauver face au même adversaire cinq jours après pour le match retour. Mais dans son antre à Constantine, l’Algérie a été incapable de prendre le meilleur sur un adversaire solide, déterminé et certainement plus motivé qu’elle.
-        Les hommes de Lucas Alcaraz ont pourtant essayé mais sont tombés sur un gardien zambien, Kennedy Mweene, impérial qui a mis en échec tour à tour les attaquants algériens, Soudani,  (9e), Brahimi (59e), Ounas (61e), et Slimani (90 +3). Surtout, le portier des Chipolopolos a arrêté un penalty de Mahrez (16e) qui aurait pu permettre aux Fennecs de bien lancer l’opération « sauver l’honneur »."</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb372651746759671</string>
+    <string name="log_out">Sign out</string>
+    <string name="multimedia_fragment_title">Multimedia</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="videoDisplay_fragment_title">Watch Video</string>
+    <string name="senditvia">Send it via :</string>
 
 
 </resources>

@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".screens.favorit.FavoriteFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".screens.Favorit.FavoriteFragment">
+
+    <data>
+        <variable
+                name="viewModel"
+                type="com.esi.dz_now.viewmodel.SavedArticlesListViewModel" />
+    </data>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:mutableVisibility="@{viewModel.getLoadingVisibility()}"
+                android:layout_gravity="center_horizontal"/>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycleView"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/list_item">
+                app:adapter="@{viewModel.getArticlesListAdapter()}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

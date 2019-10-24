@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="viewModel"
+                type="com.esi.dz_now.viewmodel.ArticleViewModel" />
+    </data>
+<com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
@@ -37,7 +45,9 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/articleImage" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp"
+                app:mutableText="@{viewModel.getArticleCategory()}"
+                />
 
         <View
                 android:id="@+id/divider"
@@ -59,7 +69,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/divider"/>
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:mutableText="@{viewModel.getArticleTitle()}"
+                />
 
         <TextView
                 android:text="source/date go here"
@@ -75,19 +87,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintTop_toBottomOf="@+id/articleTitle"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <ToggleButton
-                android:text="ToggleButton"
-                android:id="@+id/readLaterArticle"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/read_later_selector"
-                android:textOff=""
-                android:textOn=""
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toTopOf="@+id/articleImage" android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/articleImage"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:mutableText="@{viewModel.getArticleDateAndSource()}"
+                />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
+</layout>

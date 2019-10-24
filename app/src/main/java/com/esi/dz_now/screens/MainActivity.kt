@@ -2,6 +2,8 @@ package com.esi.dz_now.screens
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
@@ -9,10 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.esi.dz_now.R
-import com.esi.dz_now.data.Article
 import com.esi.dz_now.data.Categories
-import com.esi.dz_now.data.DataUtil
-import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.ActivityMainBinding
 import java.util.*
 
@@ -27,8 +26,9 @@ const val FR = "fr"
 const val EN = "en"
 const val AR = "ar"
 
-class MainActivity : AppCompatActivity(), SharedData {
+class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
+    private val TAG = "TAG-MainActivity"
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private val multiStartNavigationUi = MultiStartNavigationUI(
@@ -38,9 +38,10 @@ class MainActivity : AppCompatActivity(), SharedData {
             R.id.settingsFragment
         )
     )
-    private var dataUtil = DataUtil()
+    private var tts: TextToSpeech? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
 
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(this.applicationContext)
         //check the App Theme
@@ -52,6 +53,8 @@ class MainActivity : AppCompatActivity(), SharedData {
         val currentLanguage = sharedPref.getString(KEY_CURRENT_LANGUAGE, EN)
         if (currentLanguage != EN) switchLanguage(currentLanguage)
         super.onCreate(savedInstanceState)
+
+
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
@@ -65,7 +68,7 @@ class MainActivity : AppCompatActivity(), SharedData {
         )
         NavigationUI.setupWithNavController(binding.navView, navController)
 
-
+        tts = TextToSpeech(this, this)
     }
 
 
@@ -79,40 +82,75 @@ class MainActivity : AppCompatActivity(), SharedData {
         multiStartNavigationUi.navigateUp(binding.drawerLayout, navController)
 
 
-    override fun getAllArticles(): MutableList<Article> {
-        return dataUtil.getAllArticles()
-    }
-
-    override fun getArticlesListByCategorie(categories: Categories): MutableList<Article> {
-        return dataUtil.getArticlesListByCategorie(categories)!!
-    }
-
-
-    override fun getAllCategories(): List<Categories> {
-        return dataUtil.getAllCategories()
-    }
-
-    override fun getCategories(): List<Categories> {
-        return dataUtil.getCategories()
-    }
-
-    override fun getArticleById(articleId: Int): Article {
-        return dataUtil.getArticleById(articleId)
-    }
-
-    override fun getFavories(): MutableList<Article> {
-        return dataUtil.getFavories()
-    }
-
     private fun switchLanguage(newlanguage: String) {
         var currentLanguage = Locale.getDefault().language
-        if (!currentLanguage.equals(newlanguage)) {
+        if (currentLanguage != newlanguage) {
             var locale = Locale(newlanguage)
             Locale.setDefault(locale)
-            var res = resources
-            var config = res.configuration
+            var config = resources.configuration
             config.setLocale(locale)
-            res.updateConfiguration(config, res.displayMetrics)
+            resources.updateConfiguration(config, resources.displayMetrics)
         }
+    }
+
+    override fun onInit(status: Int) {
+
+        if (status == TextToSpeech.SUCCESS) {
+            // set US English as language for tts
+            val result = tts!!.setLanguage(Locale.FRANCE)
+
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language specified is not supported!")
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!")
+        }
+
+    }
+
+    fun speakOut(text: String) {
+
+        tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null)
+    }
+
+    public override fun onDestroy() {
+        // Shutdown TTS
+        if (tts != null) {
+            tts!!.stop()
+            tts!!.shutdown()
+        }
+        super.onDestroy()
+    }
+
+    fun stopTts() {
+        // Shutdown TTS
+        if (tts != null) {
+            tts!!.stop()
+        }
+    }
+
+
+    fun getCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+        for (cat in Categories.values().toList()) {
+            if (cat.isActivated) {
+                list.add(cat)
+            }
+        }
+        list.sortBy { categories ->
+            categories.title
+        }
+        return list
+    }
+
+    fun getAllCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+
+        list.addAll(Categories.values().toList())
+        list.sortBy { categories ->
+            categories.title
+        }
+        return list
     }
 }

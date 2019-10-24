@@ -2,60 +2,71 @@ package com.esi.dz_now.screens.favorit
 
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.esi.dz_now.R
-import com.esi.dz_now.data.Article
-import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentFavoriteBinding
-import com.esi.dz_now.screens.MainActivity
+import com.esi.dz_now.injection.ViewModelFactory
+import com.esi.dz_now.viewmodel.SavedArticlesListViewModel
+import com.google.android.material.snackbar.Snackbar
 
 
 class FavoriteFragment : Fragment() {
 
-    private lateinit var data: SharedData
+    private lateinit var binding: FragmentFavoriteBinding
+    private lateinit var viewModel: SavedArticlesListViewModel
+    private var errorSnackbar: Snackbar? = null
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        val binding: FragmentFavoriteBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_favorite, container, false)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.favourites_fragment_title)
-        data = this.activity as SharedData
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(activity!! as AppCompatActivity))
+            .get(SavedArticlesListViewModel::class.java)
 
-        setUpRecycleView(binding.root, data.getFavories())
+        if (isOnline(context!!)) viewModel.loadSavedOnlineArticles("")
+        else viewModel.loadSavedArticles()
+
+        viewModel.errorMessage.observe(this, Observer { errorMessage ->
+            if (errorMessage != null) showError(errorMessage) else hideError()
+        })
+
+        binding.viewModel = viewModel
+
+        binding.recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root
     }
 
-    //RecycleView--------------------------------------------
-    private fun setUpRecycleView(rootView: View, list: MutableList<Article>) {
-        var recyclerView = rootView.findViewById(R.id.recycleView) as RecyclerView
+    private fun showError(@StringRes errorMessage: Int) {
+        errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
+        errorSnackbar?.setAction("Retry", viewModel.errorClickListener)
+        errorSnackbar?.show()
+    }
 
-        //realtime list change
-        var adapter = FavorisArticleListAdapter(list, context!!)
-        adapter.itemChanged.observe(this, Observer { state ->
-            if (state) {
-                adapter.notifyDataSetChanged()
-                adapter.itemChanged.value = false
-            }
-        })
-        recyclerView.adapter = adapter
+    private fun hideError() {
+        errorSnackbar?.dismiss()
+    }
 
-        //setup the recucleview depending on screen orientation
-        val screenOrientation =
-            (context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.orientation
-        when (screenOrientation) {
-            Surface.ROTATION_0 -> recyclerView.layoutManager = LinearLayoutManager(context)
-            else -> recyclerView.layoutManager = GridLayoutManager(context, 2)
-        }
-        recyclerView.setHasFixedSize(true)
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 
 

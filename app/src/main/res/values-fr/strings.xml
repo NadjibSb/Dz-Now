@@ -4,8 +4,9 @@
     <string name="all_category">Tous</string>
     <string name="enabled">Affiché</string>
     <string name="disabled">Masqué</string>
-    <string name="category_title">Catégories à affciher</string>
+    <string name="category_title">Catégories à afficher</string>
     <string name="culture_category">Culture</string>
+    <string name="economy_category">Economie</string>
     <string name="favourites_fragment_title">Favoris</string>
     <string name="health_category">Santé</string>
     <string name="home_fragment_title">Acceuil</string>
@@ -18,10 +19,21 @@
     <string name="themes_title">Thème</string>
     <string name="article_fragment_title">Article</string>
     <string name="language">Langue</string>
+    <string name="log_out">Déconnecter</string>
 
     <string-array name="languages">
         <item>Anglais</item>
         <item>Français</item>
         <item>Arabe</item>
     </string-array>
+    <string name="multimedia_fragment_title">Multimédia</string>
+    <string name="please_wait">Patientez quelques instants  ...</string>
+    <string name="videoDisplay_fragment_title">Regarder la video</string>
+    <string name="Article">Article</string>
+    <string name="Favoris">Favoris</string>
+    <string name="Home">Accueil</string>
+    <string name="Settings">Parametre</string>
+    <string name="senditvia">Envoyer via</string>
+
+
 </resources>

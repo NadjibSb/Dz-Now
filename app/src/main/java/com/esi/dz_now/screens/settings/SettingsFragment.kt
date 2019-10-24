@@ -16,7 +16,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.esi.dz_now.R
 import com.esi.dz_now.data.Categories
-import com.esi.dz_now.data.SharedData
 import com.esi.dz_now.databinding.FragmentSettingsBinding
 import com.esi.dz_now.screens.*
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -26,8 +25,8 @@ import java.util.*
 class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsBinding
-    private lateinit var data: SharedData
     private lateinit var categories: List<Categories>
+    private val TAG = "TAG-SettingsFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +46,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        data = activity as SharedData
-        categories = data.getAllCategories()
+        categories = getAllCategories()
 
         spinnerSetup()
         categorieSelectionSetup(categories)
@@ -126,7 +124,7 @@ class SettingsFragment : Fragment() {
 
         binding.themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             val oldTheme = sharedPref.getString(KEY_CURRENT_THEME, "first")
-            Log.i("nadjib", oldTheme)
+            Log.i(TAG, oldTheme)
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedPref.edit().putString(KEY_CURRENT_THEME, DARK_THEME).apply()
@@ -136,28 +134,27 @@ class SettingsFragment : Fragment() {
                 sharedPref.edit().putString(KEY_CURRENT_THEME, LIGHT_THEME).apply()
             }
             val newTheme = sharedPref.getString(KEY_CURRENT_THEME, "first")
-            if (!oldTheme.equals(newTheme))
+            if (oldTheme != newTheme)
                 activity?.recreate()
 
         }
     }
 
     private fun categorieSelectionSetup(categories: List<Categories>) {
-        var category_: Categories
         var culture_: Categories = categories[0]
         var health_: Categories = categories[0]
         var sport_: Categories = categories[0]
         var international_: Categories = categories[0]
         var politics_: Categories = categories[0]
         var tech_: Categories = categories[0]
-        var msg: String = ""
+        var msg = ""
         for (category_ in categories) {
             if (category_.name == Categories.CULTURE.name) culture_ = category_
-            if (category_.name == Categories.SPORTS.name) sport_ = category_
+            if (category_.name == Categories.SPORT.name) sport_ = category_
             if (category_.name == Categories.TECH.name) tech_ = category_
             if (category_.name == Categories.POLITICS.name) politics_ = category_
             if (category_.name == Categories.INTERNATIONAL.name) international_ = category_
-            if (category_.name == Categories.SANTE.name) health_ = category_
+            if (category_.name == Categories.HEALTH.name) health_ = category_
 
         }
         checkBoxCulture.isChecked = culture_.isActivated
@@ -220,5 +217,15 @@ class SettingsFragment : Fragment() {
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun getAllCategories(): List<Categories> {
+        var list = mutableListOf<Categories>()
+
+        list.addAll(Categories.values().toList())
+        list.sortBy { categories ->
+            categories.title
+        }
+        return list
     }
 }
