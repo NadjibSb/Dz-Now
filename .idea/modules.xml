@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-Dz-Now.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-Dz-Now.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-Dz-Now.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-Dz-Now.iml" group="Dz-Now" />
       <module fileurl="file://$PROJECT_DIR$/Dz-Now.iml" filepath="$PROJECT_DIR$/Dz-Now.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/Dz-Now-app.iml" filepath="$PROJECT_DIR$/app/Dz-Now-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/Dz-Now-app.iml" filepath="$PROJECT_DIR$/app/Dz-Now-app.iml" group="Dz-Now/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -1,6 +1,7 @@
 package com.esi.dz_now.screens.home
 
 import android.content.Context
+import android.util.Log
 import android.view.*
 import androidx.annotation.StringRes
 import androidx.lifecycle.LifecycleOwner
